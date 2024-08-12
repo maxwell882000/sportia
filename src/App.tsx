@@ -1,9 +1,11 @@
 import {Map, Placemark, YMaps} from "@pbe/react-yandex-maps";
 import Layout from "./components/layout/Layout.tsx";
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 // @ts-ignore
 import Slider from "react-slick";
 import {ChevronLeft} from "@untitled-ui/icons-react";
+import Logo from "./components/Icons/Logo.tsx";
+import SliderCategory from "./components/categories/SliderCategory.tsx";
 
 var item = false;
 
@@ -13,70 +15,32 @@ function App() {
     const sliderRef = useRef(null);
     const isTransitioning = useRef(false); // Mutable ref to track transition state
 
-    // Function to handle mouse wheel events
-    const handleWheel = (event) => {
-        if (item) {
-            return; // Ignore events while transitioning
-        }
-
-        const sliderElement = sliderRef.current?.innerSlider?.list;
-        if (sliderElement && sliderElement.contains(event.target)) {
-            const {deltaX} = event;
-            console.log(`handleWheel ${deltaX}`, sliderElement);
-
-            if (deltaX > 0) {
-                // Scroll right (move to the next slide)
-                if (sliderRef.current) {
-                    item = true
-                    sliderRef.current.slickNext();
-                }
-            } else if (deltaX < 0) {
-                // Scroll left (move to the previous slide)
-                if (sliderRef.current) {
-                    item = true;
-                    sliderRef.current.slickPrev();
-                }
-            }
-        }
-    };
-
-    // Function to handle transition end
-    const handleAfterChange = () => {
-        console.log("handleAfterChange is worked !!!", isTransitioning.current);
-        item = false;
-        console.log("handleAfterChange is worked  after !!!", isTransitioning.current);
-
-    };
-
-    // Set up and clean up the wheel event listener
-    useEffect(() => {
-        // const sliderElement = sliderRef.current?.innerSlider?.list;
-        // if (sliderElement) {
-        //     sliderElement.addEventListener('wheel', handleWheel, {passive: true});
-        // }
-        //
-        // return () => {
-        //     if (sliderElement) {
-        //         sliderElement.removeEventListener('wheel', handleWheel);
-        //     }
-        // };
-    }, []);
-
 
     return (
         <Layout>
             <div className={"absolute z-10 bg-transparent flex space-x-4"}>
-                <div className=" p-[24px] h-screen bg-app-dark w-[24rem]  relative
-                    transform ">
-                    <div className="slider-container">
-
+                <div className={` h-screen bg-app-dark w-[24rem]  relative
+                    remove-bar left-0 ${isActive ? "" : "left-[-24rem]"}`}>
+                    <div className="p-[1.5rem] ">
+                        <Logo></Logo>
                     </div>
+
+                    <SliderCategory></SliderCategory>
+
                 </div>
-                <div>
-                    <button className="bg-app-dark rounded-app h-[2.5rem] w-[2.5rem] flex justify-center items-center">
-                        <ChevronLeft className="text-white"></ChevronLeft>
+                <div
+                    className={`relative h-[2.5rem]  w-[2.5rem]  remove-bar left-0 ${isActive ? "" : "left-[-24rem]"}`}>
+                    <button onClick={() => {
+                        setIsActive(!isActive)
+                    }}
+                            className={` bg-app-dark  rounded-app h-[2.5rem] w-[2.5rem] flex justify-center items-center remove-bar  `}>
+                        <div className={`${isActive ? "rotate-0" : "rotate-180"} `}>
+                            <ChevronLeft className="text-white"></ChevronLeft>
+                        </div>
                     </button>
                 </div>
+
+
             </div>
 
             <div className="absolute z-0 w-screen h-screen">
