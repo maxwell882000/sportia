@@ -14,10 +14,5 @@
     "noEmit": true,
     "jsx": "react-jsx",
   },
-  "server": {
-    "watch": {
-      "usePolling": true, // Enable polling if you're experiencing issues with file changes
-    },
-  },
   "include": ["src"]
 }

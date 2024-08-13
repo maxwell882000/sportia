@@ -11,7 +11,9 @@ export default {
             backgroundColor: {
                 "app-dark": "#15171C"
             },
-
+            opacity: {
+                '12': '0.12',
+            },
         },
     },
     plugins: [],
