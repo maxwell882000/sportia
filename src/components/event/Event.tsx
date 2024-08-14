@@ -13,7 +13,7 @@ function Event({event}: Props) {
     return <div>
         <button
             onClick={() => {
-                eventDetailChanged({...event, ...defaultEventDetailDto} as EventDetailDto);
+                eventDetailChanged({...defaultEventDetailDto, ...event} as EventDetailDto);
             }}
             className="w-full text-start fade-in-events flex flex-row p-[1.5rem] cursor-pointer hover:bg-[#1C1F24] justify-between items-center">
             <EventTitle event={event}/>
