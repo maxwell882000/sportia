@@ -1,9 +1,11 @@
 import {Swiper, SwiperSlide} from "swiper/react";
-import {defaultCategories} from "../../dtos/categories/categoryDto.ts";
 import Category from "./Category.tsx";
 import {Mousewheel} from "swiper/modules";
+import {useUnit} from "effector-react";
+import {$categories} from "../../states/category/store.ts";
 
 function Categories() {
+    const [categories] = useUnit([$categories]);
     return <Swiper
         spaceBetween={10} // Adjust space between slides
         slidesPerView="auto" // Show several slides with auto width
@@ -19,11 +21,11 @@ function Categories() {
         }}
         modules={[Mousewheel]}
     >
-        {defaultCategories.map((cat, index) =>
+        {categories.map((cat, index) =>
             <SwiperSlide
                 key={`category-${cat.id}`}
                 className={`${
-                    index === 0 ? 'ml-[1.5rem]' : (index === defaultCategories.length - 1 ? 'mr-[1.5rem]' : '')
+                    index === 0 ? 'ml-[1.5rem]' : (index === categories.length - 1 ? 'mr-[1.5rem]' : '')
                 }`}
                 style={{display: 'inline-block', width: "auto"}}>
                 <Category category={cat}/>

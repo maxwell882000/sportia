@@ -1,18 +1,18 @@
 import {useUnit} from "effector-react";
-import {$isSideBar} from "../../states/store.ts";
+import {$isAnimateSideBar} from "../../states/store.ts";
 import Categories from "../categories/Categories.tsx";
-import Cards from "../cards/Cards.tsx";
+import Events from "../event/Events.tsx";
 
 function SideBar() {
-    const [isSideBar] = useUnit([$isSideBar])
-    return <div className={` flex flex-col h-screen bg-app-dark w-[24rem] relative
-                    remove-bar z-10 left-0 ${isSideBar ? "" : "left-[-24rem]"}`}>
+    const [isAnimateSideBar] = useUnit([$isAnimateSideBar]);
+    return <div className={`flex flex-col h-screen bg-app-dark w-[24rem] relative
+                   ${isAnimateSideBar('left-0', 'left-[-24.5rem]')} z-10`}>
         <div className={"pt-[6rem]"}></div>
         <div>
             <Categories></Categories>
         </div>
         <div className={"pt-[6rem]"}></div>
-        <Cards/>
+        <Events/>
     </div>
 }
 

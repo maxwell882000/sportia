@@ -1,26 +1,20 @@
 import {CategoryDto} from "../../dtos/categories/categoryDto.ts";
+import {useUnit} from "effector-react";
+import {$categoryActivated} from "../../states/category/events.ts";
+import {hexToRgba} from "../../utils/hexToRgba.ts";
+import Button from "../button/Button.tsx";
 
 interface Props {
     category: CategoryDto
 }
 
 function Category({category}: Props) {
-    return <button
-        style={{
-            backgroundColor: category.bgColor,
-        }}
-        className={`px-4 h-[2.5rem] 
-                    ${category.isActive ? 'hover:bg-opacity-0' : "bg-opacity-12"}
-                   flex  rounded-app justify-center items-center space-x-2`}>
-        <div>
+    const [categoryActivated] = useUnit([$categoryActivated]);
+    return <Button backgroundColor={hexToRgba(category.bgColor, Number(category.isActive))}
+                   className={"text-white"}
+                   onClick={() => categoryActivated(category)}
+                   icon={category.icon} name={category.name}/>
 
-            {category.icon}
-        </div>
-        <div className={"text-white"}>
-            {category.name}
-        </div>
-
-    </button>
 }
 
 export default Category

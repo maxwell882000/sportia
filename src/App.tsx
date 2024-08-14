@@ -1,23 +1,27 @@
 import Layout from "./components/layout/Layout.tsx";
-import {YMap, YMapDefaultFeaturesLayer, YMapDefaultSchemeLayer, YMapMarker} from "ymap3-components";
-import Football from "./components/Icons/Football.tsx";
-import SearchLayout from "./components/search/SearchLayout.tsx";
+import {YMap, YMapDefaultFeaturesLayer, YMapDefaultMarker, YMapDefaultSchemeLayer, YMapMarker} from "ymap3-components";
+import Search from "./components/search/Search.tsx";
 import Logo from "./components/Icons/Logo.tsx";
 import SideBar from "./components/layout/SideBar.tsx";
+import Football from "./components/Icons/Football.tsx";
+import {AppStartGate} from "./states/gate.ts";
+import EventDetailPopUp from "./components/event/eventDetail/EventDetailPopUp.tsx";
 
 
 function App() {
-
     return (
         <Layout>
+            <AppStartGate/>
             <div className={"absolute t-0 l-0 z-10"}>
+
                 <div className="relative">
+                    <EventDetailPopUp/>
                     <div className={"absolute z-20"}>
                         <div className="p-[1.5rem]">
                             <Logo></Logo>
                         </div>
                     </div>
-                    <SearchLayout/>
+                    <Search/>
                     <SideBar/>
                 </div>
 
@@ -31,6 +35,14 @@ function App() {
                 >
                     <YMapDefaultSchemeLayer/>
                     <YMapDefaultFeaturesLayer/>
+                    <YMapDefaultMarker
+                        color={"#12B76A"}
+                        onClick={() => {
+                            alert("BITCH WORKING !!!")
+                        }}
+                        coordinates={[69.2, 41.2]}>
+                    </YMapDefaultMarker>
+
                     <YMapMarker
                         onClick={() => {
                             alert("BITCH WORKING !!!")

@@ -6,8 +6,10 @@ export default {
     ], theme: {
         extend: {
             borderRadius: {
-                app: "0.5rem"
+                app: "0.5rem",
+                info: '1.5rem'
             },
+
             backgroundColor: {
                 "app-dark": "#15171C"
             },
