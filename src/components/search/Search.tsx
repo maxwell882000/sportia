@@ -8,7 +8,7 @@ import {$activeCategory} from "../../states/category/store.ts";
 function Search() {
     const [isSideBar, isSideBarChanged, activeCategory] = useUnit([$isSideBar, $isSideBarChanged, $activeCategory]);
     return <>
-        <div className={"top-[9.5rem] absolute z-20 flex items-center"}>
+        <div className={"flex items-center"}>
             <div className="px-[1.5rem] w-[24rem] box-border">
                 <InputSearch className={"w-full"} placeholder={activeCategory?.name}/>
             </div>

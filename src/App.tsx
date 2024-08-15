@@ -1,25 +1,25 @@
 import Layout from "./components/layout/Layout.tsx";
 import {YMap, YMapDefaultFeaturesLayer, YMapDefaultMarker, YMapDefaultSchemeLayer, YMapMarker} from "ymap3-components";
-import Search from "./components/search/Search.tsx";
 import Logo from "./components/Icons/Logo.tsx";
 import SideBar from "./components/layout/SideBar.tsx";
 import Football from "./components/Icons/Football.tsx";
 import {AppStartGate} from "./states/gate.ts";
 import EventDetailPopUp from "./components/event/eventDetail/EventDetailPopUp.tsx";
+import Main from "./pages/Main.tsx";
 
 function App() {
     return (
         <Layout>
             <AppStartGate/>
             <div className={"absolute t-0 l-0 z-10"}>
-                <div className="relative">
-                    <EventDetailPopUp/>
-                    <div className={"absolute z-20"}>
-                        <div className="p-[1.5rem]">
-                            <Logo></Logo>
-                        </div>
+                <div className={"flex h-screen flex-col t-0 l-0 absolute z-20"}>
+                    <div className="order-1 p-[1.5rem]">
+                        <Logo></Logo>
                     </div>
-                    <Search/>
+                    <EventDetailPopUp/>
+                    <Main/>
+                </div>
+                <div className={"absolute z-10"}>
                     <SideBar/>
                 </div>
             </div>
