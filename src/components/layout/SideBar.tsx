@@ -1,7 +1,5 @@
 import {useUnit} from "effector-react";
 import {$isAnimateSideBar} from "../../states/store.ts";
-import Categories from "../categories/Categories.tsx";
-import Events from "../event/Events.tsx";
 
 function SideBar() {
     const [isAnimateSideBar] = useUnit([$isAnimateSideBar]);
