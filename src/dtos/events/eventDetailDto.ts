@@ -1,10 +1,15 @@
 import {EventDto} from "./eventDto.ts";
 import image from "../../assets/test/img.png";
-import {WorkHoursDto} from "./workHours.ts";
+import {WorkHoursDto} from "./workHoursDto.ts";
+import {OwnReviewDto} from "../review/ownReviewDto.ts";
+import {UserReviewDto} from "../review/userReviewDto.ts";
 
 export interface EventDetailDto extends EventDto {
     images: string[],
-    workHours: WorkHoursDto[]
+    workHours: WorkHoursDto[],
+    ownReview: OwnReviewDto,
+    userReviews: UserReviewDto[],
+    isLiked: boolean
 }
 
 export const defaultEventDetailDto: EventDetailDto = {
@@ -17,6 +22,39 @@ export const defaultEventDetailDto: EventDetailDto = {
     image,
     commentCount: 23,
     images: [image, image, image],
+    ownReview: {
+        review: 3
+    },
+    isLiked: false,
+    userReviews: [
+        {
+            avatar: 'http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3',
+            name: 'Марина Морозова',
+            review: 4,
+            reviewDate: new Date(),
+            comment: `      Оба сына тренируются в секции водные лыжи. Тренеры профессионалы. Всегда в наличии
+                                    оборудование, гидрокостюмы. Тренировки всё лето. Есть спортивный лагерь с питанием.
+                                    Дети физически развиваются и закалка.`
+        } as UserReviewDto,
+        {
+            avatar: 'http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3',
+            name: 'Марина Морозова',
+            review: 2,
+            reviewDate: new Date(),
+            comment: `      Оба сына тренируются в секции водные лыжи. Тренеры профессионалы. Всегда в наличии
+                                    оборудование, гидрокостюмы. Тренировки всё лето. Есть спортивный лагерь с питанием.
+                                    Дети физически развиваются и закалка.`
+        } as UserReviewDto,
+        {
+            avatar: 'http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3',
+            name: 'Марина Морозова',
+            review: 5,
+            reviewDate: new Date(),
+            comment: `      Оба сына тренируются в секции водные лыжи. Тренеры профессионалы. Всегда в наличии
+                                    оборудование, гидрокостюмы. Тренировки всё лето. Есть спортивный лагерь с питанием.
+                                    Дети физически развиваются и закалка.`
+        } as UserReviewDto,
+    ] as UserReviewDto[],
     workHours: [
         {
             day: "Понедельник",

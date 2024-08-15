@@ -7,13 +7,11 @@ import Football from "./components/Icons/Football.tsx";
 import {AppStartGate} from "./states/gate.ts";
 import EventDetailPopUp from "./components/event/eventDetail/EventDetailPopUp.tsx";
 
-
 function App() {
     return (
         <Layout>
             <AppStartGate/>
             <div className={"absolute t-0 l-0 z-10"}>
-
                 <div className="relative">
                     <EventDetailPopUp/>
                     <div className={"absolute z-20"}>
@@ -24,7 +22,6 @@ function App() {
                     <Search/>
                     <SideBar/>
                 </div>
-
             </div>
             <div className="absolute z-0 w-screen h-screen">
                 <YMap

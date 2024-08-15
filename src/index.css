@@ -4,16 +4,17 @@
 
 /* For WebKit browsers */
 ::-webkit-scrollbar {
-    width: 1px; /* Adjust width of scrollbar */
+    width: 4px; /* Adjust width of scrollbar */
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent; /* Track color */
+    background: rgba(28, 31, 36, 1); /* Track color */
+    border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888; /* Scrollbar color */
-    border-radius: 10px; /* Rounded corners */
+    background: rgba(255, 255, 255, 0.2); /* Scrollbar color */
+    border-radius: 2px; /* Rounded corners */
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -145,4 +146,8 @@ body {
 
 .icon-stroke-1 path {
     stroke-width: 1px;
+}
+
+.icon-stroke-0 path {
+    stroke-width: 0;
 }

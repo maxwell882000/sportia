@@ -13,7 +13,7 @@ function Slides({images}: Props) {
             sensitivity: 1,
             thresholdDelta: 25,
             releaseOnEdges: false,
-            thresholdTime: 50
+            thresholdTime: 10
         }}
         centeredSlides={true}
         scrollbar={true}

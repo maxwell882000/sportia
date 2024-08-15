@@ -6,3 +6,4 @@ import {EventDetailDto} from "../../dtos/events/eventDetailDto.ts";
 export const $eventsChanged = eventDomain.createEvent<EventDto[]>();
 export const $eventDetailChanged = eventDomain.createEvent<EventDetailDto>();
 export const $eventDetailClose = eventDomain.createEvent();
+export const $eventLiked = eventDomain.createEvent();

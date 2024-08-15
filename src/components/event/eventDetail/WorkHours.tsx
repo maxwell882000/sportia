@@ -1,12 +1,12 @@
 import {Clock} from "@untitled-ui/icons-react";
-import {WorkHoursDto} from "../../../dtos/events/workHours.ts";
+import {WorkHoursDto} from "../../../dtos/events/workHoursDto.ts";
 
 interface Props {
     workHours: WorkHoursDto[]
 }
 
 function WorkHours({workHours}: Props) {
-    return <div className={"flex pt-[1.5rem] space-x-2"}>
+    return <div className={"flex space-x-2"}>
         <div>
             <Clock className={"text-[#ACEF03]"}/>
         </div>
