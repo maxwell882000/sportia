@@ -100,6 +100,14 @@ body {
     transition: opacity 0.4s ease, visibility 0.4s ease, left 0.3s linear, top 0.3s linear;
 }
 
+.animate-page {
+    transition: height 0.3s ease-out;
+}
+
+.animate-search {
+    transition: top 0.3s linear;
+}
+
 @keyframes rotate180 {
     from {
         transform: rotate(0deg);

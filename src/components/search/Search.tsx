@@ -2,7 +2,7 @@ import {ChevronLeft} from "@untitled-ui/icons-react";
 import {useUnit} from "effector-react/effector-react.umd";
 import {$isSideBarChanged} from "../../states/events.ts";
 import {$isSideBar} from "../../states/store.ts";
-import InputSearch from "../inputs/InputSearch.tsx";
+import InputSearch from "../input/InputSearch.tsx";
 import {$activeCategory} from "../../states/category/store.ts";
 
 function Search() {

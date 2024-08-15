@@ -5,7 +5,7 @@ import SideBar from "./components/layout/SideBar.tsx";
 import Football from "./components/Icons/Football.tsx";
 import {AppStartGate} from "./states/gate.ts";
 import EventDetailPopUp from "./components/event/eventDetail/EventDetailPopUp.tsx";
-import Main from "./pages/Main.tsx";
+import AllPages from "./pages/AllPages.tsx";
 
 function App() {
     return (
@@ -17,7 +17,7 @@ function App() {
                         <Logo></Logo>
                     </div>
                     <EventDetailPopUp/>
-                    <Main/>
+                    <AllPages/>
                 </div>
                 <div className={"absolute z-10"}>
                     <SideBar/>
