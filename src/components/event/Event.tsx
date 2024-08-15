@@ -11,7 +11,7 @@ interface Props {
 function Event({event}: Props) {
     const [eventDetailChanged] = useUnit([$eventDetailChanged]);
     return <div>
-        <button
+        <div
             onClick={() => {
                 eventDetailChanged({...defaultEventDetailDto, ...event} as EventDetailDto);
             }}
@@ -20,7 +20,7 @@ function Event({event}: Props) {
             <div>
                 <img alt={"event-image-event"} className={"rounded-app w-[5rem] h-[5rem]"} src={event.image}/>
             </div>
-        </button>
+        </div>
         <div className="border-b-[1px] ml-[4rem]  border-[#1C1F24]"></div>
     </div>
 }

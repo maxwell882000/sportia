@@ -1,10 +1,24 @@
 import Book from "../components/book/Book.tsx";
-import {HTMLAttributes} from "react";
 
-function BookPage(props: HTMLAttributes<HTMLDivElement>) {
-    return <div {...props} className={"order-4"}>
-        <Book/>
-    </div>
+
+interface Props {
+    className?: string
+}
+
+
+function BookPage({className}: Props) {
+    return (
+        <>
+            <div className={"h-[6rem]"}>
+
+            </div>
+            <div
+                className={`order-4 relative flex-1 w-[24rem]  ${className} `}>
+                <Book/>
+            </div>
+        </>
+
+    )
 }
 
 export default BookPage

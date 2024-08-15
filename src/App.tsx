@@ -13,7 +13,7 @@ function App() {
             <AppStartGate/>
             <div className={"absolute t-0 l-0 z-10"}>
                 <div className={"flex h-screen flex-col t-0 l-0 absolute z-20"}>
-                    <div className="order-1 p-[1.5rem]">
+                    <div className="pt-[1.5rem] px-[1.5rem]">
                         <Logo></Logo>
                     </div>
                     <EventDetailPopUp/>
