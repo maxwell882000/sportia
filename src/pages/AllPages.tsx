@@ -16,7 +16,7 @@ function AllPages() {
         $currentPage]);
     const animateCloseOpenSideBar = isAnimateSideBar('left-0', 'left-[-24.5rem]');
     return <>
-        <div className={`absolute animate-search ${!isCategoriesDisappeared ? "top-[9.5rem]" : "top-[6rem]"}`}>
+        <div className={`z-50 absolute animate-search ${!isCategoriesDisappeared ? "top-[9.5rem]" : "top-[6rem]"}`}>
             <Search/>
         </div>
         {currentPage === Pages.MAIN && (<MainPage className={animateCloseOpenSideBar}/>)}

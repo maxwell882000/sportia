@@ -1,7 +1,7 @@
-import {ReactNode} from "react";
+import {InputHTMLAttributes, ReactNode} from "react";
 
 interface Props {
-    inputProps?: any,
+    inputProps?: InputHTMLAttributes<HTMLInputElement>,
     prefix?: ReactNode,
     suffix?: ReactNode
 }

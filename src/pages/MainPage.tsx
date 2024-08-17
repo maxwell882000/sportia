@@ -1,5 +1,6 @@
 import Categories from "../components/category/Categories.tsx";
 import Events from "../components/event/Events.tsx";
+import EventDetailPopUp from "../components/event/eventDetail/EventDetailPopUp.tsx";
 
 interface Props {
     className?: string
@@ -7,6 +8,7 @@ interface Props {
 
 function MainPage({className}: Props) {
     return <>
+        <EventDetailPopUp/>
         <div className={`w-[24rem] pt-[2.469rem] pb-[1rem] relative 
         ${className}`}>
             <Categories/>

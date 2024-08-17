@@ -15,13 +15,15 @@ import OverallReview from "../../review/OverallReview.tsx";
 import Reviews from "../../review/Reviews.tsx";
 import {$eventLiked} from "../../../states/event/events.ts";
 import {LINK, TEXT} from "../../../constants/share.ts";
+import {$pageChanged} from "../../../states/events.ts";
+import {Pages} from "../../../constants/pages.ts";
 
 interface Props {
     event: EventDetailDto
 }
 
 function EventDetail() {
-    const [event, eventLiked] = useUnit([$eventDetail, $eventLiked]);
+    const [event, eventLiked, pageChanged] = useUnit([$eventDetail, $eventLiked, $pageChanged]);
     return event && (
         <div
             className={`event-detail`}>
@@ -47,6 +49,7 @@ function EventDetail() {
                                 name={"Забронировать"}
                                 className={"w-[13.5rem] text-[#15171C] hover:bg-[#ACEF03CC]"}
                                 onClick={() => {
+                                    pageChanged(Pages.BOOK);
                                 }} icon={<Football/>}/>
                             <Button
                                 backgroundColor={'#1C1F24'}

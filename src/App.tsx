@@ -4,24 +4,36 @@ import Logo from "./components/Icons/Logo.tsx";
 import SideBar from "./components/layout/SideBar.tsx";
 import Football from "./components/Icons/Football.tsx";
 import {AppStartGate} from "./states/gate.ts";
-import EventDetailPopUp from "./components/event/eventDetail/EventDetailPopUp.tsx";
 import AllPages from "./pages/AllPages.tsx";
+import {User01} from "@untitled-ui/icons-react";
+import Login from "./components/auth/Login.tsx";
+import Modal from "react-modal";
 
 function App() {
     return (
         <Layout>
+            <div id="modal"></div>
             <AppStartGate/>
+            <div className={"absolute top-[1.5rem]  right-[1.5rem] z-50 "}>
+                <div
+                    className={"flex justify-center items-center z-30 text-[#ACEF03] bg-app-dark h-[3.5rem] w-[3.5rem] rounded-app"}>
+                    <User01 className={"w-[2rem] h-[2rem]"}/>
+                </div>
+                <Login/>
+            </div>
             <div className={"absolute t-0 l-0 z-10"}>
+
+
                 <div className={"flex h-screen flex-col t-0 l-0 absolute z-20"}>
                     <div className="pt-[1.5rem] px-[1.5rem]">
                         <Logo></Logo>
                     </div>
-                    <EventDetailPopUp/>
                     <AllPages/>
                 </div>
                 <div className={"absolute z-10"}>
                     <SideBar/>
                 </div>
+
             </div>
             <div className="absolute z-0 w-screen h-screen">
                 <YMap

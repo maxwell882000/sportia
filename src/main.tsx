@@ -9,8 +9,10 @@ import {StrictMode} from "react";
 import {fork} from "effector";
 import {YMapComponentsProvider} from "ymap3-components";
 import 'simplebar-react/dist/simplebar.min.css';
+import Modal from 'react-modal';
 
 fork()
+
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <YMapComponentsProvider apiKey={"d6e198c0-c3c3-422a-86c9-e0ff581ecc64"} lang="en_EN">
@@ -18,3 +20,5 @@ createRoot(document.getElementById('root')!).render(
         </YMapComponentsProvider>
     </StrictMode>
 )
+
+Modal.setAppElement('#modal');

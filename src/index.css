@@ -59,6 +59,7 @@
 /* Example usage */
 * {
     font-family: 'Jura', sans-serif;
+    font-size: 16px;
 }
 
 h1 {
@@ -97,12 +98,12 @@ body {
 }
 
 .animate-side-bar {
-    transition: opacity 0.4s ease, visibility 0.4s ease, left 0.3s linear, top 0.3s linear, height 0.3s ease-out;
+    transition: opacity 0.3s ease, visibility 0.3s ease, left 0.3s linear, top 0.3s linear, height 0.3s ease-out;
 }
 
 
 .animate-search {
-    transition: top 0.1s linear;
+    transition: top 0.3s linear;
 }
 
 @keyframes rotate180 {

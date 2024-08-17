@@ -3,6 +3,21 @@ import {InputHTMLAttributes, useEffect, useRef, useState} from "react";
 function Input(props: InputHTMLAttributes<HTMLInputElement>) {
     const inputRef = useRef(null);
     const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true);
+    const [value, setValue] = useState("");
+    // Handle input change
+    const handleChange = (e) => {
+        const currentValue = e.target.value;
+        if (props.pattern && e.target.value) {
+            const regEx = new RegExp(props.pattern);
+            if (regEx.test(currentValue)) {
+                setValue(currentValue);
+            } else {
+                e.target.value = value;
+            }
+        } else {
+            setValue(currentValue);
+        }
+    };
 
     useEffect(() => {
         const inputElement = inputRef.current;
@@ -20,9 +35,10 @@ function Input(props: InputHTMLAttributes<HTMLInputElement>) {
         };
     }, []);
 
-    return <div className={"relative"}>
+    return <div className={"relative  text-[1rem]"}>
         <input
             {...props}
+            onInput={handleChange}
             ref={inputRef}
             className={`w-full 
                     py-[0.75rem]

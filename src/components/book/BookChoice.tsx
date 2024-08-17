@@ -13,14 +13,14 @@ function BookChoice({isSingle, setSingle}: Props) {
                 className={(isSingle ? ' text-[#15171C] ' : ' text-[#ACEF03] ') + " text-[0.875rem] leading-[1.25rem] "}
                 onClick={() => {
                     setSingle(true);
-                }} icon={<User01/>}>
+                }} icon={<User01 className={"icon-stroke-1 w-[1.25rem] h-[1.25rem]"}/>}>
         </Button>
         <Button backgroundColor={!isSingle ? '#ACEF03' : '#1C1F24'}
                 name={"На команду"}
                 className={(!isSingle ? ' text-[#15171C] ' : ' text-[#ACEF03] ') + " text-[0.875rem] leading-[1.25rem] "}
                 onClick={() => {
                     setSingle(false);
-                }} icon={<Users01/>}>
+                }} icon={<Users01 className={"icon-stroke-1 w-[1.25rem] h-[1.25rem]"}/>}>
         </Button>
     </div>
 }
