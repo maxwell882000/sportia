@@ -1,3 +1,3 @@
 export interface OwnReviewDto {
-    review: number;
+  review: number;
 }

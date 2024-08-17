@@ -1,5 +1,5 @@
 function BookTeam() {
-    return <></>
+  return <></>;
 }
 
-export default BookTeam
+export default BookTeam;

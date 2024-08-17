@@ -1,3 +1,3 @@
-import {createGate} from "effector-react";
+import { createGate } from "effector-react";
 
 export const AppStartGate = createGate();

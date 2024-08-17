@@ -1,27 +1,21 @@
 import Book from "../components/book/Book.tsx";
 
-
 interface Props {
-    className?: string
+  className?: string;
 }
 
-
-function BookPage({className}: Props) {
-    return (
-        <>
-            <div className={"h-[5rem] mb-[1rem]"}>
-
-            </div>
-            <div className={"mt-[1rem]"}>
-
-            </div>
-            <div
-                className={`overflow-y-auto  order-4 relative flex-1 w-[24rem]  ${className} `}>
-                <Book/>
-            </div>
-        </>
-
-    )
+function BookPage({ className }: Props) {
+  return (
+    <>
+      <div className={"mb-[1rem] h-[5rem]"}></div>
+      <div className={"mt-[1rem]"}></div>
+      <div
+        className={`relative order-4 w-[24rem] flex-1 overflow-y-auto ${className} `}
+      >
+        <Book />
+      </div>
+    </>
+  );
 }
 
-export default BookPage
+export default BookPage;

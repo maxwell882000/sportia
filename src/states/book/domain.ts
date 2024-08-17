@@ -1,3 +1,3 @@
-import {createDomain} from "effector";
+import { createDomain } from "effector";
 
 export const bookDomain = createDomain("book-domain");

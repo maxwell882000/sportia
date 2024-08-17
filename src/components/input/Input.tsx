@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, useEffect, useRef, useState } from "react";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   options?: {
     initValue?: string;
     initRequired?: boolean;

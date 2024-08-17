@@ -1,6 +1,5 @@
-import {categoryDomain} from "./domain";
-import {CategoryDto} from "../../dtos/categories/categoryDto.ts";
-
+import { categoryDomain } from "./domain";
+import { CategoryDto } from "../../dtos/categories/categoryDto.ts";
 
 export const $categoriesChanged = categoryDomain.createEvent<CategoryDto[]>();
 

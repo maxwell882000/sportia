@@ -1,4 +1,4 @@
 export enum Pages {
-    MAIN,
-    BOOK
+  MAIN,
+  BOOK,
 }

@@ -1,6 +1,5 @@
-import {app} from "./domain";
-import {Pages} from "../constants/pages.ts";
-
+import { app } from "./domain";
+import { Pages } from "../constants/pages.ts";
 
 export const $isSideBarChanged = app.createEvent<boolean>();
 

@@ -1,16 +1,16 @@
 .event-detail .simplebar-track.simplebar-vertical {
-    width: 8px !important;
+  width: 8px !important;
 }
 
 .event-detail .simplebar-content-wrapper {
-    border-radius: 1.5rem;
+  border-radius: 1.5rem;
 }
 
 .event-detail .simplebar-scrollbar:before {
-    background: rgba(255, 255, 255, 0.5) !important;
+  background: rgba(255, 255, 255, 0.5) !important;
 }
 
 .event-detail .simplebar-track {
-    top: 20px !important;
-    bottom: 20px !important;
+  top: 20px !important;
+  bottom: 20px !important;
 }
