@@ -12,8 +12,8 @@ function Reviews({ event }: Props) {
       <div>
         <span className={"text text-white"}>{event.commentCount} отзывов</span>
       </div>
-      {event.userReviews.map((user) => (
-        <div className={"space-y-[0.5rem]"}>
+      {event.userReviews.map((user, index) => (
+        <div key={`reviews-${index}`} className={"space-y-[0.5rem]"}>
           <div className={"flex items-center space-x-[1rem] text-center"}>
             <Avatar
               round={true}

@@ -5,11 +5,11 @@ function InputPhone(props: InputProps) {
     <Input
       {...props}
       options={{
+        ...props.options,
         initValue: "+998",
         initRequired: true,
       }}
       pattern={"^(?:\\+|\\+9|\\+99|\\+998\\d{0,9})$"}
-      required
       placeholder={"Контактный номер"}
     />
   );

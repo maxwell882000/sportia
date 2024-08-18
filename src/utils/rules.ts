@@ -3,7 +3,16 @@ import { Rule } from "effector-forms";
 export const rules = {
   required: (): Rule<string> => ({
     name: "required",
+    errorText: "Обязательное поле",
     validator: (value) => Boolean(value),
+  }),
+  phone: (): Rule<string> => ({
+    name: "phone",
+    errorText: "Укажите номер в формате +998XXXXXXXXX",
+    validator: (value) => {
+      console.log("VALIDATED ARE !!!");
+      return /^\+998\d{9}$/.test(value);
+    },
   }),
   email: (): Rule<string> => ({
     name: "email",

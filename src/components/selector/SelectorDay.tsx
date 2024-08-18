@@ -1,7 +1,8 @@
 import { SelectItem, Selector } from "./Selector.tsx";
+import { ConnectedField } from "effector-forms";
 
 interface Props {
-  onClick: (item: SelectItem) => void;
+  field?: ConnectedField<any>;
 }
 
 function SelectorDay(props: Props) {

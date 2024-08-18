@@ -4,99 +4,106 @@
 
 /* For WebKit browsers */
 ::-webkit-scrollbar {
-  width: 4px; /* Adjust width of scrollbar */
+    width: 4px; /* Adjust width of scrollbar */
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(28, 31, 36, 1); /* Track color */
-  border-radius: 2px;
+    background: rgba(28, 31, 36, 1); /* Track color */
+    border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2); /* Scrollbar color */
-  border-radius: 2px; /* Rounded corners */
+    background: rgba(255, 255, 255, 0.2); /* Scrollbar color */
+    border-radius: 2px; /* Rounded corners */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Scrollbar color on hover */
+    background: #555; /* Scrollbar color on hover */
 }
 
 @font-face {
-  font-family: "Jura";
-  src: url("assets/fonts/Jura/static/Jura-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Jura";
+    src: url("assets/fonts/Jura/static/Jura-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "Jura";
-  src: url("assets/fonts/Jura/static/Jura-Light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
+    font-family: "Jura";
+    src: url("assets/fonts/Jura/static/Jura-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "Jura";
-  src: url("assets/fonts/Jura/static/Jura-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
+    font-family: "Jura";
+    src: url("assets/fonts/Jura/static/Jura-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "Jura";
-  src: url("assets/fonts/Jura/static/Jura-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
+    font-family: "Jura";
+    src: url("assets/fonts/Jura/static/Jura-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "Jura";
-  src: url("assets/fonts/Jura/static/Jura-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
+    font-family: "Jura";
+    src: url("assets/fonts/Jura/static/Jura-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
 }
 
 /* Example usage */
 * {
-  font-family: "Jura", sans-serif;
-  font-size: 16px;
+    font-family: "Jura", sans-serif;
+    font-size: 16px;
+}
+
+input {
+    color-scheme: dark;
+}
+
+::-webkit-calendar-picker-indicator {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="rgba(255, 255, 255, 0.5)" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
 }
 
 h1 {
-  font-weight: 700; /* Bold */
+    font-weight: 700; /* Bold */
 }
 
 p {
-  font-weight: 400; /* Regular */
+    font-weight: 400; /* Regular */
 }
 
 body {
-  margin: 0;
+    margin: 0;
 }
 
 .animated-div {
-  position: relative;
-  overflow: hidden;
+    position: relative;
+    overflow: hidden;
 }
 
 .animated-div::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  transition: left 0.5s ease-in-out;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    transition: left 0.5s ease-in-out;
 }
 
 .animated-div.active::before {
-  left: 0;
+    left: 0;
 }
 
 .animate-side-bar {
-  transition:
-    opacity 0.3s ease,
+    transition: opacity 0.3s ease,
     visibility 0.3s ease,
     left 0.3s linear,
     top 0.3s linear,
@@ -104,56 +111,56 @@ body {
 }
 
 .animate-search {
-  transition: top 0.3s linear;
+    transition: top 0.3s linear;
 }
 
 @keyframes rotate180 {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(180deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(180deg);
+    }
 }
 
 @keyframes rotate0 {
-  from {
-    transform: rotate(180deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+    from {
+        transform: rotate(180deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
 }
 
 .rotate-180 {
-  animation: rotate180 0.2s ease-in-out; /* Adjust duration and timing function as needed */
+    animation: rotate180 0.2s ease-in-out; /* Adjust duration and timing function as needed */
 }
 
 .rotate-0 {
-  animation: rotate0 0.2s ease-in-out; /* Adjust duration and timing function as needed */
+    animation: rotate0 0.2s ease-in-out; /* Adjust duration and timing function as needed */
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .fade-in-events {
-  animation: fadeIn 0.5s ease-out;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .fade-in-event-detail {
-  animation: fadeIn 0.5s ease-out;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .icon-stroke-1 path {
-  stroke-width: 1px;
+    stroke-width: 1px;
 }
 
 .icon-stroke-0 path {
-  stroke-width: 0;
+    stroke-width: 0;
 }

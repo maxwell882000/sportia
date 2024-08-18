@@ -1,18 +1,20 @@
 import { useSelect } from "downshift";
 import { ChevronDown } from "@untitled-ui/icons-react";
 import { ReactNode, useEffect, useRef, useState } from "react";
+import { ConnectedField } from "effector-forms";
 
 export interface SelectItem {
   label: string;
   value: any;
 }
 
-interface Props {
+export interface SelectorProps {
   options: SelectItem[];
   required: boolean;
   placeholder: string;
-  onClick: (item: SelectItem) => void;
+  onClick?: (item: SelectItem) => void;
   customValueElement?: (index: number, item: SelectItem) => ReactNode;
+  field?: ConnectedField<any>;
 }
 
 export const Selector = ({
@@ -21,7 +23,8 @@ export const Selector = ({
   placeholder,
   onClick,
   customValueElement,
-}: Props) => {
+  field,
+}: SelectorProps) => {
   const selectorRef = useRef<HTMLDivElement | null>(null);
   const [widthChoice, setWidthChoice] = useState<number>(0);
   const [heightChoice, setHeightChoice] = useState<number>(0);
@@ -50,15 +53,22 @@ export const Selector = ({
   }, [selectorRef.current]);
 
   useEffect(() => {
-    onClick(selectedItem);
+    onClick && onClick(selectedItem);
+    if (selectedItem) field?.onChange(selectedItem);
   }, [selectedItem]);
+
+  const borderColor = () => {
+    return field?.hasError()
+      ? "border-red-500"
+      : "border-white  border-opacity-12";
+  };
 
   return (
     <div className="relative w-full">
-      <div ref={selectorRef}>
+      <div ref={selectorRef} className={"h-[3rem]"}>
         <button
           {...getToggleButtonProps()}
-          className={`peer w-full rounded-[0.5rem] border border-white border-opacity-12 bg-app-dark px-[1rem] py-[0.75rem] text-start text-white text-opacity-80 placeholder-white placeholder-opacity-0 focus-visible:outline-none`}
+          className={`peer h-full w-full rounded-[0.5rem] border ${borderColor()} bg-app-dark px-[1rem] py-[0.75rem] text-start text-white text-opacity-80 placeholder-white placeholder-opacity-0 focus-visible:outline-none`}
         >
           <div className="flex items-center justify-between">
             <span>{selectedItem?.label}</span>

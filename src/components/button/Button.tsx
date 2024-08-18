@@ -2,10 +2,11 @@ import { MouseEventHandler, ReactNode } from "react";
 
 interface Props {
   backgroundColor: string;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   icon?: ReactNode;
   name?: string;
   className?: string;
+  type?: "button" | "submit" | "reset";
 }
 
 function Button({
@@ -14,6 +15,7 @@ function Button({
   icon,
   onClick,
   className = "",
+  type = "button",
 }: Props) {
   return (
     <button
@@ -22,6 +24,7 @@ function Button({
         "--background-color-dynamic": backgroundColor,
         transition: "background-color 0.5s ease",
       }}
+      type={type}
       onClick={onClick}
       className={`flex h-[2.5rem] items-center justify-center space-x-2 rounded-app bg-[var(--background-color-dynamic)] px-4 ${className}`}
     >

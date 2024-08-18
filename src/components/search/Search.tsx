@@ -20,7 +20,7 @@ function Search() {
             placeholder={activeCategory?.name}
           />
         </div>
-        <div className={`animate-side-bar"} ml-[0.5rem] h-[2.5rem] w-[2.5rem]`}>
+        <div className={`animate-side-bar ml-[0.5rem] h-[2.5rem] w-[2.5rem]`}>
           <button
             onClick={() => {
               isSideBarChanged(!isSideBar);

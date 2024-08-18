@@ -1,35 +1,45 @@
 import Button from "../button/Button.tsx";
 import { User01, Users01 } from "@untitled-ui/icons-react";
+import { ConnectedField } from "effector-forms";
+import { BookTypeDto } from "../../dtos/book/bookTypeDto.ts";
 
 interface Props {
-  isSingle: boolean;
-  setSingle: (single: boolean) => void;
+  bookType: ConnectedField<BookTypeDto>;
+  cost: ConnectedField<number>;
 }
 
-function BookChoice({ isSingle, setSingle }: Props) {
+function BookChoice({ bookType, cost }: Props) {
   return (
     <div className={"flex space-x-[0.5rem]"}>
       <Button
-        backgroundColor={isSingle ? "#ACEF03" : "#1C1F24"}
+        backgroundColor={
+          bookType.value === BookTypeDto.SINGLE ? "#ACEF03" : "#1C1F24"
+        }
         name={"На одного"}
         className={
-          (isSingle ? "text-[#15171C] " : "text-[#ACEF03] ") +
-          " text-[0.875rem] leading-[1.25rem]"
+          (bookType.value === BookTypeDto.SINGLE
+            ? "text-[#15171C] "
+            : "text-[#ACEF03] ") + " text-[0.875rem] leading-[1.25rem]"
         }
         onClick={() => {
-          setSingle(true);
+          bookType.onChange(BookTypeDto.SINGLE);
+          cost.onChange(300000);
         }}
         icon={<User01 className={"icon-stroke-1 h-[1.25rem] w-[1.25rem]"} />}
       ></Button>
       <Button
-        backgroundColor={!isSingle ? "#ACEF03" : "#1C1F24"}
+        backgroundColor={
+          bookType.value === BookTypeDto.TEAM ? "#ACEF03" : "#1C1F24"
+        }
         name={"На команду"}
         className={
-          (!isSingle ? "text-[#15171C] " : "text-[#ACEF03] ") +
-          " text-[0.875rem] leading-[1.25rem]"
+          (bookType.value === BookTypeDto.TEAM
+            ? "text-[#15171C] "
+            : "text-[#ACEF03] ") + " text-[0.875rem] leading-[1.25rem]"
         }
         onClick={() => {
-          setSingle(false);
+          bookType.onChange(BookTypeDto.TEAM);
+          cost.onChange(500000);
         }}
         icon={<Users01 className={"icon-stroke-1 h-[1.25rem] w-[1.25rem]"} />}
       ></Button>

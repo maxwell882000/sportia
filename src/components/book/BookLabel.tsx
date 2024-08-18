@@ -7,7 +7,7 @@ interface Props {
 
 function BookLabel({ children, label }: Props) {
   return (
-    <div className={"space-y-[0.5rem]"}>
+    <div className={"space-y-[0.125rem]"}>
       <span className={"text-[0.75rem] leading-[1rem] text-[#FFFFFFCC]"}>
         {label}
       </span>

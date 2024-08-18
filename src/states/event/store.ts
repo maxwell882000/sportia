@@ -8,6 +8,7 @@ import {
 import { defaultEventsDto, EventDto } from "../../dtos/events/eventDto.ts";
 import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
 import { $activeCategory } from "../category/store.ts";
+import { isAuth } from "../middlewares.ts";
 
 export const $events = eventDomain
   .createStore<EventDto[]>(defaultEventsDto)
@@ -18,8 +19,10 @@ export const $eventDetail = eventDomain
   .on($eventDetailChanged, (_, result) => result)
   .on($eventDetailClose, () => null)
   .on($eventLiked, (_) => {
-    return { ..._, isLiked: !_.isLiked };
+    if (isAuth()) return { ..._, isLiked: !_.isLiked };
+    return _;
   });
+
 export const $activeEvents = eventDomain
   .createStore<EventDto[]>(defaultEventsDto)
   .on($activeCategory, (_, category) => {

@@ -1,20 +1,57 @@
 import { createForm } from "effector-forms";
-import { rules } from "../../utils/rules.ts";
+import { BookTypeDto } from "../../dtos/book/bookTypeDto.ts";
+import { BookDto } from "../../dtos/book/bookDto.ts";
+import { forward } from "effector";
+import { $paymentRequired } from "./events.ts";
 
-export const $singleBookForm = createForm({
+export const $bookForm = createForm<BookDto>({
   fields: {
-    name: {
-      init: "" as string,
-      rules: [rules.required()],
+    bookType: {
+      init: BookTypeDto.SINGLE,
     },
-    phone: {
-      init: "" as string,
-      rules: [rules.required()],
+    days: {
+      init: null,
+      rules: []
     },
-    gameDays: {
+    date: {
       init: "" as string,
-      rules: [rules.required()],
+    },
+    time: {
+      init: null,
+    },
+    cost: {
+      init: 300000,
+    },
+    isClick: {
+      init: false,
+    },
+    isPayme: {
+      init: false,
     },
   },
   validateOn: ["submit"],
+});
+//
+// sample({
+//   source: $paymentRequired,
+//   fn: () => [
+//     {
+//       field: "isPayme",
+//       rule: "required",
+//       errorText: "",
+//     },
+//     {
+//       field: "isClick",
+//       rule: "required",
+//       errorText: "",
+//     },
+//   ],
+//   target: $bookForm.fields.isClick.addError,
+// });
+forward({
+  from: $paymentRequired.map(() => ({
+    rule: "paymentRequired",
+    errorText: "Вы должны выбрать способ платежа.",
+  })),
+  to: [$bookForm.fields.isClick.addError, $bookForm.fields.isPayme.addError],
 });

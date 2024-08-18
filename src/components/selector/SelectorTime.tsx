@@ -1,10 +1,11 @@
 import { SelectItem, Selector } from "./Selector.tsx";
+import { ConnectedField } from "effector-forms";
 
 interface Props {
-  onClick: (item: SelectItem) => void;
+  field?: ConnectedField<any>;
 }
 
-function SelectorHour(props: Props) {
+function SelectorTime(props: Props) {
   const options = [
     { value: 0, label: "17:00 - 19:00" },
     { value: 1, label: "19:00 - 21:00" },
@@ -20,4 +21,4 @@ function SelectorHour(props: Props) {
   );
 }
 
-export default SelectorHour;
+export default SelectorTime;
