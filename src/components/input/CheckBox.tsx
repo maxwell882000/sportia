@@ -17,9 +17,8 @@ const Checkbox = ({ placeholder, onClick }: Props) => {
 
   return (
     <div className={"flex w-max space-x-[0.5rem]"}>
-      <div className="relative flex cursor-pointer items-center">
+      <label className="relative flex cursor-pointer items-center">
         <input
-          id={`checkbox-${placeholder}`}
           type="checkbox"
           checked={checked}
           onChange={handleCheckboxChange}
@@ -32,12 +31,13 @@ const Checkbox = ({ placeholder, onClick }: Props) => {
         >
           {checked && <Check />}
         </span>
-      </div>
-      <label
-        htmlFor={`checkbox-${placeholder}`}
-        className={"cursor-default text-white text-opacity-80 select-none"}
-      >
-        {placeholder}
+        <span
+          className={
+            "cursor-default select-none pl-2 text-white text-opacity-80"
+          }
+        >
+          {placeholder}
+        </span>
       </label>
     </div>
   );
