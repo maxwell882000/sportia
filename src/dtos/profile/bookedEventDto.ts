@@ -1,12 +1,12 @@
 import { BookTypeDto } from "../book/bookTypeDto.ts";
 import { SelectItem } from "../../components/selector/Selector.tsx";
 
-interface BookedEventDto {
+export interface BookedEventDto {
   id: number;
   bookType: BookTypeDto;
-  days?: SelectItem;
+  days?: string;
   date?: string;
-  time: SelectItem;
+  time: string;
   cost: number;
   name: string;
 }

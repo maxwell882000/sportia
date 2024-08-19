@@ -26,5 +26,6 @@ export const hexToRgba = (hex: string, newOpacity: number) => {
   }
 
   // Override the opacity with the new value
+  console.log("HERE IT IS ", )
   return `rgba(${r}, ${g}, ${b}, ${newOpacity || a})`;
 };

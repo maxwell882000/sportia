@@ -11,6 +11,7 @@ function SlideButton<T extends SlideButtonDto>({ item, onClick }: Props<T>) {
   return (
     <Button
       backgroundColor={hexToRgba(item.bgColor, Number(item.isActive))}
+      backgroundColorHover={hexToRgba(item.bgColor, 100)}
       className={"text-white"}
       onClick={() => onClick && onClick(item)}
       icon={item.icon}

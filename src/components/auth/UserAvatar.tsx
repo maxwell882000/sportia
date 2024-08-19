@@ -1,6 +1,6 @@
 import { User01 } from "@untitled-ui/icons-react";
-import Login from "./auth/Login.tsx";
-import Register from "./auth/Register.tsx";
+import Login from "./Login.tsx";
+import Register from "./Register.tsx";
 import { useUnit } from "effector-react";
 import { $initials } from "../../states/users/store.ts";
 import { $profileOpened } from "../../states/profile/events.ts";

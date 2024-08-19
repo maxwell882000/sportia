@@ -1,17 +1,17 @@
 import { useUnit } from "effector-react";
-import { $isRegisterPopUp } from "../../../states/users/store.ts";
+import { $isRegisterPopUp } from "../../states/users/store.ts";
 import {
   $passwordNotMatched,
   $userPopUpChanged,
-} from "../../../states/users/events.ts";
+} from "../../states/users/events.ts";
 import { useForm } from "effector-forms";
-import { $registerForm } from "../../../states/users/form.ts";
-import CustomModal from "../../modal/CustomModal.tsx";
-import { UserPopUp } from "../../../dtos/users/userPopUp.ts";
-import Input from "../../input/Input.tsx";
-import InputPhone from "../../input/InputPhone.tsx";
-import InputPassword from "../../input/InputPassword.tsx";
-import Button from "../../button/Button.tsx";
+import { $registerForm } from "../../states/users/form.ts";
+import CustomModal from "../modal/CustomModal.tsx";
+import { UserPopUp } from "../../dtos/users/userPopUp.ts";
+import Input from "../input/Input.tsx";
+import InputPhone from "../input/InputPhone.tsx";
+import InputPassword from "../input/InputPassword.tsx";
+import Button from "../button/Button.tsx";
 
 function Register() {
   const [isRegister, userPopUpChanged, passwordNotMatched] = useUnit([

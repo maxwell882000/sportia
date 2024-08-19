@@ -17,6 +17,7 @@ import { $eventLiked } from "../../../states/event/events.ts";
 import { LINK, TEXT } from "../../../constants/share.ts";
 import { $pageChanged } from "../../../states/events.ts";
 import { Pages } from "../../../constants/pages.ts";
+import { hexToRgba } from "../../../utils/hexToRgba.ts";
 
 interface Props {
   event: EventDetailDto;
@@ -58,7 +59,7 @@ function EventDetail() {
                 <Button
                   backgroundColor={"#ACEF03"}
                   name={"Забронировать"}
-                  className={"w-[13.5rem] text-[#15171C] hover:bg-[#ACEF03CC]"}
+                  className={"w-[13.5rem] text-[#15171C]"}
                   onClick={() => {
                     pageChanged(Pages.BOOK);
                   }}
@@ -89,7 +90,7 @@ function EventDetail() {
               <div className="border-b border-[#1C1F24]"></div>
               <WorkHours workHours={event?.workHours} />
               <div className="border-b border-[#1C1F24]"></div>
-              <OverallReview  />
+              <OverallReview />
             </div>
             <div className={"mt-[2rem]"}>
               <Reviews />

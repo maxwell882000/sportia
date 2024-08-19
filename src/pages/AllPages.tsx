@@ -11,8 +11,8 @@ import Page from "./Page.tsx";
 import Book from "../components/book/Book.tsx";
 import Categories from "../components/category/Categories.tsx";
 import Events from "../components/event/Events.tsx";
-import ProfileOptions from "../components/user/profile/ProfileOptions.tsx";
-import Profile from "../components/user/profile/Profile.tsx";
+import ProfileOptions from "../components/profile/ProfileOptions.tsx";
+import Profile from "../components/profile/Profile.tsx";
 
 function AllPages() {
   const [isCategoriesDisappeared, isAnimateSideBar, currentPage] = useUnit([

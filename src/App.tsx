@@ -8,7 +8,7 @@ import Logo from "./components/Icons/Logo.tsx";
 import SideBar from "./components/layout/SideBar.tsx";
 import { AppStartGate } from "./states/gate.ts";
 import AllPages from "./pages/AllPages.tsx";
-import UserAvatar from "./components/user/UserAvatar.tsx";
+import UserAvatar from "./components/auth/UserAvatar.tsx";
 import CurrentEventMap from "./components/event/evenMap/CurrentEventMap.tsx";
 import AllEventMap from "./components/event/evenMap/AllEventMap.tsx";
 

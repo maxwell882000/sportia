@@ -1,9 +1,9 @@
 import { useUnit } from "effector-react";
-import SlideButton from "../../slide/SlideButton.tsx";
+import SlideButton from "../slide/SlideButton.tsx";
 import {
   $profileActivated,
   $profilesOption,
-} from "../../../states/profile/store.ts";
+} from "../../states/profile/store.ts";
 
 function ProfileOptions() {
   const [profilesOption, profileActivated] = useUnit([
