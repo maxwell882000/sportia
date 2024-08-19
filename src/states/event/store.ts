@@ -9,6 +9,9 @@ import { defaultEventsDto, EventDto } from "../../dtos/events/eventDto.ts";
 import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
 import { $activeCategory } from "../category/store.ts";
 import { isAuth } from "../middlewares.ts";
+import { sample } from "effector";
+import { $pageChanged } from "../events.ts";
+import { Pages } from "../../constants/pages.ts";
 
 export const $events = eventDomain
   .createStore<EventDto[]>(defaultEventsDto)
@@ -33,3 +36,9 @@ export const $activeEvents = eventDomain
         .map((e) => ({ ...e })),
     ];
   });
+
+sample({
+  source: $pageChanged,
+  filter: (page) => page === Pages.PROFILE,
+  target: $eventDetailClose,
+});

@@ -6,3 +6,4 @@ export const $eventsChanged = eventDomain.createEvent<EventDto[]>();
 export const $eventDetailChanged = eventDomain.createEvent<EventDetailDto>();
 export const $eventDetailClose = eventDomain.createEvent();
 export const $eventLiked = eventDomain.createEvent();
+export const $eventBook = eventDomain.createEvent();

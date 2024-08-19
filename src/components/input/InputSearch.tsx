@@ -37,7 +37,7 @@ function InputSearch(props: InputHTMLAttributes<HTMLInputElement>) {
         )
       }
       suffix={
-        currentPage === Pages.BOOK && (
+        currentPage !== Pages.MAIN && (
           <button
             onClick={() => {
               pageChanged(Pages.MAIN);

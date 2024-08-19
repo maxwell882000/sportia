@@ -3,5 +3,5 @@ export interface UserReviewDto {
   review: number;
   avatar: string;
   comment: string;
-  reviewDate: Date;
+  reviewDate?: Date;
 }

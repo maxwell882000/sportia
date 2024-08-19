@@ -9,7 +9,7 @@ function Star({ progress, className }: Props) {
 
   return (
     <svg
-      className={className}
+      className={ " text-[#15171C] " + className}
       width="17"
       height="16"
       viewBox="0 0 17 16"
@@ -19,7 +19,7 @@ function Star({ progress, className }: Props) {
       {/* Background path */}
       <path
         d="M8.50016 0.583374L10.9464 5.53921L16.4168 6.33879L12.4585 10.1942L13.3927 15.6409L8.50016 13.068L3.60766 15.6409L4.54183 10.1942L0.583496 6.33879L6.05391 5.53921L8.50016 0.583374Z"
-        fill="#15171C" // Background color (unfilled portion)
+        fill="currentColor" // Background color (unfilled portion)
       />
       {/* Filled portion path */}
       <path

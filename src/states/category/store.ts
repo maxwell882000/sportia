@@ -1,22 +1,18 @@
 import { categoryDomain } from "./domain";
-import {
-  CategoryDto,
-  defaultCategories,
-} from "../../dtos/categories/categoryDto.ts";
-import { $categoriesChanged, $categoryActivated } from "./events.ts";
-import { StoreWritable } from "effector";
+import { slideButtonFactory } from "../factories/slideButton/slideButtonFactory.ts";
+import { defaultCategories } from "../../dtos/categories/categoryDto.ts";
+import { sample } from "effector";
+import { $searchPlaceholderChanged } from "../events.ts";
 
-export const $categories: StoreWritable<CategoryDto[]> = categoryDomain
-  .createStore<CategoryDto[]>(defaultCategories)
-  .on($categoriesChanged, (_, result) => {
-    return result;
-  })
-  .on($categoryActivated, (state, clicked) => {
-    state.forEach((cat) => (cat.isActive = false));
-    clicked.isActive = true;
-    return [...state];
-  });
+export const {
+  $slides: $categories,
+  $activeSlide: $activeCategory,
+  $slidesChanged: $categoriesChanged,
+  $slideActivated: $categoryActivated,
+} = slideButtonFactory(categoryDomain, defaultCategories);
 
-export const $activeCategory = $categories.map<CategoryDto>(
-  (e) => e.filter((c) => c.isActive)[0],
-);
+sample({
+  source: $activeCategory,
+  fn: (result) => result.name,
+  target: $searchPlaceholderChanged,
+});

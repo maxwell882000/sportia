@@ -4,7 +4,7 @@ interface Props {
   backgroundColor: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   icon?: ReactNode;
-  name?: string;
+  name?: ReactNode;
   className?: string;
   type?: "button" | "submit" | "reset";
 }
@@ -26,7 +26,7 @@ function Button({
       }}
       type={type}
       onClick={onClick}
-      className={`flex h-[2.5rem] items-center justify-center space-x-2 rounded-app bg-[var(--background-color-dynamic)] px-4 ${className}`}
+      className={`button flex h-[2.5rem] items-center justify-center space-x-2 rounded-app bg-[var(--background-color-dynamic)] px-4 ${className}`}
     >
       {icon && <div>{icon}</div>}
       {name && <div>{name}</div>}

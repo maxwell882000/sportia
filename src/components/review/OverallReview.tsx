@@ -1,48 +1,86 @@
 import ReviewStar from "./ReviewStar.tsx";
-import CommentCount from "./CommentCount.tsx";
-import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
+import ReviewCount from "./ReviewCount.tsx";
+import { useUnit } from "effector-react";
+import { $isCommenting, $review } from "../../states/review/store.ts";
+import { $commentMade } from "../../states/review/events.ts";
+import { useForm } from "effector-forms";
+import { $ownReviewForm } from "../../states/review/form.ts";
+import TextArea from "../input/TextArea.tsx";
+import Button from "../button/Button.tsx";
+import OwnReview from "./OwnReview.tsx";
 
-interface Props {
-  event: EventDetailDto;
-}
-
-function OverallReview({ event }: Props) {
+function OverallReview() {
+  const [review, commentMade, isCommenting] = useUnit([
+    $review,
+    $commentMade,
+    $isCommenting,
+  ]);
+  const { fields, submit } = useForm($ownReviewForm);
   return (
-    <div className={"flex flex-col rounded-app bg-[#1C1F24] px-4 py-2.5"}>
-      <div
-        className={
-          "flex items-center justify-start space-x-4 border-b border-[#15171C] pb-2"
-        }
-      >
-        <div className={"h-[3.563rem]"}>
-          <span
-            className={
-              "text-[3rem] leading-[2.869rem] tracking-[0.009rem] text-white text-opacity-80"
-            }
-          >
-            5.0
-          </span>
+    <>
+      <div className={"space-y-[1rem]"}>
+        <div className={"flex flex-col rounded-app bg-[#1C1F24] px-4 py-2.5"}>
+          <div className={"flex items-center justify-start space-x-4 pb-2"}>
+            <div className={"h-[3.563rem]"}>
+              <span
+                className={
+                  "text-[3rem] leading-[2.869rem] tracking-[0.009rem] text-white text-opacity-80"
+                }
+              >
+                5.0
+              </span>
+            </div>
+            <div>
+              <ReviewStar review={review?.review} />
+              <ReviewCount reviewCount={review?.reviewCount} />
+            </div>
+          </div>
+          {(review?.ownReview == null || isCommenting) && (
+            <div
+              className={
+                "mt-2 flex flex-col items-center justify-center border-t border-[#15171C] py-2"
+              }
+            >
+              <span className={"text-[0.875rem] text-white text-opacity-50"}>
+                Оцените и оставьте отзыв
+              </span>
+              <div>
+                <ReviewStar
+                  onClick={(r: number) => {
+                    if (!isCommenting)
+                      commentMade({ ...review?.ownReview, review: r });
+                    else fields.review.onChange(r);
+                  }}
+                  startClass={"!w-[2.5rem] !h-[2.5rem] cursor-pointer"}
+                  review={isCommenting ? fields.review.value : 0}
+                />
+              </div>
+            </div>
+          )}
         </div>
-        <div>
-          <ReviewStar review={event.review} />
-          <CommentCount commentCount={event.commentCount} />
-        </div>
+        {isCommenting && (
+          <>
+            <div>
+              <TextArea
+                placeholder={"Оставьте комментарий"}
+                options={{
+                  field: fields.comment,
+                }}
+              />
+            </div>
+            <Button
+              backgroundColor={"#ACEF03"}
+              name={"Сохранить"}
+              className={"w-full text-[#15171C] hover:bg-[#ACEF03CC]"}
+              onClick={() => {
+                submit();
+              }}
+            />
+          </>
+        )}
       </div>
-      <div className={"mt-2 flex flex-col items-center justify-center py-2"}>
-        <span className={"text-[0.875rem] text-white text-opacity-50"}>
-          Оцените и оставьте отзыв
-        </span>
-        <div>
-          <ReviewStar
-            onClick={(review: number) => {
-              console.log("ReviewStar", review);
-            }}
-            startClass={"!w-[2.5rem] !h-[2.5rem] cursor-pointer"}
-            review={event?.ownReview?.review ?? 0}
-          />
-        </div>
-      </div>
-    </div>
+      {!isCommenting && <OwnReview />}
+    </>
   );
 }
 

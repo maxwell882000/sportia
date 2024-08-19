@@ -5,9 +5,12 @@ import {
   $pageRestored,
   $previousPageSaved,
   $searchChanged,
+  $searchPlaceholderChanged,
+  $searchPlaceholderRestore,
+  $searchRestore,
 } from "./events.ts";
 import { createStore, sample } from "effector";
-import { Pages } from "../constants/pages.ts";
+import { Pages, sliderPages } from "../constants/pages.ts";
 import { $eventDetailChanged } from "./event/events.ts";
 import { $userPopUpChanged } from "./users/events.ts";
 import { UserPopUp } from "../dtos/users/userPopUp.ts";
@@ -39,14 +42,22 @@ export const $isAnimateSideBar = $isSideBar.map(
 
 export const $search = app
   .createStore<string>("")
-  .on($searchChanged, (_, result) => result);
+  .on($searchChanged, (_, result) => result)
+  .reset($searchRestore);
 
-export const $isCategoriesDisappeared = createStore<boolean>(true)
+export const $searchPlaceholder = app
+  .createStore<string>("Поиск")
+  .on($searchPlaceholderChanged, (_, result) => result)
+  .reset($searchPlaceholderRestore);
+
+export const $isSliderDisappeared = createStore<boolean>(true)
   .on(
     $isSideBarChanged,
-    (_, result) => result == false || $currentPage.getState() === Pages.BOOK,
+    (_, result) => result == false || !sliderPages.has($currentPage.getState()),
   )
-  .on($currentPage, (_, page) => page === Pages.BOOK);
+  .on($currentPage, (_, page) => {
+    return !sliderPages.has(page);
+  });
 
 sample({
   source: $eventDetailChanged,

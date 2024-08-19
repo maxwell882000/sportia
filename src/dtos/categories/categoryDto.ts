@@ -1,17 +1,11 @@
 import All from "../../components/Icons/All.tsx";
 import Football from "../../components/Icons/Football.tsx";
-import { ReactNode } from "react";
 import Basketball from "../../components/Icons/Basketball.tsx";
 import Tennis from "../../components/Icons/Tennis.tsx";
 import PingPong from "../../components/Icons/PingPong.tsx";
+import { SlideButtonDto } from "../slide/slideButtonDto.ts";
 
-export interface CategoryDto {
-  id: number;
-  icon: ReactNode;
-  name: string;
-  bgColor: string;
-  isActive: boolean;
-}
+export interface CategoryDto extends SlideButtonDto {}
 
 export const defaultCategories = [
   {

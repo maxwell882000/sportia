@@ -89,10 +89,10 @@ function EventDetail() {
               <div className="border-b border-[#1C1F24]"></div>
               <WorkHours workHours={event?.workHours} />
               <div className="border-b border-[#1C1F24]"></div>
-              <OverallReview event={event} />
+              <OverallReview  />
             </div>
             <div className={"mt-[2rem]"}>
-              <Reviews event={event} />
+              <Reviews />
             </div>
           </div>
         </SimpleBar>

@@ -1,6 +1,6 @@
 import { EventDto } from "../../dtos/events/eventDto.ts";
 import ReviewStar from "../review/ReviewStar.tsx";
-import CommentCount from "../review/CommentCount.tsx";
+import ReviewCount from "../review/ReviewCount.tsx";
 
 interface Props {
   event: EventDto;
@@ -22,7 +22,7 @@ function EventTitle({ event }: Props) {
         >
           <ReviewStar review={event.review} />
           <span className={"text-white"}>{event.review}</span>
-          <CommentCount commentCount={event.commentCount} />
+          <ReviewCount reviewCount={event.reviewCount} />
         </div>
         <div className={"mt-0.5 space-y-0.5 text-[0.875rem]"}>
           <p

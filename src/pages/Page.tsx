@@ -1,10 +1,11 @@
-import Book from "../components/book/Book.tsx";
+import { ReactNode } from "react";
 
 interface Props {
-  className?: string;
+  className: string;
+  children: ReactNode;
 }
 
-function BookPage({ className }: Props) {
+function Page({ className, children }) {
   return (
     <>
       <div className={"mb-[1rem] h-[5rem]"}></div>
@@ -12,10 +13,10 @@ function BookPage({ className }: Props) {
       <div
         className={`relative order-4 w-[24rem] flex-1 overflow-y-auto ${className} `}
       >
-        <Book />
+        {children}
       </div>
     </>
   );
 }
 
-export default BookPage;
+export default Page;

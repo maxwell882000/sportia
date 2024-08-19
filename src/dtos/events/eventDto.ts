@@ -8,7 +8,7 @@ export interface EventDto {
   address: string;
   image: string;
   isOpen: boolean;
-  commentCount: number;
+  reviewCount: number;
   categoryId: number;
 }
 
@@ -21,7 +21,7 @@ export const defaultEventsDto = [
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: true,
     image,
-    commentCount: 23,
+    reviewCount: 23,
     categoryId: 3,
   } as EventDto,
   {
@@ -32,7 +32,7 @@ export const defaultEventsDto = [
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: true,
     image,
-    commentCount: 23,
+    reviewCount: 23,
     categoryId: 3,
   } as EventDto,
   {
@@ -42,7 +42,7 @@ export const defaultEventsDto = [
     workTime: "Открыто до 23:00",
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: true,
-    commentCount: 23,
+    reviewCount: 23,
     image,
     categoryId: 2,
   } as EventDto,
@@ -53,7 +53,7 @@ export const defaultEventsDto = [
     workTime: "Открыто до 23:00",
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: true,
-    commentCount: 23,
+    reviewCount: 23,
     image,
     categoryId: 2,
   } as EventDto,
@@ -64,7 +64,7 @@ export const defaultEventsDto = [
     workTime: "Открыто до 23:00",
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: false,
-    commentCount: 23,
+    reviewCount: 23,
     image,
     categoryId: 3,
   } as EventDto,
@@ -75,7 +75,7 @@ export const defaultEventsDto = [
     workTime: "Открыто до 23:00",
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: false,
-    commentCount: 23,
+    reviewCount: 23,
     image,
     categoryId: 2,
   } as EventDto,

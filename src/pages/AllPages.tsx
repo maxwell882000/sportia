@@ -3,15 +3,20 @@ import { useUnit } from "effector-react";
 import {
   $currentPage,
   $isAnimateSideBar,
-  $isCategoriesDisappeared,
+  $isSliderDisappeared,
 } from "../states/store.ts";
-import MainPage from "./MainPage.tsx";
-import BookPage from "./BookPage.tsx";
+import SliderPage from "./SliderPage.tsx";
 import { Pages } from "../constants/pages.ts";
+import Page from "./Page.tsx";
+import Book from "../components/book/Book.tsx";
+import Categories from "../components/category/Categories.tsx";
+import Events from "../components/event/Events.tsx";
+import ProfileOptions from "../components/user/profile/ProfileOptions.tsx";
+import Profile from "../components/user/profile/Profile.tsx";
 
 function AllPages() {
   const [isCategoriesDisappeared, isAnimateSideBar, currentPage] = useUnit([
-    $isCategoriesDisappeared,
+    $isSliderDisappeared,
     $isAnimateSideBar,
     $currentPage,
   ]);
@@ -24,10 +29,23 @@ function AllPages() {
         <Search />
       </div>
       {currentPage === Pages.MAIN && (
-        <MainPage className={animateCloseOpenSideBar} />
+        <SliderPage
+          choice={<Categories />}
+          content={<Events />}
+          className={animateCloseOpenSideBar}
+        />
       )}
       {currentPage === Pages.BOOK && (
-        <BookPage className={animateCloseOpenSideBar} />
+        <Page className={animateCloseOpenSideBar}>
+          <Book />
+        </Page>
+      )}
+      {currentPage === Pages.PROFILE && (
+        <SliderPage
+          choice={<ProfileOptions />}
+          content={<Profile />}
+          className={animateCloseOpenSideBar}
+        ></SliderPage>
       )}
     </>
   );

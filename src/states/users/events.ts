@@ -4,9 +4,8 @@ import { RegisterDto } from "../../dtos/users/registerDto.ts";
 import { UserDto } from "../../dtos/users/userDto.ts";
 import { UserPopUp } from "../../dtos/users/userPopUp.ts";
 
-export const $loginSubmitted = userDomain.createEvent<LoginDto>();
 
-export const $registerSubmitted = userDomain.createEvent<RegisterDto>();
+export const $passwordNotMatched = userDomain.createEvent();
 
 export const $userPopUpChanged = userDomain.createEvent<UserPopUp>();
 
