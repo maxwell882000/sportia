@@ -31,23 +31,7 @@ export const $bookForm = createForm<BookDto>({
   },
   validateOn: ["submit"],
 });
-//
-// sample({
-//   source: $paymentRequired,
-//   fn: () => [
-//     {
-//       field: "isPayme",
-//       rule: "required",
-//       errorText: "",
-//     },
-//     {
-//       field: "isClick",
-//       rule: "required",
-//       errorText: "",
-//     },
-//   ],
-//   target: $bookForm.fields.isClick.addError,
-// });
+
 forward({
   from: $paymentRequired.map(() => ({
     rule: "paymentRequired",
