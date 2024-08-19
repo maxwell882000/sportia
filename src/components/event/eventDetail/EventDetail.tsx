@@ -17,7 +17,6 @@ import { $eventLiked } from "../../../states/event/events.ts";
 import { LINK, TEXT } from "../../../constants/share.ts";
 import { $pageChanged } from "../../../states/events.ts";
 import { Pages } from "../../../constants/pages.ts";
-import { hexToRgba } from "../../../utils/hexToRgba.ts";
 
 interface Props {
   event: EventDetailDto;
