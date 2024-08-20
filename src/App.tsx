@@ -9,7 +9,6 @@ import SideBar from "./components/layout/SideBar.tsx";
 import { AppStartGate } from "./states/gate.ts";
 import AllPages from "./pages/AllPages.tsx";
 import UserAvatar from "./components/auth/UserAvatar.tsx";
-import CurrentEventMap from "./components/event/evenMap/CurrentEventMap.tsx";
 import AllEventMap from "./components/event/evenMap/AllEventMap.tsx";
 
 function App() {
@@ -37,10 +36,10 @@ function App() {
           location={{ center: [69.2401, 41.2995], zoom: 9.3 }}
           mode="vector"
           theme="dark"
+
         >
           <YMapDefaultSchemeLayer />
           <YMapDefaultFeaturesLayer />
-          <CurrentEventMap />
           <AllEventMap />
         </YMap>
       </div>

@@ -56,13 +56,13 @@ export const $isSliderDisappeared = createStore<boolean>(true)
     (_, result) => result == false || !sliderPages.has($currentPage.getState()),
   )
   .on($currentPage, (_, page) => {
-    return !sliderPages.has(page);
+    return $isSideBar.getState() == false || !sliderPages.has(page);
   });
 
 sample({
   source: $eventDetailChanged,
   fn: (source) => source.name,
-  target: $search,
+  target: [$search, $isSideBarChanged],
 });
 
 sample({
