@@ -10,6 +10,9 @@ import { AppStartGate } from "./states/gate.ts";
 import AllPages from "./pages/AllPages.tsx";
 import UserAvatar from "./components/auth/UserAvatar.tsx";
 import AllEventMap from "./components/event/evenMap/AllEventMap.tsx";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 function App() {
   return (
@@ -36,7 +39,6 @@ function App() {
           location={{ center: [69.2401, 41.2995], zoom: 9.3 }}
           mode="vector"
           theme="dark"
-
         >
           <YMapDefaultSchemeLayer />
           <YMapDefaultFeaturesLayer />

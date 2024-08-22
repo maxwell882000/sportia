@@ -9,6 +9,6 @@ export default defineConfig({
       plugins: [tailwindcss()],
     },
   },
-  base: "sportia-site",
+  base: "",
   plugins: [react()],
 });

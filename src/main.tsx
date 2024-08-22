@@ -24,4 +24,4 @@ createRoot(document.getElementById("root")!).render(
   </StrictMode>,
 );
 
-Modal.setAppElement("#modal");
+
