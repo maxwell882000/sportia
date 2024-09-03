@@ -3,10 +3,16 @@ import { OwnReviewDto } from "../../dtos/review/ownReviewDto.ts";
 import { rules } from "../../utils/rules.ts";
 import { sample } from "effector";
 import { $commentCanceled, $commentMade } from "./events.ts";
+import { $saveReviewFx } from "./effects.ts";
+import { $eventDetail } from "../event/store.ts";
+import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
 
 export const $ownReviewForm = createForm<OwnReviewDto>({
   fields: {
-    review: {
+    id: {
+      init: "" as string,
+    },
+    mark: {
       init: 0,
       rules: [rules.required()],
     },
@@ -25,5 +31,14 @@ sample({
 
 sample({
   source: $commentCanceled,
-  target: $ownReviewForm.reset
-})
+  target: $ownReviewForm.reset,
+});
+sample({
+  clock: $ownReviewForm.formValidated,
+  source: $eventDetail,
+  fn: (source: EventDetailDto, clock: OwnReviewDto) => ({
+    ownReview: clock,
+    eventId: source.id,
+  }),
+  target: $saveReviewFx,
+});

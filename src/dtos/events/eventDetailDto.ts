@@ -13,7 +13,7 @@ export interface EventDetailDto extends EventDto {
 export const defaultEventDetailDto: EventDetailDto = {
   id: 1,
   name: "Футбольное поле 1",
-  workTime: "Открыто до 23:00",
+  nextTime: "Открыто до 23:00",
   address: "ул.Мирзо-Улугбек, 82A",
   isOpen: true,
   image,

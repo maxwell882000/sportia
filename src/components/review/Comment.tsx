@@ -23,7 +23,7 @@ function Comment({ user, onStarClick }: Props) {
             <span className={"text-white"}>{user.name}</span>
             <ReviewStar
               startClass={"text-[#1C1F24]"}
-              review={user.review}
+              review={user.mark}
               onClick={(review: number) => {
                 onStarClick && onStarClick(review);
               }}

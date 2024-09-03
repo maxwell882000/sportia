@@ -54,7 +54,7 @@ function AllEventMap() {
             >
               <p>{e.name}</p>
               <p className={`${e.isOpen ? "" : "text-[#F63D68]"}`}>
-                {e.workTime}
+                {e.nextTime}
               </p>
             </div>
           </div>

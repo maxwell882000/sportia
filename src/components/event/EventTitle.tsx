@@ -20,15 +20,15 @@ function EventTitle({ event }: Props) {
         <div
           className={"my-0.5 flex items-center space-x-[0.5rem] text-center"}
         >
-          <ReviewStar review={event.review} />
-          <span className={"text-white"}>{event.review}</span>
+          <ReviewStar review={event.mark} />
+          <span className={"text-white"}>{event.mark}</span>
           <ReviewCount reviewCount={event.reviewCount} />
         </div>
         <div className={"mt-0.5 space-y-0.5 text-[0.875rem]"}>
           <p
             className={`${event.isOpen ? "text-[#ACEF03]" : "text-[#F63D68]"}`}
           >
-            {event.workTime}
+            {event.nextTime}
           </p>
           <p className={"text-white"}>{event.address}</p>
         </div>

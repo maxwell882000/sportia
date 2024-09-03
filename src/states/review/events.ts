@@ -3,6 +3,7 @@ import { ReviewDto } from "../../dtos/review/reviewDto.ts";
 import { OwnReviewDto } from "../../dtos/review/ownReviewDto.ts";
 
 export const $reviewChanged = reviewDomain.createEvent<ReviewDto>();
+export const $saveOwnReview = reviewDomain.createEvent<OwnReviewDto>();
 
 export const $commentMade = reviewDomain.createEvent<OwnReviewDto>();
 

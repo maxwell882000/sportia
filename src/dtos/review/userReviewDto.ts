@@ -1,6 +1,6 @@
 export interface UserReviewDto {
   name: string;
-  review: number;
+  mark: number;
   avatar: string;
   comment: string;
   reviewDate?: Date;

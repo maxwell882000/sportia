@@ -23,7 +23,7 @@ function OwnReview() {
           user={{
             name: user.name,
             avatar: user.avatar,
-            review: ownReview.review,
+            mark: ownReview.mark,
             comment: ownReview.comment,
             reviewDate: ownReview.reviewDate,
           }}

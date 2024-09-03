@@ -1,24 +1,25 @@
 import image from "../../assets/test/img.png";
 
 export interface EventDto {
-  id: number;
+  id: string;
   name: string;
-  review: number;
-  workTime: string;
+  mark: number;
+  nextTime: string;
   address: string;
   image: string;
   isOpen: boolean;
   reviewCount: number;
   categoryId: number;
   coordinates: [number, number];
+  isReservable: boolean;
 }
 
 export const defaultEventsDto = [
   {
-    id: 1,
+    id: "1",
     name: "Футбольное поле 1",
-    review: 4.5,
-    workTime: "Открыто до 23:00",
+    mark: 4.5,
+    nextTime: "Открыто до 23:00",
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: true,
     image,
@@ -27,10 +28,10 @@ export const defaultEventsDto = [
     coordinates: [69.255338, 41.347556],
   } as EventDto,
   {
-    id: 2,
+    id: "2",
     name: "Футбольное поле 1",
-    review: 5,
-    workTime: "Открыто до 23:00",
+    mark: 5,
+    nextTime: "Открыто до 23:00",
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: true,
     image,
@@ -39,10 +40,10 @@ export const defaultEventsDto = [
     coordinates: [69.260829, 41.330368],
   } as EventDto,
   {
-    id: 3,
+    id: "3",
     name: "Футбольное поле 1",
-    review: 4,
-    workTime: "Открыто до 23:00",
+    mark: 4,
+    nextTime: "Открыто до 23:00",
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: true,
     reviewCount: 23,
@@ -51,10 +52,10 @@ export const defaultEventsDto = [
     coordinates: [69.260829, 41.343418],
   } as EventDto,
   {
-    id: 4,
+    id: "4",
     name: "Футбольное поле 1",
-    review: 3,
-    workTime: "Открыто до 23:00",
+    mark: 3,
+    nextTime: "Открыто до 23:00",
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: true,
     reviewCount: 23,
@@ -63,10 +64,10 @@ export const defaultEventsDto = [
     coordinates: [69.285007, 41.314464],
   } as EventDto,
   {
-    id: 5,
+    id: "5",
     name: "Футбольное поле 1",
-    review: 2.3,
-    workTime: "Открыто до 23:00",
+    mark: 2.3,
+    nextTime: "Открыто до 23:00",
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: false,
     reviewCount: 23,
@@ -75,10 +76,10 @@ export const defaultEventsDto = [
     coordinates: [69.264925, 41.314464],
   } as EventDto,
   {
-    id: 6,
+    id: "6",
     name: "Футбольное поле 1",
-    review: 4.5,
-    workTime: "Открыто до 23:00",
+    mark: 4.5,
+    nextTime: "Открыто до 23:00",
     address: "ул.Мирзо-Улугбек, 82A",
     isOpen: false,
     reviewCount: 23,

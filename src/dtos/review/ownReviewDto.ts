@@ -1,5 +1,6 @@
 export interface OwnReviewDto {
-  review: number;
+  id: string | null;
+  mark: number;
   comment: string;
   reviewDate?: Date;
 }

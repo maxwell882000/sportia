@@ -31,7 +31,7 @@ function OverallReview() {
               </span>
             </div>
             <div>
-              <ReviewStar review={review?.review} />
+              <ReviewStar review={review?.mark} />
               <ReviewCount reviewCount={review?.reviewCount} />
             </div>
           </div>
@@ -48,11 +48,11 @@ function OverallReview() {
                 <ReviewStar
                   onClick={(r: number) => {
                     if (!isCommenting)
-                      commentMade({ ...review?.ownReview, review: r });
-                    else fields.review.onChange(r);
+                      commentMade({ ...review?.ownReview, mark: r });
+                    else fields.mark.onChange(r);
                   }}
                   startClass={"!w-[2.5rem] !h-[2.5rem] cursor-pointer"}
-                  review={isCommenting ? fields.review.value : 0}
+                  review={isCommenting ? fields.mark.value : 0}
                 />
               </div>
             </div>

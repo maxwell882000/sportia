@@ -2,22 +2,22 @@ import { OwnReviewDto } from "./ownReviewDto.ts";
 import { UserReviewDto } from "./userReviewDto.ts";
 
 export interface ReviewDto {
-  review: number;
-  eventId: number;
+  mark: number;
+  eventId: string;
   ownReview?: OwnReviewDto;
   userReviews: UserReviewDto[];
   reviewCount: number;
 }
 
 export const defaultReview = {
-  eventId: 1,
-  review: 4,
+  eventId: "1",
+  mark: 4,
   ownReview: null,
   userReviews: [
     {
       avatar: "http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3",
       name: "Марина Морозова",
-      review: 4,
+      mark: 4,
       reviewDate: new Date(),
       comment: `      Оба сына тренируются в секции водные лыжи. Тренеры профессионалы. Всегда в наличии
                                     оборудование, гидрокостюмы. Тренировки всё лето. Есть спортивный лагерь с питанием.
@@ -26,7 +26,7 @@ export const defaultReview = {
     {
       avatar: "http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3",
       name: "Марина Морозова",
-      review: 2,
+      mark: 2,
       reviewDate: new Date(),
       comment: `      Оба сына тренируются в секции водные лыжи. Тренеры профессионалы. Всегда в наличии
                                     оборудование, гидрокостюмы. Тренировки всё лето. Есть спортивный лагерь с питанием.
@@ -35,7 +35,7 @@ export const defaultReview = {
     {
       avatar: "http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3",
       name: "Марина Морозова",
-      review: 5,
+      mark: 5,
       reviewDate: new Date(),
       comment: `      Оба сына тренируются в секции водные лыжи. Тренеры профессионалы. Всегда в наличии
                                     оборудование, гидрокостюмы. Тренировки всё лето. Есть спортивный лагерь с питанием.

@@ -1,5 +1,4 @@
 import { BookTypeDto } from "../book/bookTypeDto.ts";
-import { SelectItem } from "../../components/selector/Selector.tsx";
 
 export interface BookedEventDto {
   id: number;

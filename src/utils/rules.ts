@@ -10,7 +10,6 @@ export const rules = {
     name: "phone",
     errorText: "Укажите номер в формате +998XXXXXXXXX",
     validator: (value) => {
-      console.log("VALIDATED ARE !!!");
       return /^\+998\d{9}$/.test(value);
     },
   }),
