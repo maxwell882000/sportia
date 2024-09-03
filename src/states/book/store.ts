@@ -10,6 +10,7 @@ import {
 import { sample, Store, StoreWritable } from "effector";
 import { $bookForm } from "./form.ts";
 import { BookingTypeDto } from "../../dtos/book/bookingTypeDto.ts";
+import { BookingCountDto } from "../../dtos/book/bookingCountDto.ts";
 
 export const $bookAccept: StoreWritable<BookDto> = bookDomain
   .createStore<BookDto>(null)
@@ -21,7 +22,7 @@ export const $bookingType = bookDomain
   .on($bookingTypeChanged, (_, bookingType) => bookingType);
 
 export const $sameBookingCount = bookDomain
-  .createStore<number>(0)
+  .createStore<BookingCountDto>(null)
   .on($sameBookingCountChanged, (_, result) => result);
 
 export const $isBookAcceptOpen: Store<boolean> = $bookAccept.map((b) => !!b);

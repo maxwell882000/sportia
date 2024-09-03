@@ -10,7 +10,7 @@ import BookPayment from "./BookPayment.tsx";
 import { $paymentRequired } from "../../states/book/events.ts";
 import { useUnit } from "effector-react";
 import BookPopUp from "./BookPopUp/BookPopUp.tsx";
-import { $bookingType } from "../../states/book/store.ts";
+import { $bookingType, $sameBookingCount } from "../../states/book/store.ts";
 import { BookingOptionType } from "../../infrastructure/axios/services/booking/dtos/bookingOptionType.ts";
 import { Selector } from "../selector/Selector.tsx";
 import Input from "../input/Input.tsx";
@@ -19,9 +19,10 @@ import RoundMan from "../Icons/RoundMan.tsx";
 
 function Book() {
   const { fields, submit } = useForm($bookForm);
-  const [paymentRequired, bookingType] = useUnit([
+  const [paymentRequired, bookingType, sameBookingCount] = useUnit([
     $paymentRequired,
     $bookingType,
+    $sameBookingCount,
   ]);
 
   function changeOptions(optionId: string, value: string) {
@@ -80,15 +81,19 @@ function Book() {
       {fields.bookType.value === BookTypeDto.TEAM && (
         <BookTeam fields={fields} />
       )}
-      {activeBookingType()?.isShowLimit && (
-        <BookLabel label={"4/10 мест свободно"}>
+      {activeBookingType()?.isShowLimit && sameBookingCount?.totalCount && (
+        <BookLabel
+          label={`${sameBookingCount.count}/${sameBookingCount.totalCount} мест свободно`}
+        >
           <div className={"flex"}>
-            {Array.from({ length: 10 }).map((_, index) => (
-              <RoundMan
-                key={`rounded-man-${index}`}
-                className={"h-[2rem] w-[2rem] text-[#ACEF03] text-[#FFFFFF1F]"}
-              />
-            ))}
+            {Array.from({ length: sameBookingCount.totalCount }).map(
+              (_, index) => (
+                <RoundMan
+                  key={`rounded-man-${index}`}
+                  className={`h-[2rem] w-[2rem] ${index + 1 > sameBookingCount.count ? "text-[#FFFFFF1F]" : "text-[#ACEF03]"} `}
+                />
+              ),
+            )}
           </div>
         </BookLabel>
       )}
@@ -97,7 +102,6 @@ function Book() {
         isPayme={fields.isPayme}
         cost={fields.cost.value}
       />
-      ;
       <div>
         <Button
           backgroundColor={"#ACEF03"}

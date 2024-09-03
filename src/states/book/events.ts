@@ -1,6 +1,7 @@
 import { bookDomain } from "./domain.ts";
 import { BookDto } from "../../dtos/book/bookDto.ts";
 import { BookingTypeDto } from "../../dtos/book/bookingTypeDto.ts";
+import { BookingCountDto } from "../../dtos/book/bookingCountDto.ts";
 
 export const $bookAcceptChanged = bookDomain.createEvent<BookDto>();
 
@@ -12,4 +13,4 @@ export const $paymentRequired = bookDomain.createEvent();
 
 export const $bookingTypeChanged = bookDomain.createEvent<BookingTypeDto[]>();
 
-export const $sameBookingCountChanged = bookDomain.createEvent<number>();
+export const $sameBookingCountChanged = bookDomain.createEvent<BookingCountDto>();

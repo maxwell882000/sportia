@@ -8,8 +8,24 @@ import { BookingService } from "../../infrastructure/axios/services/booking/book
 import { BookDto } from "../../dtos/book/bookDto.ts";
 import { GetSameBookingsCountRequest } from "../../infrastructure/axios/services/booking/dtos/requests/getSameBookingsCountRequest.ts";
 import { BookingUserOptionDto } from "../../infrastructure/axios/services/booking/dtos/bookingUserOptionDto.ts";
+import { BookingCountDto } from "../../dtos/book/bookingCountDto.ts";
+import { CreateBookingRequest } from "../../infrastructure/axios/services/booking/dtos/requests/creteBookingRequest.ts";
 
-export const createBookingFx = bookDomain.createEffect(() => {});
+export const createBookingFx = bookDomain.createEffect(
+  async ({ bookDto, eventId }: { bookDto: BookDto; eventId: string }) => {
+    await BookingService.createBooking({
+      bookingOptions: bookDto.bookingOptions.map(
+        (e) =>
+          ({
+            optionId: e.optionId,
+            bookingOptionValue: { value: e.bookingOptionValue },
+          }) as BookingUserOptionDto,
+      ),
+      bookingTypeId: bookDto.bookingTypeId as string,
+      eventId,
+    } as CreateBookingRequest);
+  },
+);
 
 export const getSameBookingCountFx = bookDomain.createEffect(
   async ({ bookDto, eventId }: { bookDto: BookDto; eventId: string }) => {
@@ -24,7 +40,7 @@ export const getSameBookingCountFx = bookDomain.createEffect(
       bookingTypeId: bookDto.bookingTypeId as string,
       eventId,
     } as GetSameBookingsCountRequest);
-    $sameBookingCountChanged(sameBookingCount.count);
+    $sameBookingCountChanged(sameBookingCount as BookingCountDto);
   },
 );
 export const getBookingTypesByCategoryFx = bookDomain.createEffect(
