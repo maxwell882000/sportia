@@ -1,23 +1,20 @@
 import { createForm } from "effector-forms";
 import { BookTypeDto } from "../../dtos/book/bookTypeDto.ts";
 import { BookDto } from "../../dtos/book/bookDto.ts";
-import { forward } from "effector";
-import { $paymentRequired } from "./events.ts";
+import { forward, sample } from "effector";
+import { $bookingTypeChanged, $paymentRequired } from "./events.ts";
+import { UserPopUp } from "../../dtos/users/userPopUp.ts";
+import { $bookingType } from "./store.ts";
+import { getSameBookingCountFx } from "./effects.ts";
+import { $eventDetail } from "../event/store.ts";
 
 export const $bookForm = createForm<BookDto>({
   fields: {
-    bookType: {
-      init: BookTypeDto.SINGLE,
-    },
-    days: {
-      init: null,
-      rules: []
-    },
-    date: {
+    bookingTypeId: {
       init: "" as string,
     },
-    time: {
-      init: null,
+    bookType: {
+      init: BookTypeDto.SINGLE,
     },
     cost: {
       init: 300000,
@@ -27,6 +24,9 @@ export const $bookForm = createForm<BookDto>({
     },
     isPayme: {
       init: false,
+    },
+    bookingOptions: {
+      init: [],
     },
   },
   validateOn: ["submit"],
@@ -38,4 +38,21 @@ forward({
     errorText: "Вы должны выбрать способ платежа.",
   })),
   to: [$bookForm.fields.isClick.addError, $bookForm.fields.isPayme.addError],
+});
+
+sample({
+  source: $bookForm.$values,
+  filter: (result: BookDto) =>
+    result.cost &&
+    result.bookingTypeId &&
+    result.bookingOptions.filter((e) => e.bookingOptionValue).length ==
+      $bookingType
+        .getState()
+        .filter((e) => e.id === result.bookingTypeId)
+        .flatMap((e) => e.bookingOptions).length,
+  fn: (bookDto) => ({
+    bookDto,
+    eventId: $eventDetail.getState().id,
+  }),
+  target: getSameBookingCountFx,
 });

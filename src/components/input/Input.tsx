@@ -7,6 +7,7 @@ export interface InputProps extends InputHTMLAttributes<any> {
     initRequired?: boolean;
     field?: ConnectedField<any>;
     isArea?: boolean;
+    onChange?: (value: string) => void;
   };
   rows?: number;
 }
@@ -37,6 +38,8 @@ function Input(props: InputProps) {
     }
 
     props?.options?.field?.onChange(e.target.value);
+
+    props?.options?.onChange(e.target.value);
   };
 
   useEffect(() => {

@@ -9,35 +9,35 @@ export interface CategoryDto extends SlideButtonDto {}
 
 export const defaultCategories = [
   {
-    id: 0,
+    id: "0",
     icon: All(),
     name: "Все",
     bgColor: "#9E77ED1F",
     isActive: true,
   } as CategoryDto,
   {
-    id: 2,
+    id: "2",
     icon: Football(),
     name: "Футбол",
     bgColor: "#12B76A1F",
     isActive: false,
   } as CategoryDto,
   {
-    id: 3,
+    id: "3",
     icon: Basketball(),
     name: "Баскетбол",
     bgColor: "#F790091F",
     isActive: false,
   } as CategoryDto,
   {
-    id: 4,
+    id: "4",
     icon: Tennis(),
     name: "Теннис",
     bgColor: "#F63D681F",
     isActive: false,
   } as CategoryDto,
   {
-    id: 5,
+    id: "5",
     icon: PingPong(),
     name: "Пинг понг",
     bgColor: "#0BA5EC1F",

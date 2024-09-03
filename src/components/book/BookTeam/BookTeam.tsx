@@ -8,18 +8,18 @@ interface Props {
   fields: ConnectedFields<BookDto>;
 }
 
-function BookTeam({ fields }: Props) {
+function  BookTeam({ fields }: Props) {
   return (
     <>
       <Input
-        options={{
-          field: fields.date,
-        }}
+        // options={{
+        //   field: fields.date,
+        // }}
         type={"date"}
         required
         placeholder={"Выберите день"}
       />
-      <SelectorTime field={fields.time} />
+      {/*<SelectorTime field={fields.time} />*/}
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface SlideButtonDto {
-  id: number;
+  id: string;
   icon: ReactNode;
   name: string;
   bgColor: string;

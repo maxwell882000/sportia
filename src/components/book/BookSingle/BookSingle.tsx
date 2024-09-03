@@ -13,18 +13,9 @@ interface Props {
 function BookSingle({ fields }: Props) {
   return (
     <>
-      <SelectorDay field={fields.days} />
-      <SelectorTime field={fields.time} />
-      <BookLabel label={"4/10 мест свободно"}>
-        <div className={"flex"}>
-          {Array.from({ length: 10 }).map((_, index) => (
-            <RoundMan
-              key={`rounded-man-${index}`}
-              className={"h-[2rem] w-[2rem] text-[#ACEF03] text-[#FFFFFF1F]"}
-            />
-          ))}
-        </div>
-      </BookLabel>
+      {/*<SelectorDay field={fields.days} />*/}
+      {/*<SelectorTime field={fields.time} />*/}
+
     </>
   );
 }
