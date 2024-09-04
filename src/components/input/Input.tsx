@@ -39,7 +39,7 @@ function Input(props: InputProps) {
 
     props?.options?.field?.onChange(e.target.value);
 
-    props?.options?.onChange(e.target.value);
+    props?.options?.onChange && props?.options?.onChange(e.target.value);
   };
 
   useEffect(() => {

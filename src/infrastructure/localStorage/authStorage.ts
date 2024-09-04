@@ -9,4 +9,8 @@ export class AuthStorage {
     const token = localStorage.getItem("token");
     return token ? JSON.parse(localStorage.getItem("token")) : null;
   }
+
+  static isToken(): boolean {
+    return AuthStorage.getToken() !== null;
+  }
 }

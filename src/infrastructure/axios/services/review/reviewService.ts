@@ -11,7 +11,7 @@ export class ReviewService {
     request: GetReviewsByEventRequest,
   ): Promise<GetReviewsByEventResponse> {
     const response = await axiosInstance.get<GetReviewsByEventResponse>(
-      "review/get-review-by-event",
+      "review/get-reviews-by-event",
       { params: request },
     );
     return response.data;

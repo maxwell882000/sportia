@@ -9,7 +9,7 @@ import { StrictMode } from "react";
 import { fork } from "effector";
 import { YMapComponentsProvider } from "ymap3-components";
 import "simplebar-react/dist/simplebar.min.css";
-import Modal from "react-modal";
+import "react-toastify/dist/ReactToastify.css";
 
 fork();
 
@@ -23,5 +23,3 @@ createRoot(document.getElementById("root")!).render(
     </YMapComponentsProvider>
   </StrictMode>,
 );
-
-

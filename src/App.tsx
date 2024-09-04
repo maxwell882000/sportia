@@ -11,6 +11,8 @@ import AllPages from "./pages/AllPages.tsx";
 import UserAvatar from "./components/auth/UserAvatar.tsx";
 import AllEventMap from "./components/event/evenMap/AllEventMap.tsx";
 import Modal from "react-modal";
+import Loader from "./components/modal/Loader.tsx";
+import { ToastContainer } from "react-toastify";
 
 Modal.setAppElement("#root");
 
@@ -18,6 +20,8 @@ function App() {
   return (
     <Layout>
       <div id="modal"></div>
+      <Loader />
+      <ToastContainer />
       <AppStartGate />
       <div className={"absolute right-[1.5rem] top-[1.5rem] z-50"}>
         <UserAvatar />

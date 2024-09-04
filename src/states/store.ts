@@ -1,5 +1,6 @@
 import { app } from "./domain";
 import {
+  $isLoadingChanged,
   $isSideBarChanged,
   $pageChanged,
   $pageRestored,
@@ -31,6 +32,10 @@ export const $currentPage = app
     if (result in middlewares) return middlewares[result]() ? result : _;
     return result;
   });
+
+export const $isLoading = app
+  .createStore<boolean>(false)
+  .on($isLoadingChanged, (_, result) => result);
 
 export const $isAnimateSideBar = $isSideBar.map(
   (e) => (openStyle: string, closeStyle: string) =>

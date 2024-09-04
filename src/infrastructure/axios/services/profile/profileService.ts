@@ -4,7 +4,7 @@ import { GetUserProfileResponse } from "./dtos/responses/getUserProfileResponse.
 export class ProfileService {
   static async getUserProfile(): Promise<GetUserProfileResponse> {
     const response = await axiosInstance.get<GetUserProfileResponse>(
-      "user/get-user-profile",
+      "profile/get-user-profile",
     );
     return response.data;
   }

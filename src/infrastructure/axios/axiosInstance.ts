@@ -1,35 +1,31 @@
-import * as axios from "axios";
+import axios from "axios";
 import { AuthStorage } from "../localStorage/authStorage.ts";
+import { errorNotification } from "../../utils/notifications/errorNotification.ts";
 
-const apiBaseUrl = import.meta.env.BASE_URL;
+const apiBaseUrl = import.meta.env.VITE_BACKEND_BASE_URL;
 
 export const axiosInstance = axios.create({
   baseURL: apiBaseUrl, // Get the base URL from the .env file
 });
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = AuthStorage.getToken();
+axiosInstance.interceptors.request.use((config) => {
+  const token = AuthStorage.getToken();
 
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token.accessToken}`;
-    }
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token.accessToken}`;
+  }
 
-    return config;
+  return config;
+});
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
   },
-  (error) => {
-    if (error.response.status === 401) {
-      // Handle unauthorized error (e.g., redirect to login page)
-      console.error("Unauthorized access - redirecting to login");
-      // You can use history.push('/login') if using react-router
-    } else if (error.response.status === 403) {
-      // Handle forbidden error (e.g., show access denied message)
-      console.error("Access denied - showing error message");
-    } else {
-      // Handle other errors
-      console.error("An error occurred:", error.message);
+  (error: any) => {
+    if (error.status === 400) {
+      errorNotification(error.response.data.message);
     }
-
     return Promise.reject(error);
   },
 );

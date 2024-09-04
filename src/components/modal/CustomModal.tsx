@@ -17,7 +17,7 @@ function CustomModal({ isOpen, close, width = 24, height, children }: Props) {
       style={{
         overlay: {
           backgroundColor: "#00000099",
-          zIndex: 999999,
+          zIndex: 1000,
         },
         content: {
           backgroundColor: "transparent",
@@ -34,7 +34,9 @@ function CustomModal({ isOpen, close, width = 24, height, children }: Props) {
             width: `${width}rem`,
             maxHeight: height,
           }}
-          className={"space-y-[1.5rem] rounded-info overflow-y-auto bg-app-dark p-[1.5rem]"}
+          className={
+            "space-y-[1.5rem] overflow-y-auto rounded-info bg-app-dark p-[1.5rem]"
+          }
         >
           <div className={"flex items-center justify-between"}>
             <Logo />

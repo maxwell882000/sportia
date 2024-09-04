@@ -16,3 +16,5 @@ export const $pageChanged = app.createEvent<Pages>();
 export const $previousPageSaved = app.createEvent<Pages>();
 
 export const $pageRestored = app.createEvent();
+
+export const $isLoadingChanged = app.createEvent<boolean>();
