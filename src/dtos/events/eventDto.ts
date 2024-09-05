@@ -9,7 +9,7 @@ export interface EventDto {
   image: string;
   isOpen: boolean;
   reviewCount: number;
-  categoryId: number;
+  categoryId: string;
   coordinates: [number, number];
   isReservable: boolean;
 }
@@ -24,7 +24,7 @@ export const defaultEventsDto = [
     isOpen: true,
     image,
     reviewCount: 23,
-    categoryId: 3,
+    categoryId: "3",
     coordinates: [69.255338, 41.347556],
   } as EventDto,
   {
@@ -36,7 +36,7 @@ export const defaultEventsDto = [
     isOpen: true,
     image,
     reviewCount: 23,
-    categoryId: 3,
+    categoryId: "3",
     coordinates: [69.260829, 41.330368],
   } as EventDto,
   {
@@ -48,7 +48,7 @@ export const defaultEventsDto = [
     isOpen: true,
     reviewCount: 23,
     image,
-    categoryId: 2,
+    categoryId: "2",
     coordinates: [69.260829, 41.343418],
   } as EventDto,
   {
@@ -60,7 +60,7 @@ export const defaultEventsDto = [
     isOpen: true,
     reviewCount: 23,
     image,
-    categoryId: 2,
+    categoryId: "2",
     coordinates: [69.285007, 41.314464],
   } as EventDto,
   {
@@ -72,7 +72,7 @@ export const defaultEventsDto = [
     isOpen: false,
     reviewCount: 23,
     image,
-    categoryId: 3,
+    categoryId: "3",
     coordinates: [69.264925, 41.314464],
   } as EventDto,
   {
@@ -84,7 +84,7 @@ export const defaultEventsDto = [
     isOpen: false,
     reviewCount: 23,
     image,
-    categoryId: 2,
+    categoryId: "2",
     coordinates: [69.237855, 41.293259],
   } as EventDto,
 ] as EventDto[];

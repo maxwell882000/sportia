@@ -25,10 +25,10 @@ function Event({ event }: Props) {
         className="fade-in-events flex w-full cursor-pointer flex-row items-center justify-between p-[1.5rem] text-start hover:bg-[#1C1F24]"
       >
         <EventTitle event={event} />
-        <div>
+        <div className={"w-[5rem] h-[5rem] flex-shrink-0"}>
           <img
             alt={"event-image-event"}
-            className={"h-[5rem] w-[5rem] rounded-app"}
+            className={"h-[5rem] w-[5rem]  object-cover  rounded-app"}
             src={event.image}
           />
         </div>

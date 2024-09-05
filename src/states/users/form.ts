@@ -20,11 +20,6 @@ export const $loginForm = createForm<LoginDto>({
   validateOn: ["submit"],
 });
 
-sample({
-  source: $loginForm.formValidated,
-  target: $loginFx,
-});
-
 export const $registerForm = createForm<RegisterDto>({
   fields: {
     phone: {
@@ -45,11 +40,6 @@ export const $registerForm = createForm<RegisterDto>({
     },
   },
   validateOn: ["submit"],
-});
-
-sample({
-  source: $registerForm.formValidated,
-  target: $registerFx,
 });
 
 sample({

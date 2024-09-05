@@ -5,7 +5,9 @@ import Tennis from "../../components/Icons/Tennis.tsx";
 import PingPong from "../../components/Icons/PingPong.tsx";
 import { SlideButtonDto } from "../slide/slideButtonDto.ts";
 
-export interface CategoryDto extends SlideButtonDto {}
+export interface CategoryDto extends SlideButtonDto {
+  isDefault?: boolean;
+}
 
 export const defaultCategories = [
   {

@@ -3,11 +3,13 @@ import { userDomain } from "./domain.ts";
 import { UserDto } from "../../dtos/users/userDto.ts";
 import { $userChanged, $userPopUpChanged } from "./events.ts";
 import { UserPopUp } from "../../dtos/users/userPopUp.ts";
+import { AppStartGate } from "../gate.ts";
+import { $initProfileFx, $loginFx, $registerFx } from "./effects.ts";
+import { $loginForm, $registerForm } from "./form.ts";
 
 export const $user: StoreWritable<UserDto> = userDomain
   .createStore<UserDto>(null)
   .on($userChanged, (_, result) => {
-    console.log("USER WAS CHANGED !!! ", result);
     return result;
   });
 
@@ -31,4 +33,18 @@ sample({
   source: $userChanged,
   fn: () => UserPopUp.SUCCESS,
   target: $userPopUpChanged,
+});
+
+sample({
+  source: AppStartGate.open,
+  target: $initProfileFx,
+});
+
+sample({
+  source: $loginForm.formValidated,
+  target: $loginFx,
+});
+sample({
+  source: $registerForm.formValidated,
+  target: $registerFx,
 });

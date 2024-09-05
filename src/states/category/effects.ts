@@ -3,7 +3,7 @@ import { CategoryService } from "../../infrastructure/axios/services/category/ca
 import { $categoriesChanged } from "./store.ts";
 import { CategoryDto } from "../../dtos/categories/categoryDto.ts";
 
-export const getAllCategoriesFx = categoryDomain.createEffect(async () => {
+export const $getAllCategoriesFx = categoryDomain.createEffect(async () => {
   const categories = await CategoryService.getAllCategories();
   $categoriesChanged(
     categories.map<CategoryDto>((category) => ({
@@ -11,6 +11,7 @@ export const getAllCategoriesFx = categoryDomain.createEffect(async () => {
       name: category.name,
       icon: category?.icon?.path,
       bgColor: category?.bgColor,
+      isDefault: category?.isDefault,
       isActive: category?.isDefault,
     })),
   );

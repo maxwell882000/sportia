@@ -12,6 +12,9 @@ import { isAuth } from "../middlewares.ts";
 import { sample } from "effector";
 import { $pageChanged } from "../events.ts";
 import { Pages } from "../../constants/pages.ts";
+import { AppStartGate } from "../gate.ts";
+import { $getAllEventsFx } from "./effects.ts";
+import { CategoryDto } from "../../dtos/categories/categoryDto.ts";
 
 export const $events = eventDomain
   .createStore<EventDto[]>(defaultEventsDto)
@@ -41,4 +44,9 @@ sample({
   source: $pageChanged,
   filter: (page) => page === Pages.PROFILE,
   target: $eventDetailClose,
+});
+
+sample({
+  source: AppStartGate.open,
+  target: $getAllEventsFx,
 });

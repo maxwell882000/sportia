@@ -1,5 +1,5 @@
 import { SlideButtonDto } from "../../../dtos/slide/slideButtonDto.ts";
-import { Domain, StoreWritable } from "effector";
+import { Domain, Store, StoreWritable } from "effector";
 import { defaultCategories } from "../../../dtos/categories/categoryDto.ts";
 
 export function slideButtonFactory<T extends SlideButtonDto>(
@@ -19,7 +19,7 @@ export function slideButtonFactory<T extends SlideButtonDto>(
       return [...state];
     });
 
-  const $activeSlide = $slides.map<T>((e) => e.filter((c) => c.isActive)[0]);
+  const $activeSlide: Store<T> = $slides.map<T>((e) => e.filter((c) => c.isActive)[0]);
   return {
     $slidesChanged,
     $slideActivated,

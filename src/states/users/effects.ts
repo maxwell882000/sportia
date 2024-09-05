@@ -72,10 +72,6 @@ sample({
   source: $loginFx.doneData,
   target: $initProfileFx,
 });
-sample({
-  source: AppStartGate.open,
-  target: $initProfileFx,
-});
 
 sample({
   source: [$registerFx.pending, $loginFx.pending],

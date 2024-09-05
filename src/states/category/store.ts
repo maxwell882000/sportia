@@ -4,7 +4,7 @@ import { defaultCategories } from "../../dtos/categories/categoryDto.ts";
 import { sample } from "effector";
 import { $searchPlaceholderChanged } from "../events.ts";
 import { AppStartGate } from "../gate.ts";
-import { getAllCategoriesFx } from "./effects.ts";
+import { $getAllCategoriesFx } from "./effects.ts";
 
 export const {
   $slides: $categories,
@@ -21,5 +21,5 @@ sample({
 
 sample({
   source: AppStartGate.open,
-  target: getAllCategoriesFx,
+  target: $getAllCategoriesFx,
 });

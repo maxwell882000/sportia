@@ -5,7 +5,7 @@ import { forward, sample } from "effector";
 import { $bookingTypeChanged, $paymentRequired } from "./events.ts";
 import { UserPopUp } from "../../dtos/users/userPopUp.ts";
 import { $bookingType } from "./store.ts";
-import { createBookingFx, getSameBookingCountFx } from "./effects.ts";
+import { $createBookingFx, $getSameBookingCountFx } from "./effects.ts";
 import { $eventDetail } from "../event/store.ts";
 
 export const $bookForm = createForm<BookDto>({
@@ -43,7 +43,7 @@ forward({
 sample({
   source: $bookForm.formValidated,
   fn: (source) => ({ bookDto: source, eventId: $eventDetail.getState().id }),
-  target: createBookingFx,
+  target: $createBookingFx,
 });
 
 sample({
@@ -64,5 +64,5 @@ sample({
     bookDto,
     eventId: $eventDetail.getState().id,
   }),
-  target: getSameBookingCountFx,
+  target: $getSameBookingCountFx,
 });
