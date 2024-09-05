@@ -9,12 +9,13 @@ import { defaultEventsDto, EventDto } from "../../dtos/events/eventDto.ts";
 import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
 import { $activeCategory } from "../category/store.ts";
 import { isAuth } from "../middlewares.ts";
-import { sample } from "effector";
+import { combine, sample } from "effector";
 import { $pageChanged } from "../events.ts";
 import { Pages } from "../../constants/pages.ts";
 import { AppStartGate } from "../gate.ts";
 import { $getAllEventsFx } from "./effects.ts";
 import { CategoryDto } from "../../dtos/categories/categoryDto.ts";
+import { combineEvents } from "patronum";
 
 export const $events = eventDomain
   .createStore<EventDto[]>(defaultEventsDto)
@@ -29,16 +30,15 @@ export const $eventDetail = eventDomain
     return _;
   });
 
-export const $activeEvents = eventDomain
-  .createStore<EventDto[]>(defaultEventsDto)
-  .on($activeCategory, (_, category) => {
-    return [
-      ...$events
-        .getState()
-        .filter((e) => e.categoryId === category.id || category.id === 0)
-        .map((e) => ({ ...e })),
-    ];
-  });
+export const $activeEvents = combine(
+  $activeCategory,
+  $events,
+  (category, events) => {
+    return (events ?? [])
+      .filter((e) => e.categoryId === category?.id || category?.isDefault)
+      .map((e) => ({ ...e }));
+  },
+);
 
 sample({
   source: $pageChanged,

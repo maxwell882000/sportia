@@ -10,7 +10,7 @@ import {
   $searchPlaceholderRestore,
   $searchRestore,
 } from "./events.ts";
-import { createStore, sample } from "effector";
+import { combine, createStore, sample } from "effector";
 import { Pages, sliderPages } from "../constants/pages.ts";
 import { $eventDetailChanged } from "./event/events.ts";
 import { $userPopUpChanged } from "./users/events.ts";
@@ -54,14 +54,13 @@ export const $searchPlaceholder = app
   .on($searchPlaceholderChanged, (_, result) => result)
   .reset($searchPlaceholderRestore);
 
-export const $isSliderDisappeared = createStore<boolean>(true)
-  .on(
-    $isSideBarChanged,
-    (_, result) => result == false || !sliderPages.has($currentPage.getState()),
-  )
-  .on($currentPage, (_, page) => {
-    return $isSideBar.getState() == false || !sliderPages.has(page);
-  });
+export const $isSliderDisappeared = combine(
+  $isSideBar,
+  $currentPage,
+  (isSideBar, currentPage) => {
+    return isSideBar == false || !sliderPages.has(currentPage);
+  },
+);
 
 sample({
   source: $pageChanged,
