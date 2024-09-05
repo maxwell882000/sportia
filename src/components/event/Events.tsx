@@ -7,7 +7,7 @@ function Events() {
   return (
     <>
       {events.map((event) => (
-        <Event event={event} key={`event-${event.id + Math.random()}`}></Event>
+        <Event event={event} key={`event-${event.id}`}></Event>
       ))}
     </>
   );
