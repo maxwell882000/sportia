@@ -7,6 +7,7 @@ import { UserPopUp } from "../../dtos/users/userPopUp.ts";
 export const $user: StoreWritable<UserDto> = userDomain
   .createStore<UserDto>(null)
   .on($userChanged, (_, result) => {
+    console.log("USER WAS CHANGED !!! ", result);
     return result;
   });
 

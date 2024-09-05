@@ -1,6 +1,6 @@
 import { Mousewheel } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { SlideButtonDto } from "../../dtos/slide/slideButtonDto.ts";
 import SlideButtonItem from "./SlideButtonItem.tsx";
 
@@ -27,7 +27,7 @@ function SlideButton<T extends SlideButtonDto>({
       mousewheel={{
         enabled: true,
         sensitivity: 1, // Adjust sensitivity for smooth scrolling
-        releaseOnEdges: false, // Ensure scrolling continues through edges
+        releaseOnEdges: true, // Ensure scrolling continues through edges
       }}
       modules={[Mousewheel]}
     >

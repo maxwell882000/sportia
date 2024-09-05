@@ -1,6 +1,8 @@
 import { hexToRgba } from "../../utils/hexToRgba.ts";
 import Button from "../button/Button.tsx";
 import { SlideButtonDto } from "../../dtos/slide/slideButtonDto.ts";
+import { string } from "prop-types";
+import { ReactSVG } from "react-svg";
 
 interface Props<T extends SlideButtonDto> {
   item: T;
@@ -14,7 +16,9 @@ function SlideButton<T extends SlideButtonDto>({ item, onClick }: Props<T>) {
       backgroundColorHover={hexToRgba(item.bgColor, 100)}
       className={"text-white"}
       onClick={() => onClick && onClick(item)}
-      icon={item.icon}
+      icon={
+        typeof item.icon == "string" ? <ReactSVG src={item.icon} /> : item.icon
+      }
       name={item.name}
     />
   );

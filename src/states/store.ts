@@ -28,7 +28,6 @@ const $previousPage = app
 export const $currentPage = app
   .createStore<Pages>(Pages.MAIN)
   .on($pageChanged, (_, result) => {
-    $previousPageSaved(result);
     if (result in middlewares) return middlewares[result]() ? result : _;
     return result;
   });
@@ -63,6 +62,11 @@ export const $isSliderDisappeared = createStore<boolean>(true)
   .on($currentPage, (_, page) => {
     return $isSideBar.getState() == false || !sliderPages.has(page);
   });
+
+sample({
+  source: $pageChanged,
+  target: $previousPageSaved,
+});
 
 sample({
   source: $eventDetailChanged,

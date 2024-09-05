@@ -1,5 +1,7 @@
 import EventDetailPopUp from "../components/event/eventDetail/EventDetailPopUp.tsx";
 import { ReactNode } from "react";
+import { useUnit } from "effector-react";
+import { $categories } from "../states/category/store.ts";
 
 interface Props {
   className?: string;

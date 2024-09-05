@@ -1,6 +1,7 @@
 import axios from "axios";
 import { AuthStorage } from "../localStorage/authStorage.ts";
 import { errorNotification } from "../../utils/notifications/errorNotification.ts";
+import { ValidationError } from "./exceptions/validationError.ts";
 
 const apiBaseUrl = import.meta.env.VITE_BACKEND_BASE_URL;
 
@@ -23,9 +24,11 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error: any) => {
-    if (error.status === 400) {
+    if (error.status === 400 && error?.response?.data?.message) {
       errorNotification(error.response.data.message);
+    } else if (error.status === 400 && error?.response?.data?.errors) {
+      throw new ValidationError(error.response.data.errors);
     }
-    return Promise.reject(error);
+    return Promise.reject(error.response.data);
   },
 );

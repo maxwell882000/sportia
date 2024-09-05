@@ -13,29 +13,43 @@ import { sample } from "effector";
 import { AppStartGate } from "../gate.ts";
 import { $eventDetailChanged } from "../event/events.ts";
 import { $isLoadingChanged } from "../events.ts";
+import { ValidationError } from "../../infrastructure/axios/exceptions/validationError.ts";
+import { fillFormError } from "../errors/fillFormError.ts";
+import { $loginForm } from "./form.ts";
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export const $loginFx = userDomain.createEffect(async (result: LoginDto) => {
-  const authTokenResponse = await AuthService.login(result as AuthLoginRequest);
-  AuthStorage.setToken(authTokenResponse as AuthToken);
-  const userResponse = await ProfileService.getUserProfile();
-
-  $userChanged({
-    phone: result.phone,
-    name: userResponse.name,
-    avatar: userResponse.avatar.path,
-  } as UserDto);
+  try {
+    const authTokenResponse = await AuthService.login(
+      result as AuthLoginRequest,
+    );
+    AuthStorage.setToken(authTokenResponse as AuthToken);
+  } catch (e) {
+    if (e instanceof ValidationError) {
+      fillFormError(e.getErrors(), $loginForm);
+    } else {
+      throw e;
+    }
+  }
 });
 
 export const $registerFx = userDomain.createEffect(
   async (result: RegisterDto) => {
-    const authTokenResponse = await AuthService.register(
-      result as AuthRegisterRequest,
-    );
-    AuthStorage.setToken(authTokenResponse as AuthToken);
+    try {
+      const authTokenResponse = await AuthService.register(
+        result as AuthRegisterRequest,
+      );
+      AuthStorage.setToken(authTokenResponse as AuthToken);
+    } catch (e) {
+      if (e instanceof ValidationError) {
+        fillFormError(e.getErrors(), $loginForm);
+      } else {
+        throw e;
+      }
+    }
   },
 );
 
@@ -45,7 +59,7 @@ export const $initProfileFx = userDomain.createEffect(async () => {
     $userChanged({
       phone: userResponse.phone,
       name: userResponse.name,
-      avatar: userResponse.avatar.path,
+      avatar: userResponse?.avatar?.path,
     } as UserDto);
   }
 });
