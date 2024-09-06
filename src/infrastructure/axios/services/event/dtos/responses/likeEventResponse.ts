@@ -1,0 +1,3 @@
+interface LikeEventResponse {
+  isLiked: boolean;
+}

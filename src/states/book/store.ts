@@ -13,6 +13,7 @@ import { BookingTypeDto } from "../../dtos/book/bookingTypeDto.ts";
 import { BookingCountDto } from "../../dtos/book/bookingCountDto.ts";
 import { $getBookingTypesByCategoryFx } from "./effects.ts";
 import { $eventDetailChanged, $eventDetailOpened } from "../event/events.ts";
+import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
 
 export const $bookAccept: StoreWritable<BookDto> = bookDomain
   .createStore<BookDto>(null)
@@ -45,6 +46,6 @@ sample({
 
 sample({
   source: $eventDetailChanged,
-  fn: (category) => category.id,
+  fn: (eventDetail: EventDetailDto) => eventDetail.categoryId,
   target: $getBookingTypesByCategoryFx,
 });

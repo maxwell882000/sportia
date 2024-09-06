@@ -4,20 +4,19 @@ import {
   $eventDetailChanged,
   $eventDetailClose,
   $eventDetailOpened,
+  $eventLike,
   $eventLiked,
   $eventsChanged,
 } from "./events.ts";
 import { defaultEventsDto, EventDto } from "../../dtos/events/eventDto.ts";
 import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
 import { $activeCategory } from "../category/store.ts";
-import { isAuth } from "../middlewares.ts";
 import { combine, sample } from "effector";
 import { $pageChanged } from "../events.ts";
 import { Pages } from "../../constants/pages.ts";
 import { AppStartGate } from "../gate.ts";
-import { $getAllEventsFx, $getEventDetailFx } from "./effects.ts";
+import { $getAllEventsFx, $getEventDetailFx, $likeEventFx } from "./effects.ts";
 import { $aggregateReviewChanged } from "../review/events.ts";
-import { AggregateReviewDto } from "../../dtos/review/aggregateReviewDto.ts";
 
 export const $events = eventDomain
   .createStore<EventDto[]>(defaultEventsDto)
@@ -33,15 +32,13 @@ export const $eventDetail = eventDomain
   .on($eventDetailClose, () => null)
   .on($aggregateReviewChanged, (_, result) => ({ ..._, ...result }))
   .on($eventLiked, (_) => {
-    if (isAuth()) return { ..._, isLiked: !_.isLiked };
-    return _;
+    return { ..._, isLiked: !_.isLiked };
   });
 
 export const $activeEvents = combine(
   $activeCategory,
   $events,
   (category, events) => {
-    console.log("EVENET IN $activeEvents", events);
     return (events ?? [])
       .filter((e) => e.categoryId === category?.id || category?.isDefault)
       .map((e) => ({ ...e }));
@@ -71,4 +68,9 @@ sample({
 sample({
   source: $eventDetailOpened,
   target: [$getEventDetailFx],
+});
+
+sample({
+  source: $eventLike,
+  target: $likeEventFx,
 });

@@ -2,8 +2,6 @@ import { bookDomain } from "./domain.ts";
 import { BookingTypeService } from "../../infrastructure/axios/services/booking/bookingTypeService.ts";
 import { GetBookingTypeByCategoryRequest } from "../../infrastructure/axios/services/booking/dtos/requests/getBookingTypeByCategoryRequest.ts";
 import { $bookingTypeChanged, $sameBookingCountChanged } from "./events.ts";
-import { sample } from "effector";
-import { $activeCategory } from "../category/store.ts";
 import { BookingService } from "../../infrastructure/axios/services/booking/bookingService.ts";
 import { BookDto } from "../../dtos/book/bookDto.ts";
 import { GetSameBookingsCountRequest } from "../../infrastructure/axios/services/booking/dtos/requests/getSameBookingsCountRequest.ts";
@@ -40,7 +38,7 @@ export const $getSameBookingCountFx = bookDomain.createEffect(
       bookingTypeId: bookDto.bookingTypeId as string,
       eventId,
     } as GetSameBookingsCountRequest);
-    $sameBookingCountChanged(sameBookingCount as BookingCountDto);
+    $sameBookingCountChanged({ ...sameBookingCount } as BookingCountDto);
   },
 );
 export const $getBookingTypesByCategoryFx = bookDomain.createEffect(
@@ -48,6 +46,6 @@ export const $getBookingTypesByCategoryFx = bookDomain.createEffect(
     const bookingTypes = await BookingTypeService.getBookingType({
       categoryId,
     } as GetBookingTypeByCategoryRequest);
-    $bookingTypeChanged(bookingTypes);
+    $bookingTypeChanged({ ...bookingTypes });
   },
 );

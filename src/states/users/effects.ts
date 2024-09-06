@@ -16,6 +16,7 @@ import { $isLoadingChanged } from "../events.ts";
 import { ValidationError } from "../../infrastructure/axios/exceptions/validationError.ts";
 import { fillFormError } from "../errors/fillFormError.ts";
 import { $loginForm } from "./form.ts";
+import { requestHandler } from "../handler.ts";
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -55,7 +56,7 @@ export const $registerFx = userDomain.createEffect(
 
 export const $initProfileFx = userDomain.createEffect(async () => {
   if (AuthStorage.isToken()) {
-    const userResponse = await ProfileService.getUserProfile();
+    const userResponse = await requestHandler(ProfileService.getUserProfile());
     $userChanged({
       phone: userResponse.phone,
       name: userResponse.name,

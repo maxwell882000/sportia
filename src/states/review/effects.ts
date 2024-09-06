@@ -12,6 +12,8 @@ import { sample } from "effector";
 import { $eventDetailChanged } from "../event/events.ts";
 import { successNotification } from "../../utils/notifications/successNotification.ts";
 import { AggregateReviewDto } from "../../dtos/review/aggregateReviewDto.ts";
+import { requestHandler } from "../handler.ts";
+import { GetReviewsByEventResponse } from "../../infrastructure/axios/services/review/dtos/responses/getReviewsByEventResponse.ts";
 
 export const $saveReviewFx = reviewDomain.createEffect(
   async ({
@@ -21,22 +23,25 @@ export const $saveReviewFx = reviewDomain.createEffect(
     ownReview: OwnReviewDto;
     eventId: string;
   }) => {
-    console.log("$saveReviewFx", ownReview);
     let response = null;
     if (ownReview.id) {
-      response = await ReviewService.updateReview({
-        ...ownReview,
-        eventId,
-      } as UpdateReviewRequest);
+      response = await requestHandler(
+        ReviewService.updateReview({
+          ...ownReview,
+          eventId,
+        } as UpdateReviewRequest),
+      );
     } else {
-      response = await ReviewService.createReview({
-        ...ownReview,
-        eventId,
-      } as CreateReviewRequest);
+      response = await requestHandler(
+        ReviewService.createReview({
+          ...ownReview,
+          eventId,
+        } as CreateReviewRequest),
+      );
       ownReview.id = response.id;
     }
     successNotification("Вы успешно оставили отзыв");
-    $saveOwnReview(ownReview);
+    $saveOwnReview({ ...ownReview });
     $aggregateReviewChanged({
       reviewCount: response.reviewCount,
       mark: response.mark,
@@ -46,16 +51,19 @@ export const $saveReviewFx = reviewDomain.createEffect(
 
 export const $getReviewsFx = reviewDomain.createEffect(
   async (eventId: string) => {
-    const reviews = await ReviewService.getReviewsByEvent({
-      eventId,
-    } as UpdateReviewRequest);
+    const reviews = await requestHandler<GetReviewsByEventResponse>(
+      ReviewService.getReviewsByEvent({
+        eventId,
+      } as UpdateReviewRequest),
+    );
+
     $reviewChanged({
       mark: reviews.mark,
       reviewCount: reviews.reviewCount,
       eventId: reviews.eventId,
       ownReview: reviews.ownReview,
       userReviews: reviews.userReviews.map((e) => ({
-        avatar: e.avatar.path,
+        avatar: e?.avatar?.path,
         name: e.name,
         mark: e.mark,
         reviewDate: e.reviewDate,
@@ -64,9 +72,3 @@ export const $getReviewsFx = reviewDomain.createEffect(
     });
   },
 );
-
-sample({
-  source: $eventDetailChanged,
-  fn: (r) => r.id,
-  target: $getReviewsFx,
-});

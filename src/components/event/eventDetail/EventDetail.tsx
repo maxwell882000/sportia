@@ -13,7 +13,7 @@ import SimpleBar from "simplebar-react";
 import "../../../styles/event.css";
 import OverallReview from "../../review/OverallReview.tsx";
 import Reviews from "../../review/Reviews.tsx";
-import { $eventLiked } from "../../../states/event/events.ts";
+import { $eventLike, $eventLiked } from "../../../states/event/events.ts";
 import { LINK, TEXT } from "../../../constants/share.ts";
 import { $pageChanged } from "../../../states/events.ts";
 import { Pages } from "../../../constants/pages.ts";
@@ -24,9 +24,9 @@ interface Props {
 }
 
 function EventDetail() {
-  const [event, eventLiked, pageChanged] = useUnit([
+  const [event, eventLike, pageChanged] = useUnit([
     $eventDetail,
-    $eventLiked,
+    $eventLike,
     $pageChanged,
   ]);
   return (
@@ -67,7 +67,7 @@ function EventDetail() {
                   backgroundColor={"#1C1F24"}
                   className={"w-[2.5rem] text-white"}
                   onClick={() => {
-                    eventLiked();
+                    eventLike(event.id);
                   }}
                   icon={
                     <Heart
