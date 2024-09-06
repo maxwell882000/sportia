@@ -6,6 +6,11 @@ import { $commentCanceled, $commentMade } from "./events.ts";
 import { $saveReviewFx } from "./effects.ts";
 import { $eventDetail } from "../event/store.ts";
 import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
+import {
+  $eventDetailChanged,
+  $eventDetailClose,
+  $eventDetailOpened,
+} from "../event/events.ts";
 
 export const $ownReviewForm = createForm<OwnReviewDto>({
   fields: {
@@ -33,6 +38,11 @@ sample({
   source: $commentCanceled,
   target: $ownReviewForm.reset,
 });
+sample({
+  source: $eventDetailOpened,
+  target: $ownReviewForm.reset,
+});
+
 sample({
   clock: $ownReviewForm.formValidated,
   source: $eventDetail,

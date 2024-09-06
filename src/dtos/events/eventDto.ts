@@ -4,11 +4,11 @@ export interface EventDto {
   id: string;
   name: string;
   mark: number;
+  reviewCount: number;
   nextTime: string;
   address: string;
   image: string;
   isOpen: boolean;
-  reviewCount: number;
   categoryId: string;
   coordinates: [number, number];
   isReservable: boolean;

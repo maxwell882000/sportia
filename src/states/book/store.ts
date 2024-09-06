@@ -11,6 +11,8 @@ import { sample, Store, StoreWritable } from "effector";
 import { $bookForm } from "./form.ts";
 import { BookingTypeDto } from "../../dtos/book/bookingTypeDto.ts";
 import { BookingCountDto } from "../../dtos/book/bookingCountDto.ts";
+import { $getBookingTypesByCategoryFx } from "./effects.ts";
+import { $eventDetailChanged, $eventDetailOpened } from "../event/events.ts";
 
 export const $bookAccept: StoreWritable<BookDto> = bookDomain
   .createStore<BookDto>(null)
@@ -39,4 +41,10 @@ sample({
   clock: $bookAccepted,
   source: $bookAccept,
   target: [$bookAcceptClose], // here write next logic,
+});
+
+sample({
+  source: $eventDetailChanged,
+  fn: (category) => category.id,
+  target: $getBookingTypesByCategoryFx,
 });

@@ -2,11 +2,11 @@ import { OwnReviewDto } from "./ownReviewDto.ts";
 import { UserReviewDto } from "./userReviewDto.ts";
 
 export interface ReviewDto {
-  mark: number;
   eventId: string;
   ownReview?: OwnReviewDto;
   userReviews: UserReviewDto[];
   reviewCount: number;
+  mark: number;
 }
 
 export const defaultReview = {

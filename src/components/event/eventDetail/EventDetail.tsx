@@ -17,6 +17,7 @@ import { $eventLiked } from "../../../states/event/events.ts";
 import { LINK, TEXT } from "../../../constants/share.ts";
 import { $pageChanged } from "../../../states/events.ts";
 import { Pages } from "../../../constants/pages.ts";
+import { ReactSVG } from "react-svg";
 
 interface Props {
   event: EventDetailDto;
@@ -42,16 +43,14 @@ function EventDetail() {
             <div className={"space-y-6"}>
               <EventTitle event={event} />
               <div>
-                <PayInfo
-                  icon={<User01 />}
-                  paymentType={`Ежемесячная оплата`}
-                  payment={`300 000 сум с человека`}
-                />
-                <PayInfo
-                  icon={<Users01 />}
-                  paymentType={`Ежемесячная оплата`}
-                  payment={`300 000 сум с человека`}
-                />
+                {event.bookingDetails.map((bookingDetail) => (
+                  <PayInfo
+                    key={`pay-info-${bookingDetail.label}`}
+                    icon={<ReactSVG src={bookingDetail.icon} />}
+                    paymentType={bookingDetail.label}
+                    payment={`${bookingDetail.cost} сум с человека`}
+                  />
+                ))}
               </div>
 
               <div className={"flex justify-between"}>

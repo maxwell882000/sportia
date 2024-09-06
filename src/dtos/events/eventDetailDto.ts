@@ -8,10 +8,15 @@ export interface EventDetailDto extends EventDto {
   images: string[];
   workHours: WorkHoursDto[];
   isLiked: boolean;
+  bookingDetails: {
+    icon:string;
+    label: string;
+    cost: number;
+  }[];
 }
 
 export const defaultEventDetailDto: EventDetailDto = {
-  id: 1,
+  id: "1",
   name: "Футбольное поле 1",
   nextTime: "Открыто до 23:00",
   address: "ул.Мирзо-Улугбек, 82A",

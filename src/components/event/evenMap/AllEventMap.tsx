@@ -8,12 +8,14 @@ import {
   EventDetailDto,
 } from "../../../dtos/events/eventDetailDto.ts";
 import { MarkerPin01 } from "@untitled-ui/icons-react";
+import { $getEventDetailFx } from "../../../states/event/effects.ts";
 
 function AllEventMap() {
-  const [events, eventDetailChanged, eventDetail] = useUnit([
+  const [events, eventDetailChanged, eventDetail, getEventDetail] = useUnit([
     $events,
     $eventDetailChanged,
     $eventDetail,
+    $getEventDetailFx,
   ]);
   return (
     <>
@@ -21,10 +23,7 @@ function AllEventMap() {
         <YMapMarker
           key={`ymap-events-${e.id}`}
           onClick={() => {
-            eventDetailChanged({
-              ...defaultEventDetailDto,
-              ...e,
-            } as EventDetailDto);
+            getEventDetail(e);
           }}
           coordinates={e.coordinates}
         >

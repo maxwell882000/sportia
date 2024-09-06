@@ -1,11 +1,17 @@
 import { reviewDomain } from "./domain.ts";
 import { OwnReviewDto } from "../../dtos/review/ownReviewDto.ts";
-import { $reviewChanged, $saveOwnReview } from "./events.ts";
+import {
+  $aggregateReviewChanged,
+  $reviewChanged,
+  $saveOwnReview,
+} from "./events.ts";
 import { ReviewService } from "../../infrastructure/axios/services/review/reviewService.ts";
 import { UpdateReviewRequest } from "../../infrastructure/axios/services/review/dtos/requests/updateReviewRequest.ts";
 import { CreateReviewRequest } from "../../infrastructure/axios/services/review/dtos/requests/createReviewRequest.ts";
 import { sample } from "effector";
 import { $eventDetailChanged } from "../event/events.ts";
+import { successNotification } from "../../utils/notifications/successNotification.ts";
+import { AggregateReviewDto } from "../../dtos/review/aggregateReviewDto.ts";
 
 export const $saveReviewFx = reviewDomain.createEffect(
   async ({
@@ -15,19 +21,26 @@ export const $saveReviewFx = reviewDomain.createEffect(
     ownReview: OwnReviewDto;
     eventId: string;
   }) => {
+    console.log("$saveReviewFx", ownReview);
+    let response = null;
     if (ownReview.id) {
-      await ReviewService.updateReview({
+      response = await ReviewService.updateReview({
         ...ownReview,
         eventId,
       } as UpdateReviewRequest);
     } else {
-      const response = await ReviewService.createReview({
+      response = await ReviewService.createReview({
         ...ownReview,
         eventId,
       } as CreateReviewRequest);
       ownReview.id = response.id;
     }
+    successNotification("Вы успешно оставили отзыв");
     $saveOwnReview(ownReview);
+    $aggregateReviewChanged({
+      reviewCount: response.reviewCount,
+      mark: response.mark,
+    });
   },
 );
 

@@ -19,4 +19,9 @@ export interface GetEventDetailResponse {
   isReservable: boolean;
   images: FileDto[];
   workHours: WorkHour[];
+  bookingDetails: {
+    label: string;
+    cost: number;
+    icon: FileDto
+  }[];
 }

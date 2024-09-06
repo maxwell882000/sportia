@@ -1,26 +1,24 @@
 import { EventDto } from "../../dtos/events/eventDto.ts";
 import EventTitle from "./EventTitle.tsx";
 import { useUnit } from "effector-react";
-import { $eventDetailChanged } from "../../states/event/events.ts";
+import { $eventDetailChanged, $eventDetailOpened } from "../../states/event/events.ts";
 import {
   defaultEventDetailDto,
   EventDetailDto,
 } from "../../dtos/events/eventDetailDto.ts";
+import { $getEventDetailFx } from "../../states/event/effects.ts";
 
 interface Props {
   event: EventDto;
 }
 
 function Event({ event }: Props) {
-  const [eventDetailChanged] = useUnit([$eventDetailChanged]);
+  const [eventDetailOpened] = useUnit([$eventDetailOpened]);
   return (
     <div>
       <div
         onClick={() => {
-          eventDetailChanged({
-            ...defaultEventDetailDto,
-            ...event,
-          } as EventDetailDto);
+          eventDetailOpened(event);
         }}
         className="fade-in-events flex w-full cursor-pointer flex-row items-center justify-between p-[1.5rem] text-start hover:bg-[#1C1F24]"
       >

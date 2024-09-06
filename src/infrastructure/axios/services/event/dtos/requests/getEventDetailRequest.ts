@@ -1,3 +1,3 @@
 export interface GetEventDetailRequest {
-  eventId: string; // UUID string
+  id: string; // UUID string
 }

@@ -16,7 +16,7 @@ function BookedEvent({ bookedEventDto }: Props) {
             : bookedEventDto.date}
           , {bookedEventDto.time}
         </p>
-        <p className={"text-[1.5rem] leading-[1.5rem] text-[#FFFFFFCC]"}>
+        <p className={"mt-[0.25rem] text-[1.5rem] leading-[1.5rem] text-[#FFFFFFCC]"}>
           {bookedEventDto.name}
         </p>
       </div>
@@ -26,7 +26,7 @@ function BookedEvent({ bookedEventDto }: Props) {
             ? "На одного"
             : "На команду"}
         </p>
-        <p className={"text-[2rem] leading-[2rem] text-[#FFFFFFCC]"}>
+        <p className={"mt-[0.5rem] text-[2rem] leading-[2rem] text-[#FFFFFFCC]"}>
           {bookedEventDto.cost} сум
         </p>
       </div>

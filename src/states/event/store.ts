@@ -1,7 +1,9 @@
 import { eventDomain } from "./domain";
 import {
+  $eventChanged,
   $eventDetailChanged,
   $eventDetailClose,
+  $eventDetailOpened,
   $eventLiked,
   $eventsChanged,
 } from "./events.ts";
@@ -13,18 +15,23 @@ import { combine, sample } from "effector";
 import { $pageChanged } from "../events.ts";
 import { Pages } from "../../constants/pages.ts";
 import { AppStartGate } from "../gate.ts";
-import { $getAllEventsFx } from "./effects.ts";
-import { CategoryDto } from "../../dtos/categories/categoryDto.ts";
-import { combineEvents } from "patronum";
+import { $getAllEventsFx, $getEventDetailFx } from "./effects.ts";
+import { $aggregateReviewChanged } from "../review/events.ts";
+import { AggregateReviewDto } from "../../dtos/review/aggregateReviewDto.ts";
 
 export const $events = eventDomain
   .createStore<EventDto[]>(defaultEventsDto)
+  .on($eventChanged, (_: EventDto[], result: EventDto) => {
+    console.log("$eventChanged", _, result);
+    return [..._.map((e) => (e.id === result.id ? { ...result } : e))];
+  })
   .on($eventsChanged, (_, result) => result);
 
 export const $eventDetail = eventDomain
   .createStore<EventDetailDto>(null)
   .on($eventDetailChanged, (_, result) => result)
   .on($eventDetailClose, () => null)
+  .on($aggregateReviewChanged, (_, result) => ({ ..._, ...result }))
   .on($eventLiked, (_) => {
     if (isAuth()) return { ..._, isLiked: !_.isLiked };
     return _;
@@ -34,6 +41,7 @@ export const $activeEvents = combine(
   $activeCategory,
   $events,
   (category, events) => {
+    console.log("EVENET IN $activeEvents", events);
     return (events ?? [])
       .filter((e) => e.categoryId === category?.id || category?.isDefault)
       .map((e) => ({ ...e }));
@@ -49,4 +57,18 @@ sample({
 sample({
   source: AppStartGate.open,
   target: $getAllEventsFx,
+});
+
+sample({
+  source: $eventDetail,
+  fn: (source: EventDetailDto) =>
+    ({
+      ...source,
+    }) as EventDto,
+  target: $eventChanged,
+});
+
+sample({
+  source: $eventDetailOpened,
+  target: [$getEventDetailFx],
 });

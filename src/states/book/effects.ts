@@ -51,9 +51,3 @@ export const $getBookingTypesByCategoryFx = bookDomain.createEffect(
     $bookingTypeChanged(bookingTypes);
   },
 );
-
-sample({
-  source: $activeCategory,
-  fn: (category) => category.id,
-  target: $getBookingTypesByCategoryFx,
-});
