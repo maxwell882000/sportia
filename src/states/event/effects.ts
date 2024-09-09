@@ -7,9 +7,14 @@ import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
 import { WorkHoursDto } from "../../dtos/events/workHoursDto.ts";
 import { requestHandler } from "../handler.ts";
 import { successNotification } from "../../utils/notifications/successNotification.ts";
+import { GetEventDetailResponse } from "../../infrastructure/axios/services/event/dtos/responses/getEventDetailResponse.ts";
+import { LikeEventResponse } from "../../infrastructure/axios/services/event/dtos/responses/likeEventResponse.ts";
+import { GetAllEventsResponse } from "../../infrastructure/axios/services/event/dtos/responses/getAllEventsResponse.ts";
 
 export const $getAllEventsFx = eventDomain.createEffect(async () => {
-  const allEvents = await requestHandler(EventService.getAllEvents());
+  const allEvents = await requestHandler<GetAllEventsResponse[]>(
+    EventService.getAllEvents(),
+  );
   $eventsChanged(
     allEvents.map<EventDto>(
       (e) =>
@@ -35,7 +40,7 @@ export const $likeEventFx = eventDomain.createEffect(
 
 export const $getEventDetailFx = eventDomain.createEffect(
   async (event: EventDto) => {
-    const eventDetail = await requestHandler(
+    const eventDetail = await requestHandler<GetEventDetailResponse>(
       EventService.getEventDetail({
         id: event.id,
       }),

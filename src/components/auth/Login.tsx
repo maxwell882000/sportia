@@ -1,10 +1,10 @@
 import { useUnit } from "effector-react";
-import { $isLoginPopUp } from "../../states/users/store.ts";
+import { $isLoginPopUp } from "../../states/profile/store.ts";
 import { useForm } from "effector-forms";
 import { $loginForm } from "../../states/users/form.ts";
 import CustomModal from "../modal/CustomModal.tsx";
 import { UserPopUp } from "../../dtos/users/userPopUp.ts";
-import { $userPopUpChanged } from "../../states/users/events.ts";
+import { $userPopUpChanged } from "../../states/profile/events.ts";
 import InputPassword from "../input/InputPassword.tsx";
 import InputPhone from "../input/InputPhone.tsx";
 import Button from "../button/Button.tsx";

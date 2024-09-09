@@ -1,12 +1,11 @@
 import { BookTypeDto } from "./bookTypeDto.ts";
 import { SelectItem } from "../../components/selector/Selector.tsx";
 import { BookingUserOptionDto } from "./bookingUserOptionDto.ts";
+import { BookingTypeDto } from "./bookingTypeDto.ts";
 
 export interface BookDto {
-  bookingTypeId: string;
-  bookType: BookTypeDto;
+  bookingType: BookingTypeDto;
   bookingOptions: BookingUserOptionDto[];
-  cost: number;
   isClick: boolean;
   isPayme: boolean;
 }

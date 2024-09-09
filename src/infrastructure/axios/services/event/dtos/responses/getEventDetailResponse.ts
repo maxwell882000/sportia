@@ -1,6 +1,6 @@
 import { FileDto } from "../../../common/dtos/fileDto.ts";
 import { DayOfWeek } from "../dayOfWeek.ts";
-import { LatLong } from "../latLong.ts";
+import { LatLong } from "../../../common/dtos/latLong.ts";
 import { WorkHour } from "../workHour.ts";
 
 export interface GetEventDetailResponse {

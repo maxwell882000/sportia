@@ -8,6 +8,10 @@ import { GetSameBookingsCountRequest } from "../../infrastructure/axios/services
 import { BookingUserOptionDto } from "../../infrastructure/axios/services/booking/dtos/bookingUserOptionDto.ts";
 import { BookingCountDto } from "../../dtos/book/bookingCountDto.ts";
 import { CreateBookingRequest } from "../../infrastructure/axios/services/booking/dtos/requests/creteBookingRequest.ts";
+import { PaymentOption } from "../../infrastructure/axios/services/booking/dtos/paymentOption.ts";
+import { successNotification } from "../../utils/notifications/successNotification.ts";
+import { $pageChanged } from "../events.ts";
+import { Pages } from "../../constants/pages.ts";
 
 export const $createBookingFx = bookDomain.createEffect(
   async ({ bookDto, eventId }: { bookDto: BookDto; eventId: string }) => {
@@ -19,9 +23,12 @@ export const $createBookingFx = bookDomain.createEffect(
             bookingOptionValue: { value: e.bookingOptionValue },
           }) as BookingUserOptionDto,
       ),
-      bookingTypeId: bookDto.bookingTypeId as string,
+      payment: bookDto.isClick ? PaymentOption.isClick : PaymentOption.IsPayme,
+      bookingTypeId: bookDto.bookingType.id as string,
       eventId,
     } as CreateBookingRequest);
+    successNotification("Вы успешно забранировали !");
+    $pageChanged(Pages.MAIN);
   },
 );
 
@@ -35,7 +42,7 @@ export const $getSameBookingCountFx = bookDomain.createEffect(
             bookingOptionValue: { value: e.bookingOptionValue },
           }) as BookingUserOptionDto,
       ),
-      bookingTypeId: bookDto.bookingTypeId as string,
+      bookingTypeId: bookDto.bookingType.id as string,
       eventId,
     } as GetSameBookingsCountRequest);
     $sameBookingCountChanged({ ...sameBookingCount } as BookingCountDto);
@@ -46,6 +53,6 @@ export const $getBookingTypesByCategoryFx = bookDomain.createEffect(
     const bookingTypes = await BookingTypeService.getBookingType({
       categoryId,
     } as GetBookingTypeByCategoryRequest);
-    $bookingTypeChanged({ ...bookingTypes });
+    $bookingTypeChanged([...bookingTypes]);
   },
 );

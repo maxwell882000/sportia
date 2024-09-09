@@ -1,11 +1,9 @@
 import { BookTypeDto } from "../book/bookTypeDto.ts";
 
 export interface BookedEventDto {
-  id: number;
-  bookType: BookTypeDto;
-  days?: string;
-  date?: string;
-  time: string;
-  cost: number;
+  id: string;
   name: string;
+  type: string;
+  options: string;
+  cost: number;
 }

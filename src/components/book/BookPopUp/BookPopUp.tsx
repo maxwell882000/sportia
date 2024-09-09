@@ -6,7 +6,7 @@ import {
   $bookAccepted,
 } from "../../../states/book/events.ts";
 import Button from "../../button/Button.tsx";
-import { $user } from "../../../states/users/store.ts";
+import { $user } from "../../../states/profile/store.ts";
 import { BookTypeDto } from "../../../dtos/book/bookTypeDto.ts";
 import BookInfo from "./BookInfo.tsx";
 
@@ -18,6 +18,7 @@ function BookPopUp() {
     $bookAccept,
     $bookAccepted,
   ]);
+
   return (
     <CustomModal isOpen={isBookAccept} close={close}>
       {bookAccept && (
@@ -26,28 +27,25 @@ function BookPopUp() {
             <BookInfo label={"Имя"} value={user.name} />
             <BookInfo
               label={"Тип брони"}
-              value={
-                bookAccept.bookType === BookTypeDto.SINGLE
-                  ? "На одного"
-                  : "На команду"
-              }
+              value={bookAccept.bookingType.label}
             />
             <BookInfo label={"Контактный номер"} value={user.phone} />
-
-            {bookAccept.bookType === BookTypeDto.TEAM && (
-              <BookInfo label={"Дата игры"} value={bookAccept.date} />
-            )}
-
-            {bookAccept.bookType === BookTypeDto.SINGLE && (
-              <BookInfo label={"Дни игры"} value={bookAccept.days.label} />
-            )}
-
-            <BookInfo label={"Время игры"} value={bookAccept.time.label} />
+            {bookAccept.bookingOptions.map((e) => (
+              <BookInfo
+                key={`book-info-${e.optionId}-${e.bookingOptionValue}`}
+                label={"Дата игры"}
+                value={e.bookingOptionValue}
+              />
+            ))}
           </div>
-          <div className={"bg-[#1C1F24] rounded-app px-[1rem] py-[0.625rem]"}>
+          <div className={"rounded-app bg-[#1C1F24] px-[1rem] py-[0.625rem]"}>
             <p className={"text-[1rem] text-[#ACEF03]"}>Цена</p>
-            <p className={"text-[2rem] leading-[1.5rem] py-[0.5rem] text-[#FFFFFFCC]"}>
-              {bookAccept.cost} сум
+            <p
+              className={
+                "py-[0.5rem] text-[2rem] leading-[1.5rem] text-[#FFFFFFCC]"
+              }
+            >
+              {bookAccept.bookingType.cost} сум
             </p>
             <p className={"text-[1rem] text-[#FFFFFF80]"}>
               Пожалуйста, оплатите через{" "}

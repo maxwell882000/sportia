@@ -1,7 +1,7 @@
 import Comment from "./Comment.tsx";
 import { useUnit } from "effector-react";
 import { $ownReview } from "../../states/review/store.ts";
-import { $user } from "../../states/users/store.ts";
+import { $user } from "../../states/profile/store.ts";
 import { $commentMade } from "../../states/review/events.ts";
 import Button from "../button/Button.tsx";
 import { LINK, TEXT } from "../../constants/share.ts";

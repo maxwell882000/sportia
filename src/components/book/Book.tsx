@@ -16,44 +16,57 @@ import { Selector } from "../selector/Selector.tsx";
 import Input from "../input/Input.tsx";
 import BookLabel from "./BookLabel.tsx";
 import RoundMan from "../Icons/RoundMan.tsx";
+import { BookingUserOptionDto } from "../../dtos/book/bookingUserOptionDto.ts";
+import { errorNotification } from "../../utils/notifications/errorNotification.ts";
 
 function Book() {
-  const { fields, submit } = useForm($bookForm);
-  const [paymentRequired, bookingType, sameBookingCount] = useUnit([
+  const { fields, submit, values } = useForm($bookForm);
+  const [paymentRequired, sameBookingCount] = useUnit([
     $paymentRequired,
-    $bookingType,
     $sameBookingCount,
   ]);
 
   function changeOptions(optionId: string, value: string) {
-    var result = fields.bookingOptions.value.map((f) =>
-      f.optionId === optionId ? { ...f, value: value } : f,
+    let result = fields.bookingOptions.value.map((f) =>
+      f.optionId === optionId ? { ...f, bookingOptionValue: value } : f,
     );
+    var isPropertyExist = fields.bookingOptions.value.find(
+      (e) => e.optionId === optionId,
+    );
+    if (!isPropertyExist) {
+      result.push({
+        optionId,
+        bookingOptionValue: value,
+      } as BookingUserOptionDto);
+    }
     fields.bookingOptions.onChange(result);
-  }
 
-  function activeBookingType() {
-    return bookingType?.filter((b) => b.id === fields.bookingTypeId.value)[0];
+    console.log("changeOptions", values, result);
   }
 
   return (
     <div className={"space-y-[1rem] px-[1.5rem] pb-[1rem]"}>
-      <BookChoice cost={fields.cost} bookTypeField={fields.bookingTypeId} />
-      {activeBookingType()?.bookingOptions?.map((e) =>
+      <BookChoice
+        bookingTypeOptionField={fields.bookingOptions}
+        bookTypeField={fields.bookingType}
+      />
+      {fields.bookingType?.value?.bookingOptions?.map((e) =>
         e.type === BookingOptionType.DropDown ? (
           <Selector
+            key={`select-${e.type}-${e.id}`}
             options={e.bookingOptionValues.map((e) => ({
               label: e.value,
               value: e.value,
             }))}
             onClick={(value) => {
-              changeOptions(e.id, value.value);
+              if (value) changeOptions(e.id, value?.value);
             }}
             required={true}
             placeholder={e.label}
           />
         ) : e.type === BookingOptionType.Text ? (
           <Input
+            key={`select-${e.type}-${e.id}`}
             options={{
               onChange: (value) => {
                 changeOptions(e.id, value);
@@ -64,6 +77,7 @@ function Book() {
           />
         ) : (
           <Input
+            key={`select-${e.type}-${e.id}`}
             options={{
               onChange: (value) => {
                 changeOptions(e.id, value);
@@ -75,13 +89,8 @@ function Book() {
           />
         ),
       )}
-      {fields.bookType.value === BookTypeDto.SINGLE && (
-        <BookSingle fields={fields} />
-      )}
-      {fields.bookType.value === BookTypeDto.TEAM && (
-        <BookTeam fields={fields} />
-      )}
-      {activeBookingType()?.isShowLimit && sameBookingCount?.totalCount && (
+      {fields.bookingType?.value?.isShowLimit &&
+      sameBookingCount?.totalCount ? (
         <BookLabel
           label={`${sameBookingCount.count}/${sameBookingCount.totalCount} мест свободно`}
         >
@@ -96,11 +105,13 @@ function Book() {
             )}
           </div>
         </BookLabel>
+      ) : (
+        ""
       )}
       <BookPayment
         isClick={fields.isClick}
         isPayme={fields.isPayme}
-        cost={fields.cost.value}
+        cost={fields?.bookingType?.value?.cost}
       />
       <div>
         <Button
@@ -108,6 +119,12 @@ function Book() {
           name={"Забронировать"}
           className={"w-full text-[#15171C] hover:bg-[#ACEF03CC]"}
           onClick={() => {
+            if (
+              fields.bookingType.value.bookingOptions.length !==
+              fields.bookingOptions.value.length
+            ) {
+              errorNotification("Пожалуйста заполните все поля !!!");
+            }
             if (
               fields.isClick.value === false &&
               fields.isPayme.value === false

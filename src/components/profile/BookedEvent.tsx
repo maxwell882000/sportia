@@ -11,22 +11,23 @@ function BookedEvent({ bookedEventDto }: Props) {
     <div className={"space-y-[1rem]"}>
       <div>
         <p className={"text-[1rem] leading-[1.183rem] text-[#ACEF03]"}>
-          {bookedEventDto.bookType === BookTypeDto.SINGLE
-            ? bookedEventDto.days
-            : bookedEventDto.date}
-          , {bookedEventDto.time}
+          {bookedEventDto.options}
         </p>
-        <p className={"mt-[0.25rem] text-[1.5rem] leading-[1.5rem] text-[#FFFFFFCC]"}>
+        <p
+          className={
+            "mt-[0.25rem] text-[1.5rem] leading-[1.5rem] text-[#FFFFFFCC]"
+          }
+        >
           {bookedEventDto.name}
         </p>
       </div>
       <div>
         <p className={"text-[1rem] leading-[1.183rem] text-[#ACEF03]"}>
-          {bookedEventDto.bookType === BookTypeDto.SINGLE
-            ? "На одного"
-            : "На команду"}
+          {bookedEventDto.type}
         </p>
-        <p className={"mt-[0.5rem] text-[2rem] leading-[2rem] text-[#FFFFFFCC]"}>
+        <p
+          className={"mt-[0.5rem] text-[2rem] leading-[2rem] text-[#FFFFFFCC]"}
+        >
           {bookedEventDto.cost} сум
         </p>
       </div>

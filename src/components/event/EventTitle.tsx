@@ -30,7 +30,7 @@ function EventTitle({ event }: Props) {
           >
             {event.nextTime}
           </p>
-          <p className={"text-white"}>{event.address}</p>
+          <p className={"one-lines text-[#D2D2D3] text-opacity-70"}>{event.address}</p>
         </div>
       </div>
     </>

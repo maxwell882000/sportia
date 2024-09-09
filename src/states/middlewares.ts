@@ -1,6 +1,6 @@
 import { Pages } from "../constants/pages.ts";
-import { $isLoggedIn } from "./users/store.ts";
-import { $userPopUpChanged } from "./users/events.ts";
+import { $isLoggedIn } from "./profile/store.ts";
+import { $userPopUpChanged } from "./profile/events.ts";
 import { UserPopUp } from "../dtos/users/userPopUp.ts";
 
 export const isAuth = () => {

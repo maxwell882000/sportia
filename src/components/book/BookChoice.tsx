@@ -3,29 +3,33 @@ import { ConnectedField } from "effector-forms";
 import { useUnit } from "effector-react";
 import { $bookingType } from "../../states/book/store.ts";
 import { ReactSVG } from "react-svg";
+import { BookingTypeDto } from "../../dtos/book/bookingTypeDto.ts";
+import { BookingUserOptionDto } from "../../dtos/book/bookingUserOptionDto.ts";
 
 interface Props {
-  bookTypeField: ConnectedField<string>;
-  cost: ConnectedField<number>;
+  bookTypeField: ConnectedField<BookingTypeDto>;
+  bookingTypeOptionField: ConnectedField<BookingUserOptionDto[]>;
 }
 
-function BookChoice({ bookTypeField, cost }: Props) {
+function BookChoice({ bookTypeField, bookingTypeOptionField }: Props) {
   const [bookingType] = useUnit([$bookingType]);
   return (
     <div className={"flex space-x-[0.5rem]"}>
       {bookingType.map((b) => (
         <Button
           key={`booking-type-${b.id}`}
-          backgroundColor={bookTypeField.value === b.id ? "#ACEF03" : "#1C1F24"}
-          name={"На одного"}
+          backgroundColor={
+            bookTypeField?.value?.id === b.id ? "#ACEF03" : "#1C1F24"
+          }
+          name={b.label}
           className={
-            (bookTypeField.value === b.id
+            (bookTypeField.value?.id === b.id
               ? "text-[#15171C] "
               : "text-[#ACEF03] ") + " text-[0.875rem] leading-[1.25rem]"
           }
           onClick={() => {
-            bookTypeField.onChange(b.id);
-            cost.onChange(b.cost);
+            bookTypeField.onChange(b);
+            bookingTypeOptionField.onChange([]);
           }}
           icon={
             <ReactSVG

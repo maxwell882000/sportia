@@ -18,9 +18,9 @@ export class BookingService {
   static async getSameBookingCount(
     request: GetSameBookingsCountRequest,
   ): Promise<GetSameBookingsCountResponse> {
-    const response = await axiosInstance.get<GetSameBookingsCountResponse>(
+    const response = await axiosInstance.post<GetSameBookingsCountResponse>(
       "booking/get-same-booking-count",
-      { params: request },
+      request,
     );
     return response.data;
   }

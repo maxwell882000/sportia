@@ -2,23 +2,23 @@ import { createForm } from "effector-forms";
 import { BookTypeDto } from "../../dtos/book/bookTypeDto.ts";
 import { BookDto } from "../../dtos/book/bookDto.ts";
 import { forward, sample } from "effector";
-import { $bookingTypeChanged, $paymentRequired } from "./events.ts";
+import {
+  $bookAcceptChanged,
+  $bookingTypeChanged,
+  $paymentRequired,
+} from "./events.ts";
 import { UserPopUp } from "../../dtos/users/userPopUp.ts";
 import { $bookingType } from "./store.ts";
 import { $createBookingFx, $getSameBookingCountFx } from "./effects.ts";
 import { $eventDetail } from "../event/store.ts";
+import { BookingTypeDto } from "../../dtos/book/bookingTypeDto.ts";
 
 export const $bookForm = createForm<BookDto>({
   fields: {
-    bookingTypeId: {
-      init: "" as string,
+    bookingType: {
+      init: null,
     },
-    bookType: {
-      init: BookTypeDto.SINGLE,
-    },
-    cost: {
-      init: 300000,
-    },
+
     isClick: {
       init: false,
     },
@@ -39,27 +39,27 @@ forward({
   })),
   to: [$bookForm.fields.isClick.addError, $bookForm.fields.isPayme.addError],
 });
-
 sample({
   source: $bookForm.formValidated,
-  fn: (source) => ({ bookDto: source, eventId: $eventDetail.getState().id }),
-  target: $createBookingFx,
+  target: $bookAcceptChanged,
 });
 
 sample({
   source: $bookForm.$values,
-  filter: (result: BookDto) =>
-    $bookingType
-      .getState()
-      .filter((e) => e.id === result.bookingTypeId)
-      .map((e) => e.isShowLimit)[0] &&
-    result.cost &&
-    result.bookingTypeId &&
-    result.bookingOptions.filter((e) => e.bookingOptionValue).length ==
+  filter: (result: BookDto) => {
+    return (
+      $bookingType.getState() &&
       $bookingType
         .getState()
-        .filter((e) => e.id === result.bookingTypeId)
-        .flatMap((e) => e.bookingOptions).length,
+        .filter((e) => e.id === result?.bookingType?.id)
+        .map((e) => e.isShowLimit)[0] &&
+      result.bookingOptions.filter((e) => e.bookingOptionValue).length ==
+        $bookingType
+          .getState()
+          .filter((e) => e.id === result.bookingType?.id)
+          .flatMap((e) => e.bookingOptions).length
+    );
+  },
   fn: (bookDto) => ({
     bookDto,
     eventId: $eventDetail.getState().id,

@@ -6,7 +6,3 @@ import { UserPopUp } from "../../dtos/users/userPopUp.ts";
 
 
 export const $passwordNotMatched = userDomain.createEvent();
-
-export const $userPopUpChanged = userDomain.createEvent<UserPopUp>();
-
-export const $userChanged = userDomain.createEvent<UserDto>();

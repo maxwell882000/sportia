@@ -2,7 +2,7 @@ import { User01 } from "@untitled-ui/icons-react";
 import Login from "./Login.tsx";
 import Register from "./Register.tsx";
 import { useUnit } from "effector-react";
-import { $initials } from "../../states/users/store.ts";
+import { $initials } from "../../states/profile/store.ts";
 import { $profileOpened } from "../../states/profile/events.ts";
 
 function UserAvatar() {

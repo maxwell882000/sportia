@@ -13,9 +13,11 @@ import {
 import { combine, createStore, sample } from "effector";
 import { Pages, sliderPages } from "../constants/pages.ts";
 import { $eventDetailChanged } from "./event/events.ts";
-import { $userPopUpChanged } from "./users/events.ts";
+import { $userPopUpChanged } from "./profile/events.ts";
 import { UserPopUp } from "../dtos/users/userPopUp.ts";
 import { middlewares } from "./middlewares.ts";
+import { $profileActivated } from "./profile/store.ts";
+import { $categoryActivated } from "./category/store.ts";
 
 export const $isSideBar = app
   .createStore<boolean>(false)
@@ -47,7 +49,7 @@ export const $isAnimateSideBar = $isSideBar.map(
 export const $search = app
   .createStore<string>("")
   .on($searchChanged, (_, result) => result)
-  .reset($searchRestore);
+  .reset($searchRestore, $profileActivated, $categoryActivated);
 
 export const $searchPlaceholder = app
   .createStore<string>("Поиск")

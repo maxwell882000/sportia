@@ -21,6 +21,14 @@
     background: #555; /* Scrollbar color on hover */
 }
 
+.one-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 @font-face {
     font-family: "Jura";
     src: url("assets/fonts/Jura/static/Jura-Regular.ttf") format("truetype");

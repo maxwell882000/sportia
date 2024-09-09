@@ -3,6 +3,7 @@ import { axiosInstance } from "../../axiosInstance.ts";
 import { GetEventDetailRequest } from "./dtos/requests/getEventDetailRequest.ts";
 import { GetEventDetailResponse } from "./dtos/responses/getEventDetailResponse.ts";
 import { LikeEventRequest } from "./dtos/requests/likeEventRequest.ts";
+import { LikeEventResponse } from "./dtos/responses/likeEventResponse.ts";
 
 export class EventService {
   static async getAllEvents(): Promise<GetAllEventsResponse[]> {

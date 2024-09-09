@@ -1,9 +1,9 @@
-import { DayOfWeek } from "../dayOfWeek.ts";
+import { DayOfWeek } from "../../../event/dtos/dayOfWeek.ts";
 import { FileDto } from "../../../common/dtos/fileDto.ts";
 import { LatLong } from "../../../common/dtos/latLong.ts";
 
-export interface GetAllEventsResponse {
-  id: string; // UUID string
+export interface GetUserLikedEventsResponse {
+  id: string;
   name: string;
   nextTime: string;
   workDay: DayOfWeek;
@@ -13,7 +13,6 @@ export interface GetAllEventsResponse {
   coordinates: LatLong;
   mark: number;
   reviewCount: number;
-  categoryId: string; // UUID string
-  isLiked: boolean;
+  categoryId: string;
   isReservable: boolean;
 }

@@ -11,6 +11,9 @@ export const $bookAcceptClose = bookDomain.createEvent();
 
 export const $paymentRequired = bookDomain.createEvent();
 
+export const $bookingReset = bookDomain.createEvent();
+
 export const $bookingTypeChanged = bookDomain.createEvent<BookingTypeDto[]>();
 
-export const $sameBookingCountChanged = bookDomain.createEvent<BookingCountDto>();
+export const $sameBookingCountChanged =
+  bookDomain.createEvent<BookingCountDto>();

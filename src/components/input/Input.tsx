@@ -57,7 +57,7 @@ function Input(props: InputProps) {
       ? "border-red-500"
       : "border-white  border-opacity-12";
   };
-  const inputClass = `peer w-full rounded-[0.5rem] border ${borderColor()} bg-app-dark px-[1rem] py-[0.75rem] text-white text-opacity-80 placeholder-white placeholder-opacity-0 focus-visible:outline-none`;
+  const inputClass = `peer w-full rounded-[0.5rem] border ${borderColor()} bg-app-dark px-[1rem] ${props.type == "date" ? "py-[0.625rem]" : "py-[0.688rem]"} text-white text-opacity-80 placeholder-white placeholder-opacity-0 focus-visible:outline-none`;
 
   return (
     <div className={"relative text-[1rem]"}>
