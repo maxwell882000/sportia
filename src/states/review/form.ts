@@ -8,6 +8,7 @@ import { $eventDetail } from "../event/store.ts";
 import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
 import { $eventDetailOpened } from "../event/events.ts";
 import { reviewDomain } from "./domain.ts";
+import { isAuth } from "../middlewares.ts";
 
 export const $ownReviewForm = createForm<OwnReviewDto>({
   fields: {
@@ -28,36 +29,14 @@ export const $ownReviewForm = createForm<OwnReviewDto>({
 
 sample({
   source: $commentMade,
+  filter: () => isAuth(),
   target: $ownReviewForm.setInitialForm,
 });
 sample({
   source: $commentCanceled,
-  // fn: () => ({
-  //   id: "",
-  //   mark: 0,
-  //   comment: "",
-  // }),
   target: $ownReviewForm.reset,
 });
 sample({
   source: $eventDetailOpened,
-  // fn: () => ({
-  //   id: "",
-  //   mark: 0,
-  //   comment: "",
-  // }),
   target: $ownReviewForm.reset,
 });
-
-// $commentCanceled.watch(() => {
-//   // $ownReviewForm.reset();
-//   setTimeout(() => {
-//     console.log("RESET $commentCanceled", $ownReviewForm.$values.getState());
-//   }, 300);
-// });
-// $eventDetailOpened.watch(() => {
-//   // $ownReviewForm.reset();
-//   setTimeout(() => {
-//     console.log("RESET $eventDetailOpened", $ownReviewForm.$values.getState());
-//   }, 300);
-// });

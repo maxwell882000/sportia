@@ -28,6 +28,7 @@ function MobileSideBar({ children }: MobileSideBarProps) {
         setActiveSnapPoint={(snap) => {
           isSideBarChanged(snap === 1);
         }}
+        className={"space-y-[1rem]"}
       >
         {children}
       </BaseDrawer>

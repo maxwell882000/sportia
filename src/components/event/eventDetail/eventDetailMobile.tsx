@@ -17,6 +17,7 @@ import WorkHours from "./WorkHours.tsx";
 import OverallReview from "../../review/OverallReview.tsx";
 import Reviews from "../../review/Reviews.tsx";
 import { useEffect, useRef, useState } from "react";
+import EventCard from "../EventCard.tsx";
 
 export const EventDetailMobile = () => {
   const [event, eventLike, pageChanged] = useUnit([
@@ -60,10 +61,8 @@ export const EventDetailMobile = () => {
   };
 
   return (
-    <div
-      className={"flex w-full flex-col  "}
-    >
-      <div className={"relative z-10 w-screen  "}>
+    <div className={"flex w-full flex-col"}>
+      <div className={"relative z-10 w-screen"}>
         <Slides images={event.images} />
       </div>
       <div className={"relative z-20"}>
@@ -74,16 +73,25 @@ export const EventDetailMobile = () => {
           }}
           snapPoints={[0.84, 1]}
         >
+          <div className={"z-50 px-[1rem] pb-[0.25rem] pt-[1rem] shadow-lg"}>
+            <h1
+              className={
+                "pb-1 text-[1.25rem] font-light leading-[1.5rem] text-white"
+              }
+            >
+              {event.name}
+            </h1>
+            <CloseButton className={"!bg-[#1C1F24]"} />
+          </div>
           <div
             ref={scrollDivRef}
             onWheel={handleWheel}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
-            className={`remove-scroll   h-full space-y-[1.5rem] ${isOnTop ? "overflow-y-scroll" : ""} p-[1rem]`}
+            className={`remove-scroll h-full space-y-[1.5rem] px-[1rem] ${isOnTop ? "overflow-y-scroll" : ""}`}
           >
-            <div className={"flex"}>
-              <EventTitle event={event} />
-              <CloseButton className={"!bg-[#1C1F24]"} />
+            <div>
+              <EventCard event={event} />
             </div>
 
             <div>

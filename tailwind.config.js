@@ -1,23 +1,22 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 export default {
-    content: [
-        "./index.html",
-        "./src/**/*.{js,ts,jsx,tsx}",
-    ], theme: {
-        extend: {
-            borderRadius: {
-                app: "0.5rem",
-                info: '1.5rem'
-            },
-
-            backgroundColor: {
-                "app-dark": "#15171C"
-            },
-            opacity: {
-                '12': '0.12',
-            },
-        },
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      borderRadius: {
+        app: "0.5rem",
+        info: "1.5rem",
+      },
+      boxShadow: {
+        custom: "0 15px 12px #15171C",
+      },
+      backgroundColor: {
+        "app-dark": "#15171C",
+      },
+      opacity: {
+        12: "0.12",
+      },
     },
-    plugins: [],
-}
-
+  },
+  plugins: [],
+};

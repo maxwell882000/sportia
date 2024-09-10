@@ -6,6 +6,7 @@ interface BaseDrawerProps {
   activeSnapPoint?: number;
   setActiveSnapPoint?: (activeSnapPoint: number | string | null) => void;
   snapPoints: (string | number)[];
+  className?: string;
 }
 
 function BaseDrawer({
@@ -13,6 +14,7 @@ function BaseDrawer({
   activeSnapPoint,
   setActiveSnapPoint,
   snapPoints,
+  className,
 }: BaseDrawerProps) {
   const windowWidth = useWindowWidth();
 
@@ -29,8 +31,11 @@ function BaseDrawer({
     >
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="bg-app-dar fixed bottom-0 left-0 right-0 mt-24 flex h-[96%] flex-col rounded-t-[1.5rem] z-10">
-          <div className="flex h-full flex-1 flex-col space-y-[1rem] rounded-t-[1.5rem] bg-app-dark">
+        <Drawer.Content className="bg-app-dar fixed bottom-0 left-0 right-0 z-10 mt-24 flex h-[96%] flex-col rounded-t-[1.5rem]">
+          <Drawer.Title />
+          <div
+            className={`flex h-full flex-1 flex-col rounded-t-[1.5rem] bg-app-dark ${className} `}
+          >
             {children}
           </div>
         </Drawer.Content>

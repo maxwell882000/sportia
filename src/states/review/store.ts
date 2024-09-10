@@ -47,7 +47,7 @@ export const $ownReview: Store<OwnReviewDto | null> = $review.map(
 
 export const $isCommenting = reviewDomain
   .createStore<boolean>(false)
-  .on($commentMade, () => true)
+  .on($commentMade, () => isAuth())
   .reset($ownReviewForm.formValidated, $commentCanceled, $eventDetailOpened);
 
 sample({
