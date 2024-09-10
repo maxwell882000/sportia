@@ -48,7 +48,7 @@ function EventDetail() {
                     key={`pay-info-${bookingDetail.label}`}
                     icon={<ReactSVG src={bookingDetail.icon} />}
                     paymentType={bookingDetail.label}
-                    payment={`${bookingDetail.cost} сум с человека`}
+                    payment={`${bookingDetail.cost} сум`}
                   />
                 ))}
               </div>

@@ -13,6 +13,8 @@ import AllEventMap from "./components/event/evenMap/AllEventMap.tsx";
 import Modal from "react-modal";
 import Loader from "./components/modal/Loader.tsx";
 import { ToastContainer } from "react-toastify";
+import DesktopLayout from "./components/layout/DesktopLayout.tsx";
+import MobileLayout from "./components/layout/MobileLayout.tsx";
 
 Modal.setAppElement("#root");
 
@@ -23,20 +25,9 @@ function App() {
       <Loader />
       <ToastContainer />
       <AppStartGate />
-      <div className={"absolute right-[1.5rem] top-[1.5rem] z-50"}>
-        <UserAvatar />
-      </div>
-      <div className={"t-0 l-0 absolute z-10"}>
-        <div className={"t-0 l-0 absolute z-20 flex h-screen flex-col"}>
-          <div className="px-[1.5rem] pt-[1.5rem]">
-            <Logo></Logo>
-          </div>
-          <AllPages />
-        </div>
-        <div className={"absolute z-10"}>
-          <SideBar />
-        </div>
-      </div>
+      <DesktopLayout />
+      <MobileLayout />
+
       <div className="absolute z-0 h-screen w-screen">
         <YMap
           key="map"

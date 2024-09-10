@@ -48,7 +48,7 @@ function AllEventMap() {
 
             <div
               className={
-                "h-[48px] w-[180px] rounded-app bg-[#FFFFFFE5] p-2 px-[1rem] py-[0.5rem] leading-[16.56px] text-[#15171C]"
+                "h-[3rem] w-[11.25rem] rounded-app bg-[#FFFFFFE5] p-2 px-[1rem] py-[0.5rem] leading-[1.035rem] text-[#15171C]"
               }
             >
               <p>{e.name}</p>
