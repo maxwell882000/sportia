@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 import { $categoriesChanged } from "../../states/category/store.ts";
 import { $isMobileSideBar } from "../../states/store.ts";
+import BaseDrawer from "../drawer/BaseDrawer.tsx";
 
 interface MobileSideBarProps {
   children: React.ReactNode;
@@ -21,27 +22,15 @@ function MobileSideBar({ children }: MobileSideBarProps) {
   ]);
   return (
     <div>
-      <Drawer.Root
-        modal={false}
-        dismissible={false}
-        open={windowWidth < 768}
-        snapPoints={[0.3, 1]}
-        closeThreshold={0}
+      <BaseDrawer
         activeSnapPoint={isMobileSideBar ? 1 : 0.3}
+        snapPoints={[0.3, 1]}
         setActiveSnapPoint={(snap) => {
-          console.log("SAP CHANGED !!!!", snap);
           isSideBarChanged(snap === 1);
         }}
       >
-        <Drawer.Portal>
-          <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-          <Drawer.Content className="bg-app-dar fixed bottom-0 left-0 right-0 mt-24 flex h-[96%] flex-col rounded-t-[1.5rem]">
-            <div className="flex-1 space-y-[1rem] rounded-t-[1.5rem] bg-app-dark">
-              {children}
-            </div>
-          </Drawer.Content>
-        </Drawer.Portal>
-      </Drawer.Root>
+        {children}
+      </BaseDrawer>
     </div>
   );
 }

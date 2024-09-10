@@ -10,6 +10,7 @@ import InputSearch from "../input/InputSearch.tsx";
 import { $isSideBarChanged } from "../../states/events.ts";
 import Categories from "../category/Categories.tsx";
 import Events from "../event/Events.tsx";
+import AllMobilePages from "../../pages/AllMobilePages.tsx";
 
 function MobileLayout() {
   const [isSideBar, searchPlaceholder] = useUnit([
@@ -24,20 +25,7 @@ function MobileLayout() {
         </div>
       )}
       <div className={"absolute"}>
-        <MobileSideBar>
-          <Categories />
-          <div className={"px-[1rem]"}>
-            <InputSearch className={"w-full"} placeholder={searchPlaceholder} />
-          </div>
-          <div className={"overflow-y-scroll"}>
-            <Events />
-            asfasfasf
-            fasfsa
-            fas
-            asfasf
-            <Events />
-          </div>
-        </MobileSideBar>
+        <AllMobilePages />
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ function AllPages() {
       >
         <Search />
       </div>
-      {currentPage === Pages.MAIN && (
+      {(currentPage === Pages.MAIN || currentPage === Pages.DETAIL) && (
         <SliderPage
           choice={<Categories />}
           content={<Events />}

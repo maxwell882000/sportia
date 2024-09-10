@@ -13,7 +13,7 @@ import {
 } from "./events.ts";
 import { combine, createStore, sample } from "effector";
 import { Pages, sliderPages } from "../constants/pages.ts";
-import { $eventDetailChanged } from "./event/events.ts";
+import { $eventDetailChanged, $eventDetailClose } from "./event/events.ts";
 import { $userPopUpChanged } from "./profile/events.ts";
 import { UserPopUp } from "../dtos/users/userPopUp.ts";
 import { middlewares } from "./middlewares.ts";
@@ -79,6 +79,19 @@ sample({
   fn: (source) => source.name,
   target: [$search, $isSideBarChanged],
 });
+
+sample({
+  source: $eventDetailChanged,
+  fn: () => Pages.DETAIL,
+  target: $pageChanged,
+});
+
+sample({
+  source: $eventDetailClose,
+  fn: () => Pages.MAIN,
+  target: $pageChanged,
+});
+
 
 sample({
   clock: $pageRestored,

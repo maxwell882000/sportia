@@ -19,7 +19,7 @@ function Slides({ images }: Props) {
       centeredSlides={true}
       scrollbar={true}
       modules={[Mousewheel, Scrollbar]}
-      className="h-[11.75rem] rounded-tl-info rounded-tr-info"
+      className="rounded-0 h-[11.75rem] md:rounded-tl-info md:rounded-tr-info"
     >
       {images.map((img, index) => (
         <SwiperSlide key={`event-img-${index}`}>

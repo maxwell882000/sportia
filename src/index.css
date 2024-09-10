@@ -4,8 +4,22 @@
 
 /* For WebKit browsers */
 ::-webkit-scrollbar {
-    width: 4px; /* Adjust width of scrollbar */
+    width: 2px; /* Adjust width of scrollbar */
 }
+
+*:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+html, body {
+    overscroll-behavior: none !important;
+}
+
+.remove-scroll::-webkit-scrollbar {
+    width: 0 !important;
+}
+
 
 ::-webkit-scrollbar-track {
     background: rgba(28, 31, 36, 1); /* Track color */
