@@ -1,5 +1,6 @@
 import { app } from "./domain";
 import {
+  $isMobileSideBarChanged,
   $isLoadingChanged,
   $isSideBarChanged,
   $pageChanged,
@@ -22,6 +23,10 @@ import { $categoryActivated } from "./category/store.ts";
 export const $isSideBar = app
   .createStore<boolean>(false)
   .on($isSideBarChanged, (_, result) => result);
+
+export const $isMobileSideBar = app
+  .createStore<boolean>(false)
+  .on($isMobileSideBarChanged, (_, result) => result);
 
 const $previousPage = app
   .createStore<Pages>(Pages.MAIN)
@@ -85,4 +90,16 @@ sample({
   source: $userPopUpChanged,
   filter: (result) => result === UserPopUp.SUCCESS,
   target: $pageRestored,
+});
+
+sample({
+  source: $categoryActivated,
+  fn: () => true,
+  target: $isMobileSideBarChanged,
+});
+
+sample({
+  source: $profileActivated,
+  fn: () => true,
+  target: $isMobileSideBarChanged,
 });
