@@ -1,7 +1,7 @@
 import UserAvatar from "../auth/UserAvatar.tsx";
 import Logo from "../Icons/Logo.tsx";
 import AllPages from "../../pages/AllPages.tsx";
-import SideBar from "./SideBar.tsx";
+import SideBar from "../sidebar/SideBar.tsx";
 
 function DesktopLayout() {
   return (

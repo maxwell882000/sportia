@@ -1,5 +1,5 @@
 import UserAvatar from "../auth/UserAvatar.tsx";
-import MobileSideBar from "./MobileSideBar.tsx";
+import MobileSideBar from "../sidebar/MobileSideBar.tsx";
 import { useUnit } from "effector-react";
 import {
   $isMobileSideBar,

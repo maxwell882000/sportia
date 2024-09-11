@@ -5,18 +5,20 @@ import BaseDrawer from "../drawer/BaseDrawer.tsx";
 
 interface MobileSideBarProps {
   children: React.ReactNode;
+  closeSnap?: string | number;
 }
 
-function MobileSideBar({ children }: MobileSideBarProps) {
+function MobileSideBar({ children, closeSnap = 0.3 }: MobileSideBarProps) {
   const [isSideBarChanged, isMobileSideBar] = useUnit([
     $isMobileSideBarChanged,
     $isMobileSideBar,
   ]);
+  console.log("CURRENT SNAP ", closeSnap);
   return (
     <div>
       <BaseDrawer
-        activeSnapPoint={isMobileSideBar ? 1 : 0.3}
-        snapPoints={[0.3, 1]}
+        activeSnapPoint={isMobileSideBar ? 1 : closeSnap}
+        snapPoints={[closeSnap, 1]}
         setActiveSnapPoint={(snap) => {
           isSideBarChanged(snap === 1);
         }}

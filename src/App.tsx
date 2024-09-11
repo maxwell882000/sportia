@@ -4,11 +4,7 @@ import {
   YMapDefaultFeaturesLayer,
   YMapDefaultSchemeLayer,
 } from "ymap3-components";
-import Logo from "./components/Icons/Logo.tsx";
-import SideBar from "./components/layout/SideBar.tsx";
 import { AppStartGate } from "./states/gate.ts";
-import AllPages from "./pages/AllPages.tsx";
-import UserAvatar from "./components/auth/UserAvatar.tsx";
 import AllEventMap from "./components/event/evenMap/AllEventMap.tsx";
 import Modal from "react-modal";
 import Loader from "./components/modal/Loader.tsx";

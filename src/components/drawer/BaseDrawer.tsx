@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 interface BaseDrawerProps {
   children?: React.ReactNode;
-  activeSnapPoint?: number;
+  activeSnapPoint?: number | string;
   setActiveSnapPoint?: (activeSnapPoint: number | string | null) => void;
   snapPoints: (string | number)[];
   className?: string;

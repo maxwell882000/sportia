@@ -18,6 +18,8 @@ import OverallReview from "../../review/OverallReview.tsx";
 import Reviews from "../../review/Reviews.tsx";
 import { useEffect, useRef, useState } from "react";
 import EventCard from "../EventCard.tsx";
+import { useWindowSize } from "../../../hooks/useWindowSize.ts";
+import { useElementSize } from "../../../hooks/useElementSize.ts";
 
 export const EventDetailMobile = () => {
   const [event, eventLike, pageChanged] = useUnit([
@@ -34,44 +36,42 @@ export const EventDetailMobile = () => {
     if (scrollDivRef.current) {
       const isAtTop = scrollDivRef.current.scrollTop === 0;
 
-      // Detect if you're already at the top and scrolling upwards
       if (isAtTop && event.deltaY < 0) {
         console.log("Trying to scroll up, but already at the top!");
         setIsOnTop(false);
-        // Add your action here when trying to scroll up from the top
       }
     }
   };
-
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     setStartY(event.touches[0].clientY);
   };
-
   const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
     if (scrollDivRef.current) {
       const currentY = event.touches[0].clientY;
       const isAtTop = scrollDivRef.current.scrollTop === 0;
 
-      // Detect if you're at the top and trying to scroll down (swiping down)
       if (isAtTop && currentY > startY) {
         setIsOnTop(false);
-        // Add your action here when touching and trying to scroll up from the top
       }
     }
   };
 
+  const slidesRef = useRef<HTMLDivElement>(null);
+  const windowSize = useWindowSize();
+  const slidesSize = useElementSize(slidesRef);
+  const drawerSize = `${windowSize.innerHeight - slidesSize.height * 0.75}px`;
   return (
     <div className={"flex w-full flex-col"}>
-      <div className={"relative z-10 w-screen"}>
+      <div ref={slidesRef} className={"relative z-10 w-screen"}>
         <Slides images={event.images} />
       </div>
       <div className={"relative z-20"}>
         <BaseDrawer
-          activeSnapPoint={isOnTop ? 1 : 0.84}
+          activeSnapPoint={isOnTop ? 1 : drawerSize}
           setActiveSnapPoint={(snap) => {
             setIsOnTop(snap === 1);
           }}
-          snapPoints={[0.84, 1]}
+          snapPoints={[drawerSize, 1]}
         >
           <div className={"z-50 px-[1rem] pb-[0.25rem] pt-[1rem]"}>
             <h1
