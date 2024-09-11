@@ -73,7 +73,7 @@ export const EventDetailMobile = () => {
           }}
           snapPoints={[0.84, 1]}
         >
-          <div className={"z-50 px-[1rem] pb-[0.25rem] pt-[1rem] shadow-lg"}>
+          <div className={"z-50 px-[1rem] pb-[0.25rem] pt-[1rem]"}>
             <h1
               className={
                 "pb-1 text-[1.25rem] font-light leading-[1.5rem] text-white"
@@ -88,7 +88,7 @@ export const EventDetailMobile = () => {
             onWheel={handleWheel}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
-            className={`remove-scroll h-full space-y-[1.5rem] px-[1rem] ${isOnTop ? "overflow-y-scroll" : ""}`}
+            className={`remove-scroll h-full space-y-[1.5rem] px-[1rem] pb-[1rem] ${isOnTop ? "overflow-y-scroll" : ""}`}
           >
             <div>
               <EventCard event={event} />
