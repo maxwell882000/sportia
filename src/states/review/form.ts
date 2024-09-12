@@ -4,8 +4,6 @@ import { rules } from "../../utils/rules.ts";
 import { sample } from "effector";
 import { $commentCanceled, $commentMade } from "./events.ts";
 import { $eventDetailOpened } from "../event/events.ts";
-import { isAuth } from "../middlewares.ts";
-import { $saveReviewFx } from "./effects.ts";
 
 export const $ownReviewForm = createForm<OwnReviewDto>({
   fields: {
