@@ -24,24 +24,25 @@ export const $saveReviewFx = reviewDomain.createEffect(
     eventId: string;
   }) => {
     let response = null;
-    if (ownReview.id) {
+    let review = { ...ownReview };
+    if (review.id) {
       response = await requestHandler(
         ReviewService.updateReview({
-          ...ownReview,
+          ...review,
           eventId,
         } as UpdateReviewRequest),
       );
     } else {
       response = await requestHandler(
         ReviewService.createReview({
-          ...ownReview,
+          ...review,
           eventId,
         } as CreateReviewRequest),
       );
-      ownReview.id = response.id;
+      review.id = response.id;
     }
     successNotification("Вы успешно оставили отзыв");
-    $saveOwnReview({ ...ownReview });
+    $saveOwnReview({ ...review });
     $aggregateReviewChanged({
       reviewCount: response.reviewCount,
       mark: response.mark,
