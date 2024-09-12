@@ -54,7 +54,12 @@ export const $isAnimateSideBar = $isSideBar.map(
 export const $search = app
   .createStore<string>("")
   .on($searchChanged, (_, result) => result)
-  .reset($searchRestore, $profileActivated, $categoryActivated);
+  .reset(
+    $searchRestore,
+    $profileActivated,
+    $categoryActivated,
+    $eventDetailClose,
+  );
 
 export const $searchPlaceholder = app
   .createStore<string>("Поиск")
@@ -83,12 +88,6 @@ sample({
 sample({
   source: $eventDetailChanged,
   fn: () => Pages.DETAIL,
-  target: $pageChanged,
-});
-
-sample({
-  source: $eventDetailClose,
-  fn: () => Pages.MAIN,
   target: $pageChanged,
 });
 

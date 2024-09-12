@@ -17,6 +17,7 @@ import { Pages } from "../../constants/pages.ts";
 import { AppStartGate } from "../gate.ts";
 import { $getAllEventsFx, $getEventDetailFx, $likeEventFx } from "./effects.ts";
 import { $aggregateReviewChanged } from "../review/events.ts";
+import { $search } from "../store.ts";
 
 export const $events = eventDomain
   .createStore<EventDto[]>(defaultEventsDto)
@@ -38,9 +39,15 @@ export const $eventDetail = eventDomain
 export const $activeEvents = combine(
   $activeCategory,
   $events,
-  (category, events) => {
+  $search,
+  (category, events, search) => {
     return (events ?? [])
-      .filter((e) => e.categoryId === category?.id || category?.isDefault)
+      .filter(
+        (e) =>
+          (e.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
+            !search) &&
+          (e.categoryId === category?.id || category?.isDefault),
+      )
       .map((e) => ({ ...e }));
   },
 );
