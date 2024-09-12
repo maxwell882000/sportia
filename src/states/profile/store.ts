@@ -3,7 +3,7 @@ import {
   defaultProfileOptions,
   ProfileOptions,
 } from "../../dtos/profile/profile.ts";
-import { sample, Store, StoreWritable } from "effector";
+import { combine, createStore, sample, Store, StoreWritable } from "effector";
 import {
   $bookedEventsChanged,
   $likedEventsChanged,
@@ -44,17 +44,39 @@ export const $user: StoreWritable<UserDto> = profileDomain
     return result;
   });
 
-export const $likedEvents: StoreWritable<EventDto[]> = profileDomain
+export const _search = profileDomain.createStore<string>("");
+
+const _likedEvents: StoreWritable<EventDto[]> = profileDomain
   .createStore<EventDto[]>([])
   .on($likedEventsChanged, (_, result) => {
     return result;
   });
 
-export const $bookedEvents: StoreWritable<BookedEventDto[]> = profileDomain
+export const $likedEvents = combine(
+  _search,
+  _likedEvents,
+  (search, likedEvent) =>
+    likedEvent.filter(
+      (e) =>
+        e.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
+        !search,
+    ),
+);
+const _bookedEvents: StoreWritable<BookedEventDto[]> = profileDomain
   .createStore<BookedEventDto[]>([])
   .on($bookedEventsChanged, (_, result) => {
     return result;
   });
+export const $bookedEvents = combine(
+  _search,
+  _bookedEvents,
+  (search, bookedEvents) =>
+    bookedEvents.filter(
+      (e) =>
+        e.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
+        !search,
+    ),
+);
 
 export const $initials: Store<string | null> = $user.map((e) =>
   e?.name

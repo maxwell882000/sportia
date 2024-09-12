@@ -17,7 +17,7 @@ import { $eventDetailChanged, $eventDetailClose } from "./event/events.ts";
 import { $userPopUpChanged } from "./profile/events.ts";
 import { UserPopUp } from "../dtos/users/userPopUp.ts";
 import { middlewares } from "./middlewares.ts";
-import { $profileActivated } from "./profile/store.ts";
+import { $profileActivated, _search } from "./profile/store.ts";
 import { $categoryActivated } from "./category/store.ts";
 
 export const $isSideBar = app
@@ -121,4 +121,9 @@ sample({
   source: $profileActivated,
   fn: () => true,
   target: $isMobileSideBarChanged,
+});
+
+sample({
+  source: $search,
+  target: _search,
 });

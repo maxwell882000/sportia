@@ -10,6 +10,8 @@ import { useRef } from "react";
 import { useElementSize } from "../hooks/useElementSize.ts";
 import { SearchWithPlaceholder } from "../components/search/SearchWithPlaceholder.tsx";
 import BookMobile from "../components/book/BookMobile.tsx";
+import Profile from "../components/profile/Profile.tsx";
+import ProfileOptions from "../components/profile/ProfileOptions.tsx";
 
 function AllMobilePages() {
   const [currentPage, searchPlaceholder] = useUnit([
@@ -35,6 +37,24 @@ function AllMobilePages() {
           </div>
           <div className={"flex-1 overflow-y-scroll"}>
             <Events />
+          </div>
+        </MobileSideBar>
+      )}
+      {currentPage == Pages.PROFILE && (
+        <MobileSideBar closeSnap={categoryAndSearchSize.height + 32 + "px"}>
+          <div
+            ref={categoryAndSearchRef}
+            className={
+              "z-10 w-full space-y-[1rem] overflow-hidden rounded rounded-t-[1.5rem]"
+            }
+          >
+            <ProfileOptions />
+            <div className={"px-[1rem]"}>
+              <SearchWithPlaceholder />
+            </div>
+          </div>
+          <div className={"flex-1 overflow-y-scroll"}>
+            <Profile />
           </div>
         </MobileSideBar>
       )}
