@@ -1,7 +1,7 @@
 import { app } from "./domain";
 import {
-  $isMobileSideBarChanged,
   $isLoadingChanged,
+  $isMobileSideBarChanged,
   $isSideBarChanged,
   $pageChanged,
   $pageRestored,
@@ -35,6 +35,7 @@ const $previousPage = app
 export const $currentPage = app
   .createStore<Pages>(Pages.MAIN)
   .on($pageChanged, (_, result) => {
+    $previousPageSaved(_);
     if (result in middlewares) return middlewares[result]() ? result : _;
     return result;
   });
@@ -75,11 +76,6 @@ export const $isSliderDisappeared = combine(
 );
 
 sample({
-  source: $pageChanged,
-  target: $previousPageSaved,
-});
-
-sample({
   source: $eventDetailChanged,
   fn: (source) => source.name,
   target: [$search, $isSideBarChanged],
@@ -95,14 +91,17 @@ sample({
   clock: $eventDetailClose,
   source: $currentPage,
   filter: (source) => source === Pages.DETAIL,
-  fn: () => Pages.MAIN,
+  fn: () =>
+    $previousPage.getState() === Pages.BOOK
+      ? Pages.MAIN
+      : $previousPage.getState(),
   target: $pageChanged,
 });
 
 sample({
   clock: $pageRestored,
   source: $previousPage,
-  target: $currentPage,
+  target: $pageChanged,
 });
 
 sample({

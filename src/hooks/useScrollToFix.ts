@@ -20,7 +20,6 @@ const useScrollToFix = <
         const elementTop =
           element.getBoundingClientRect().top -
           container.getBoundingClientRect().top;
-        console.log("CHECK !!!!", elementTop);
         if (elementTop <= fixCheck) {
           setIsFixed(true);
         } else {
@@ -30,7 +29,6 @@ const useScrollToFix = <
     };
 
     const container = containerRef.current;
-    console.log("CONTAINER", container);
     if (container) {
       container.addEventListener("scroll", handleScroll);
       container.addEventListener("touchmove", handleScroll);

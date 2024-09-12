@@ -13,7 +13,6 @@ function MobileSideBar({ children, closeSnap = 0.3 }: MobileSideBarProps) {
     $isMobileSideBarChanged,
     $isMobileSideBar,
   ]);
-  console.log("CURRENT SNAP ", closeSnap);
   return (
     <div>
       <BaseDrawer

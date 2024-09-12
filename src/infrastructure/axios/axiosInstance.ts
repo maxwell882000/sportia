@@ -29,9 +29,7 @@ axiosInstance.interceptors.response.use(
     } else if (error.status === 400 && error?.response?.data?.errors) {
       throw new ValidationError(error.response.data.errors);
     }
-    console.log("ERROR COME SSS !!!", error, error.response, error.status);
     if (error.status === 401) {
-      console.log("ERROR COME HERE !!!");
       throw new AuthError();
     }
     return Promise.reject(error.response);

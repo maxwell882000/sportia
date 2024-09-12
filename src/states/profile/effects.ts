@@ -41,7 +41,6 @@ export const $getUserLikedEventsFx = userDomain.createEffect(async () => {
   const response = await requestHandler<GetUserLikedEventsResponse[]>(
     ProfileService.getUserLikedEvents(),
   );
-  console.log("$getUserLikedEventsFx", response);
   $likedEventsChanged([
     ...response.map<EventDto>(
       (e) =>
@@ -53,5 +52,4 @@ export const $getUserLikedEventsFx = userDomain.createEffect(async () => {
     ),
   ]);
 
-  console.log("sdadsad ", $likedEvents.getState());
 });

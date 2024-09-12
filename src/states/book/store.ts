@@ -44,9 +44,6 @@ sample({
   target: $bookAcceptChanged,
 });
 
-$bookAcceptChanged.watch((e) => {
-  console.log("$bookAcceptChanged", e);
-});
 sample({
   clock: $bookAccepted,
   source: $bookAccept,

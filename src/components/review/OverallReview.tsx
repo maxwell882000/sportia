@@ -47,7 +47,6 @@ function OverallReview() {
               <div>
                 <ReviewStar
                   onClick={(r: number) => {
-                    console.log("review?.ownReview", review?.ownReview, fields);
                     if (!isCommenting)
                       commentMade({ ...review?.ownReview, mark: r });
                     else fields.mark.onChange(r);

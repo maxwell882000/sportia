@@ -27,7 +27,6 @@ const ScrollDrawer = forwardRef<HTMLDivElement, ScrollDrawerProps>(
         const isAtTop = internalRef.current.scrollTop === 0;
 
         if (isAtTop && event.deltaY < 0) {
-          console.log("Trying to scroll up, but already at the top!");
           setIsOnTop(false);
         }
       }

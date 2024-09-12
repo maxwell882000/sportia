@@ -4,16 +4,22 @@ import { useUnit } from "effector-react";
 import { $currentPage, $search } from "../../states/store.ts";
 import { Pages } from "../../constants/pages.ts";
 import { InputHTMLAttributes } from "react";
-import { $pageChanged, $searchChanged } from "../../states/events.ts";
+import {
+  $pageChanged,
+  $pageRestored,
+  $searchChanged,
+} from "../../states/events.ts";
 import { useWindowSize } from "../../hooks/useWindowSize.ts";
 
 function InputSearch(props: InputHTMLAttributes<HTMLInputElement>) {
-  const [currentPage, search, searchChanged, pageChanged] = useUnit([
-    $currentPage,
-    $search,
-    $searchChanged,
-    $pageChanged,
-  ]);
+  const [currentPage, search, searchChanged, pageChanged, pageRestored] =
+    useUnit([
+      $currentPage,
+      $search,
+      $searchChanged,
+      $pageChanged,
+      $pageRestored,
+    ]);
   const widthSize = useWindowSize();
   return (
     <InputPrefix
@@ -35,7 +41,7 @@ function InputSearch(props: InputHTMLAttributes<HTMLInputElement>) {
         ) : (
           <button
             onClick={() => {
-              pageChanged(Pages.MAIN);
+              pageRestored();
             }}
             className={"text-white text-opacity-50"}
           >

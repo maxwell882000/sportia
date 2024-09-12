@@ -29,7 +29,6 @@ function Register() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            console.log(values);
             if (values.password !== values.repeatPassword) passwordNotMatched();
             else submit();
           }}

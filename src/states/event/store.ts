@@ -22,7 +22,6 @@ import { $search } from "../store.ts";
 export const $events = eventDomain
   .createStore<EventDto[]>(defaultEventsDto)
   .on($eventChanged, (_: EventDto[], result: EventDto) => {
-    console.log("$eventChanged", _, result);
     return [..._.map((e) => (e.id === result.id ? { ...result } : e))];
   })
   .on($eventsChanged, (_, result) => result);

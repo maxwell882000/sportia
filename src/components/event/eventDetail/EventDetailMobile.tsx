@@ -31,7 +31,7 @@ export const EventDetailMobile = () => {
   return (
     <div className={"flex w-full flex-col"}>
       <div ref={slidesRef} className={"relative z-10 w-screen"}>
-        <Slides images={event.images} />
+        <Slides images={event?.images} />
       </div>
       <div className={"relative z-20"}>
         <ScrollDrawer
@@ -45,7 +45,7 @@ export const EventDetailMobile = () => {
                   "pb-1 text-[0.875rem] font-light leading-[0.875rem] text-white md:text-[1.25rem] md:leading-[1.5rem]"
                 }
               >
-                {event.name}
+                {event?.name}
               </h1>
               <CloseButton className={"!bg-[#1C1F24]"} />
               <div className={`mt-[1.25rem] ${!book.isFixed && "hidden"}`}>
