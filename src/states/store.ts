@@ -92,6 +92,14 @@ sample({
 });
 
 sample({
+  clock: $eventDetailClose,
+  source: $currentPage,
+  filter: (source) => source === Pages.DETAIL,
+  fn: () => Pages.MAIN,
+  target: $pageChanged,
+});
+
+sample({
   clock: $pageRestored,
   source: $previousPage,
   target: $currentPage,
