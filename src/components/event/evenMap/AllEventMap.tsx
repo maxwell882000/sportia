@@ -1,62 +1,35 @@
-import { YMapMarker } from "ymap3-components";
-import Football from "../../Icons/Football.tsx";
+import { YMapListener, YMapMarker } from "ymap3-components";
 import { useUnit } from "effector-react";
 import { $eventDetail, $events } from "../../../states/event/store.ts";
-import { $eventDetailChanged } from "../../../states/event/events.ts";
-import {
-  defaultEventDetailDto,
-  EventDetailDto,
-} from "../../../dtos/events/eventDetailDto.ts";
-import { MarkerPin01 } from "@untitled-ui/icons-react";
 import { $getEventDetailFx } from "../../../states/event/effects.ts";
+import { useCallback, useState } from "react";
+import EventMarker from "./EventMarker.tsx";
 
 function AllEventMap() {
-  const [events, eventDetailChanged, eventDetail, getEventDetail] = useUnit([
+  const [events, eventDetail, getEventDetail] = useUnit([
     $events,
-    $eventDetailChanged,
     $eventDetail,
     $getEventDetailFx,
   ]);
+  const [zIndex, setZIndex] = useState(9.3);
+  const onUpdate = useCallback(({ location, mapInAction }) => {
+    console.log(location.zoom);
+    setZIndex(location.zoom);
+  }, []);
+
   return (
     <>
+      <YMapListener onUpdate={onUpdate} />
       {events.map((e) => (
         <YMapMarker
           key={`ymap-events-${e.id}`}
           onClick={() => {
             getEventDetail(e);
           }}
+          zIndex={zIndex}
           coordinates={e.coordinates}
         >
-          <div className={"relative flex cursor-pointer flex-row items-center"}>
-            <div>
-              {eventDetail?.id !== e.id ? (
-                <div
-                  className={
-                    "relative left-[50%] min-w-min rounded-[50%] border-2 border-[#FFFFFFCC] bg-green-600 p-1 text-white"
-                  }
-                >
-                  <Football></Football>
-                </div>
-              ) : (
-                <MarkerPin01
-                  className={
-                    "h-[3.208rem] w-[2.625rem] fill-[#12B76A] text-[#12B76A]"
-                  }
-                />
-              )}
-            </div>
-
-            <div
-              className={
-                "h-[3rem] w-[11.25rem] rounded-app bg-[#FFFFFFE5] p-2 px-[1rem] py-[0.5rem] leading-[1.035rem] text-[#15171C]"
-              }
-            >
-              <p>{e.name}</p>
-              <p className={`${e.isOpen ? "" : "text-[#F63D68]"}`}>
-                {e.nextTime}
-              </p>
-            </div>
-          </div>
+          <EventMarker currentEvent={eventDetail} event={e} />
         </YMapMarker>
       ))}
     </>

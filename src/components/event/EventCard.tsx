@@ -15,7 +15,7 @@ function EventCard({ event }: Props) {
         }
       >
         <ReviewStar
-          startClass={"w-[0.875rem] h-[0.875rem]"}
+          startClass={"w-[0.875rem] h-[0.875rem] text-white text-opacity-30"}
           review={event.mark}
         />
         <span

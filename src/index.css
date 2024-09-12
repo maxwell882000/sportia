@@ -225,3 +225,12 @@ body {
         height: 20px;
     }
 }
+
+
+.icon-marker {
+    cursor: pointer;
+    border-radius: 50%;
+    left: 40%;
+    position: relative;
+    transform: translate(-50%, -50%);
+}

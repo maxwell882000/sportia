@@ -8,6 +8,9 @@ export interface BaseDrawerProps {
   setActiveSnapPoint?: (activeSnapPoint: number | string | null) => void;
   snapPoints: (string | number)[];
   className?: string;
+  dismissible?: boolean;
+  open?: boolean;
+  onClose?: () => void;
 }
 
 function BaseDrawer({
@@ -16,6 +19,9 @@ function BaseDrawer({
   setActiveSnapPoint,
   snapPoints,
   className,
+  dismissible = false,
+  open = true,
+  onClose,
 }: BaseDrawerProps) {
   const windowSize = useWindowSize();
 
@@ -47,8 +53,9 @@ function BaseDrawer({
   return (
     <Drawer.Root
       modal={false}
-      dismissible={false}
-      open={windowSize.innerWidth < 768}
+      onClose={() => onClose && onClose()}
+      dismissible={dismissible}
+      open={open && windowSize.innerWidth < 768}
       snapPoints={snapPoints}
       activeSnapPoint={activeSnapPoint}
       setActiveSnapPoint={(snap) => {

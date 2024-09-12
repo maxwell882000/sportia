@@ -11,6 +11,7 @@ import BookForm from "./BookForm.tsx";
 import { useForm } from "effector-forms";
 import { $bookForm } from "../../states/book/form.ts";
 import useScrollToFix from "../../hooks/useScrollToFix.ts";
+import BookPopUpMobile from "./BookPopUp/BookPopUpMobile.tsx";
 
 function BookMobile() {
   const [event] = useUnit([$eventDetail]);
@@ -48,6 +49,7 @@ function BookMobile() {
             <BookForm />
           </div>
         </ScrollDrawer>
+        <BookPopUpMobile />
       </div>
     </div>
   );

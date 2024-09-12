@@ -11,6 +11,8 @@ import Loader from "./components/modal/Loader.tsx";
 import { ToastContainer } from "react-toastify";
 import DesktopLayout from "./components/layout/DesktopLayout.tsx";
 import MobileLayout from "./components/layout/MobileLayout.tsx";
+import Login from "./components/auth/Login.tsx";
+import Register from "./components/auth/Register.tsx";
 
 Modal.setAppElement("#root");
 
@@ -18,16 +20,18 @@ function App() {
   return (
     <Layout>
       <div id="modal"></div>
+      <Login />
+      <Register />
       <Loader />
       <ToastContainer />
       <AppStartGate />
       <DesktopLayout />
       <MobileLayout />
-
       <div className="absolute z-0 h-screen w-screen">
         <YMap
           key="map"
           location={{ center: [69.2401, 41.2995], zoom: 9.3 }}
+
           mode="vector"
           theme="dark"
         >

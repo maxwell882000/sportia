@@ -35,7 +35,7 @@ const $previousPage = app
 export const $currentPage = app
   .createStore<Pages>(Pages.MAIN)
   .on($pageChanged, (_, result) => {
-    $previousPageSaved(_);
+    if (_ !== result) $previousPageSaved(_);
     if (result in middlewares) return middlewares[result]() ? result : _;
     return result;
   });

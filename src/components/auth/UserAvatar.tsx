@@ -31,8 +31,6 @@ function UserAvatar() {
           />
         )}
       </button>
-      <Login />
-      <Register />
     </>
   );
 }
