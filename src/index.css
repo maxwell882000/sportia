@@ -183,6 +183,45 @@ body {
     stroke-width: 1px;
 }
 
+.icon-stroke-2 path {
+    stroke-width: 2px;
+}
+
 .icon-stroke-0 path {
     stroke-width: 0;
+}
+
+.slide-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.pay-info svg {
+    width: 24px;
+    height: 24px;
+}
+
+
+.text-12 {
+    @apply text-[0.75rem] leading-[0.875rem];
+}
+
+.text-14 {
+    @apply text-[0.875rem] leading-[1.035rem];
+}
+
+@media (max-width: 768px) {
+    div {
+        font-size: 14px;
+    }
+
+    .slide-button svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .pay-info svg {
+        width: 20px;
+        height: 20px;
+    }
 }

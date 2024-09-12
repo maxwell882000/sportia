@@ -5,6 +5,7 @@ import { $currentPage, $search } from "../../states/store.ts";
 import { Pages } from "../../constants/pages.ts";
 import { InputHTMLAttributes } from "react";
 import { $pageChanged, $searchChanged } from "../../states/events.ts";
+import { useWindowSize } from "../../hooks/useWindowSize.ts";
 
 function InputSearch(props: InputHTMLAttributes<HTMLInputElement>) {
   const [currentPage, search, searchChanged, pageChanged] = useUnit([
@@ -13,6 +14,7 @@ function InputSearch(props: InputHTMLAttributes<HTMLInputElement>) {
     $searchChanged,
     $pageChanged,
   ]);
+  const widthSize = useWindowSize();
   return (
     <InputPrefix
       inputProps={{
@@ -23,8 +25,13 @@ function InputSearch(props: InputHTMLAttributes<HTMLInputElement>) {
         },
       }}
       prefix={
-        currentPage === Pages.MAIN ? (
-          <SearchSm className={"h-[1.5rem] w-[1.5rem] text-[#ACEF03]"} />
+        currentPage === Pages.MAIN ||
+        (widthSize.innerWidth >= 768 && currentPage === Pages.DETAIL) ? (
+          <SearchSm
+            className={
+              "h-[1.25rem] w-[1.25rem] text-[#ACEF03] md:h-[1.5rem] md:w-[1.5rem]"
+            }
+          />
         ) : (
           <button
             onClick={() => {
@@ -32,19 +39,28 @@ function InputSearch(props: InputHTMLAttributes<HTMLInputElement>) {
             }}
             className={"text-white text-opacity-50"}
           >
-            <ArrowLeft className={"h-[1.5rem] w-[1.5rem] text-[#ACEF03]"} />
+            <ArrowLeft
+              className={
+                "h-[1.25rem] w-[1.25rem] text-[#ACEF03] md:h-[1.5rem] md:w-[1.5rem]"
+              }
+            />
           </button>
         )
       }
       suffix={
-        currentPage !== Pages.MAIN && (
+        currentPage !== Pages.MAIN &&
+        !(widthSize.innerWidth >= 768 && currentPage === Pages.DETAIL) && (
           <button
             onClick={() => {
               pageChanged(Pages.MAIN);
             }}
-            className={"h-[1.5rem] w-[1.5rem] text-white text-opacity-50"}
+            className={
+              "h-[1.25rem] w-[1.25rem] text-white text-opacity-50 md:h-[1.5rem] md:w-[1.5rem]"
+            }
           >
-            <X className={"h-[1.5rem] w-[1.5rem]"} />
+            <X
+              className={"h-[1.25rem] w-[1.25rem] md:h-[1.5rem] md:w-[1.5rem]"}
+            />
           </button>
         )
       }

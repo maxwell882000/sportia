@@ -31,7 +31,7 @@ function Button({
       }}
       type={type}
       onClick={onClick}
-      className={`button flex h-[2.5rem] items-center justify-center space-x-2 rounded-app bg-[var(--background-color-dynamic)] px-4 hover:bg-[var(--background-color-hover)] ${className}`}
+      className={`button flex h-[2rem] items-center justify-center space-x-[0.625rem] rounded-app bg-[var(--background-color-dynamic)] px-4 hover:bg-[var(--background-color-hover)] md:h-[2.5rem] md:space-x-[0.5rem] ${className}`}
     >
       {icon && <div>{icon}</div>}
       {name && <div>{name}</div>}

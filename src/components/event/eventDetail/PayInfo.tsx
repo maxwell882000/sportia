@@ -13,12 +13,16 @@ function PayInfo({ icon, paymentType, payment }: Props) {
       <div>
         <p
           className={
-            "text-[0.875rem] leading-[1.035rem] tracking-[0.009rem] text-white text-opacity-50"
+            "text-12 tracking-[0.009rem] text-white text-opacity-50 md:text-[0.875rem] md:leading-[1.035rem]"
           }
         >
           {paymentType}
         </p>
-        <p className={"leading-[1.183rem] tracking-[0.009rem] text-white"}>
+        <p
+          className={
+            "text-14 leading-[1.183rem] tracking-[0.009rem] text-white"
+          }
+        >
           {payment}
         </p>
       </div>

@@ -2,7 +2,7 @@ import { Drawer } from "vaul";
 import { useWindowSize } from "../../hooks/useWindowSize.ts";
 import { useEffect, useMemo, useState } from "react";
 
-interface BaseDrawerProps {
+export interface BaseDrawerProps {
   children?: React.ReactNode;
   activeSnapPoint?: number | string;
   setActiveSnapPoint?: (activeSnapPoint: number | string | null) => void;

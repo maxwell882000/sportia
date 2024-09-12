@@ -19,7 +19,7 @@ function InputPrefix({ prefix, inputProps, suffix }: Props) {
         {...inputProps}
         type="text"
         id="input-group-1"
-        className={`block h-[3.5rem] w-full rounded-app bg-[#1C1F24] pe-11 ps-11 text-[1.25rem] text-white text-opacity-80 placeholder-white placeholder-opacity-80 focus:border-none focus-visible:outline-none focus-visible:ring-0 ${inputProps?.className}`}
+        className={`text-14 block h-[3rem] w-full rounded-app bg-[#1C1F24] pe-11 ps-11 text-white text-opacity-80 placeholder-white placeholder-opacity-80 focus:border-none focus-visible:outline-none focus-visible:ring-0 md:h-[3.5rem] md:text-[1.25rem] ${inputProps?.className}`}
       />
 
       {suffix && (

@@ -18,7 +18,7 @@ function MobileLayout() {
     $searchPlaceholder,
   ]);
   return (
-    <div className={"block md:hidden"}>
+    <div className={"block text-[0.875rem] md:hidden"}>
       {!isSideBar && (
         <div className={"absolute left-[1rem] top-[4rem] z-10"}>
           <UserAvatar />

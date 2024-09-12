@@ -15,7 +15,7 @@ function Event({ event }: Props) {
         onClick={() => {
           eventDetailOpened(event);
         }}
-        className="fade-in-events flex w-full cursor-pointer flex-row items-center justify-between p-[1.5rem] text-start hover:bg-[#1C1F24]"
+        className="fade-in-events flex w-full cursor-pointer flex-row items-center justify-between space-x-1 p-[1rem] text-start hover:bg-[#1C1F24] md:p-[1.5rem]"
       >
         <EventTitle event={event} />
         <div className={"h-[5rem] w-[5rem] flex-shrink-0"}>

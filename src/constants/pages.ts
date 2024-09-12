@@ -2,7 +2,7 @@ export enum Pages {
   MAIN,
   BOOK,
   PROFILE,
-  DETAIL
+  DETAIL,
 }
 
-export const sliderPages = new Set([Pages.MAIN, Pages.PROFILE]);
+export const sliderPages = new Set([Pages.MAIN, Pages.PROFILE, Pages.DETAIL]);

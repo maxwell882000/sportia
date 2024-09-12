@@ -6,7 +6,7 @@ function ReviewCount({ reviewCount }: Props) {
   return (
     <span
       className={
-        "text-[0.875rem] leading-[1.035rem] text-white text-opacity-50"
+        "text-[0.75rem] leading-[0.875rem] text-white text-opacity-50 md:text-[0.875rem] md:leading-[1rem]"
       }
     >
       {reviewCount} отзывов

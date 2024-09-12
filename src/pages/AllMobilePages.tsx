@@ -5,9 +5,11 @@ import Events from "../components/event/Events.tsx";
 import { useUnit } from "effector-react";
 import { $currentPage, $searchPlaceholder } from "../states/store.ts";
 import { Pages } from "../constants/pages.ts";
-import { EventDetailMobile } from "../components/event/eventDetail/eventDetailMobile.tsx";
+import { EventDetailMobile } from "../components/event/eventDetail/EventDetailMobile.tsx";
 import { useRef } from "react";
 import { useElementSize } from "../hooks/useElementSize.ts";
+import { SearchWithPlaceholder } from "../components/search/SearchWithPlaceholder.tsx";
+import BookMobile from "../components/book/BookMobile.tsx";
 
 function AllMobilePages() {
   const [currentPage, searchPlaceholder] = useUnit([
@@ -28,10 +30,7 @@ function AllMobilePages() {
           >
             <Categories />
             <div className={"px-[1rem]"}>
-              <InputSearch
-                className={"w-full"}
-                placeholder={searchPlaceholder}
-              />
+              <SearchWithPlaceholder />
             </div>
           </div>
           <div className={"flex-1 overflow-y-scroll"}>
@@ -40,6 +39,7 @@ function AllMobilePages() {
         </MobileSideBar>
       )}
       {currentPage == Pages.DETAIL && <EventDetailMobile />}
+      {currentPage == Pages.BOOK && <BookMobile />}
     </>
   );
 }

@@ -8,7 +8,7 @@ export default {
         info: "1.5rem",
       },
       boxShadow: {
-        custom: "0 15px 12px #15171C",
+        custom: "0px 15px 12px 0px #15171C",
       },
       backgroundColor: {
         "app-dark": "#15171C",

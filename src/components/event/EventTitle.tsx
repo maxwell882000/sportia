@@ -13,7 +13,7 @@ function EventTitle({ event }: Props) {
       <div>
         <h1
           className={
-            "pb-1 text-[1.25rem] font-light leading-[1.5rem] text-white"
+            "pb-1 text-[0.875rem] font-light leading-[0.875rem] text-white md:text-[1.25rem] md:leading-[1.5rem]"
           }
         >
           {event.name}

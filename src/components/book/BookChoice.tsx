@@ -14,7 +14,7 @@ interface Props {
 function BookChoice({ bookTypeField, bookingTypeOptionField }: Props) {
   const [bookingType] = useUnit([$bookingType]);
   return (
-    <div className={"flex space-x-[0.5rem]"}>
+    <div className={"flex justify-between space-x-[0.5rem] md:justify-start"}>
       {bookingType.map((b) => (
         <Button
           key={`booking-type-${b.id}`}

@@ -14,21 +14,16 @@ import "../../../styles/event.css";
 import OverallReview from "../../review/OverallReview.tsx";
 import Reviews from "../../review/Reviews.tsx";
 import { $eventLike, $eventLiked } from "../../../states/event/events.ts";
-import { LINK, TEXT } from "../../../constants/share.ts";
 import { $pageChanged } from "../../../states/events.ts";
-import { Pages } from "../../../constants/pages.ts";
 import { ReactSVG } from "react-svg";
+import EventBooking from "./EventBooking.tsx";
 
 interface Props {
   event: EventDetailDto;
 }
 
 function EventDetail() {
-  const [event, eventLike, pageChanged] = useUnit([
-    $eventDetail,
-    $eventLike,
-    $pageChanged,
-  ]);
+  const [event] = useUnit([$eventDetail]);
   return (
     event && (
       <div className={`event-detail`}>
@@ -52,39 +47,7 @@ function EventDetail() {
                   />
                 ))}
               </div>
-
-              <div className={"flex justify-between"}>
-                <Button
-                  backgroundColor={"#ACEF03"}
-                  name={"Забронировать"}
-                  className={"w-[13.5rem] text-[#15171C]"}
-                  onClick={() => {
-                    pageChanged(Pages.BOOK);
-                  }}
-                  icon={<Football />}
-                />
-                <Button
-                  backgroundColor={"#1C1F24"}
-                  className={"w-[2.5rem] text-white"}
-                  onClick={() => {
-                    eventLike(event.id);
-                  }}
-                  icon={
-                    <Heart
-                      className={` ${event.isLiked ? "fill-[#ACEF03] text-[#ACEF03]" : "icon-stroke-1"}`}
-                    />
-                  }
-                />
-                <Button
-                  backgroundColor={"#1C1F24"}
-                  className={"w-[2.5rem] text-white"}
-                  onClick={() => {
-                    const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(LINK)}&text=${encodeURIComponent(TEXT)}`;
-                    window.open(shareUrl, "_blank", "noopener,noreferrer");
-                  }}
-                  icon={<Share01 className={"icon-stroke-1"} />}
-                />
-              </div>
+              <EventBooking event={event} />
               <div className="border-b border-[#1C1F24]"></div>
               <WorkHours workHours={event?.workHours} />
               <div className="border-b border-[#1C1F24]"></div>

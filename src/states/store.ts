@@ -11,7 +11,7 @@ import {
   $searchPlaceholderRestore,
   $searchRestore,
 } from "./events.ts";
-import { combine, createStore, sample } from "effector";
+import { combine, sample } from "effector";
 import { Pages, sliderPages } from "../constants/pages.ts";
 import { $eventDetailChanged, $eventDetailClose } from "./event/events.ts";
 import { $userPopUpChanged } from "./profile/events.ts";
@@ -91,7 +91,6 @@ sample({
   fn: () => Pages.MAIN,
   target: $pageChanged,
 });
-
 
 sample({
   clock: $pageRestored,
