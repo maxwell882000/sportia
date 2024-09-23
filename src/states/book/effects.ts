@@ -1,7 +1,7 @@
 import { bookDomain } from "./domain.ts";
 import { BookingTypeService } from "../../infrastructure/axios/services/booking/bookingTypeService.ts";
 import { GetBookingTypeByCategoryRequest } from "../../infrastructure/axios/services/booking/dtos/requests/getBookingTypeByCategoryRequest.ts";
-import { $bookingTypeChanged, $sameBookingCountChanged } from "./events.ts";
+import { $bookingTypeChanged, $isBookingCanceledPopUpChanged, $sameBookingCountChanged } from "./events.ts";
 import { BookingService } from "../../infrastructure/axios/services/booking/bookingService.ts";
 import { BookDto } from "../../dtos/book/bookDto.ts";
 import { GetSameBookingsCountRequest } from "../../infrastructure/axios/services/booking/dtos/requests/getSameBookingsCountRequest.ts";
@@ -12,6 +12,7 @@ import { PaymentOption } from "../../infrastructure/axios/services/booking/dtos/
 import { successNotification } from "../../utils/notifications/successNotification.ts";
 import { $pageChanged } from "../events.ts";
 import { Pages } from "../../constants/pages.ts";
+import { $isBookingCanceledPopUp } from "./store.ts";
 
 export const $createBookingFx = bookDomain.createEffect(
   async ({ bookDto, eventId }: { bookDto: BookDto; eventId: string }) => {
@@ -29,6 +30,13 @@ export const $createBookingFx = bookDomain.createEffect(
     } as CreateBookingRequest);
     successNotification("Вы успешно забранировали !");
     $pageChanged(Pages.MAIN);
+  },
+);
+
+export const $cancelBookingFx = bookDomain.createEffect(
+  async (bookingId: string) => {
+    await BookingService.cancelBooking({ bookingId });
+    $isBookingCanceledPopUpChanged(true);
   },
 );
 

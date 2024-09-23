@@ -23,7 +23,7 @@ function AllMobilePages() {
   return (
     <>
       {currentPage == Pages.MAIN && (
-        <MobileSideBar closeSnap={categoryAndSearchSize.height + 32 + "px"}>
+        <MobileSideBar closeSnap={categoryAndSearchSize.height + 42 + "px"}>
           <div
             ref={categoryAndSearchRef}
             className={
@@ -41,7 +41,7 @@ function AllMobilePages() {
         </MobileSideBar>
       )}
       {currentPage == Pages.PROFILE && (
-        <MobileSideBar closeSnap={categoryAndSearchSize.height + 32 + "px"}>
+        <MobileSideBar closeSnap={categoryAndSearchSize.height + 42 + "px"}>
           <div
             ref={categoryAndSearchRef}
             className={

@@ -12,74 +12,66 @@ import Button from "../button/Button.tsx";
 import { $passwordNotMatched } from "../../states/users/events.ts";
 
 function Register() {
-  const [isRegister, userPopUpChanged, passwordNotMatched] = useUnit([
-    $isRegisterPopUp,
+  const [userPopUpChanged, passwordNotMatched] = useUnit([
     $userPopUpChanged,
     $passwordNotMatched,
   ]);
   const { fields, submit, values } = useForm($registerForm);
   return (
     <div>
-      <CustomModal
-        isOpen={isRegister}
-        close={() => {
-          userPopUpChanged(UserPopUp.NONE);
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (values.password !== values.repeatPassword) passwordNotMatched();
+          else submit();
         }}
+        className={"flex flex-col space-y-[1.5rem]"}
       >
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (values.password !== values.repeatPassword) passwordNotMatched();
-            else submit();
+        <Input
+          options={{
+            field: fields.name,
           }}
-          className={"flex flex-col space-y-[1.5rem]"}
-        >
-          <Input
-            options={{
-              field: fields.name,
-            }}
-            required
-            placeholder={"Ф.И.О"}
+          required
+          placeholder={"Ф.И.О"}
+        />
+        <InputPhone
+          required
+          options={{
+            field: fields.phone,
+          }}
+        />
+        <InputPassword
+          options={{
+            field: fields.password,
+          }}
+          required
+          placeholder={"Пароль"}
+        />
+        <InputPassword
+          options={{
+            field: fields.repeatPassword,
+          }}
+          required
+          placeholder={"Подтвердить пароль"}
+        />
+        <div className={"space-y-[0.5rem]"}>
+          <Button
+            type={"submit"}
+            backgroundColor={"#ACEF03"}
+            name={"Зарегестрироваться"}
+            className={"!h-[2.5rem] w-full text-[#15171C] hover:bg-[#ACEF03CC]"}
           />
-          <InputPhone
-            required
-            options={{
-              field: fields.phone,
+          <Button
+            type={"button"}
+            onClick={() => {
+              userPopUpChanged(UserPopUp.LOGIN);
             }}
+            backgroundColor={"#1C1F24"}
+            name={"Войти"}
+            className={"!h-[2.5rem] w-full text-[#FFFFFFCC]"}
           />
-          <InputPassword
-            options={{
-              field: fields.password,
-            }}
-            required
-            placeholder={"Пароль"}
-          />
-          <InputPassword
-            options={{
-              field: fields.repeatPassword,
-            }}
-            required
-            placeholder={"Подтвердить пароль"}
-          />
-          <div className={"space-y-[0.5rem]"}>
-            <Button
-              type={"submit"}
-              backgroundColor={"#ACEF03"}
-              name={"Зарегестрироваться"}
-              className={"w-full text-[#15171C] hover:bg-[#ACEF03CC]"}
-            />
-            <Button
-              type={"button"}
-              onClick={() => {
-                userPopUpChanged(UserPopUp.LOGIN);
-              }}
-              backgroundColor={"#1C1F24"}
-              name={"Войти"}
-              className={"w-full text-[#FFFFFFCC]"}
-            />
-          </div>
-        </form>
-      </CustomModal>
+        </div>
+      </form>
     </div>
   );
 }

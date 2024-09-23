@@ -3,6 +3,7 @@ import { axiosInstance } from "../../axiosInstance.ts";
 import { CreateBookingRequest } from "./dtos/requests/creteBookingRequest.ts";
 import { GetSameBookingsCountResponse } from "./dtos/responses/getSameBookingsCountResponse.ts";
 import { GetSameBookingsCountRequest } from "./dtos/requests/getSameBookingsCountRequest.ts";
+import { CancelBookingRequest } from "./dtos/requests/cancelBookingRequest.ts";
 
 export class BookingService {
   static async createBooking(
@@ -13,6 +14,12 @@ export class BookingService {
       request,
     );
     return response.data;
+  }
+
+  static async cancelBooking(request: CancelBookingRequest): Promise<void> {
+    await axiosInstance.delete("booking/cancel-booking", {
+      params: request,
+    });
   }
 
   static async getSameBookingCount(

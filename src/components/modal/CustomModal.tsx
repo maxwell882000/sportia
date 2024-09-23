@@ -22,6 +22,8 @@ function CustomModal({ isOpen, close, width = 24, height, children }: Props) {
         content: {
           backgroundColor: "transparent",
           border: "none",
+          inset: 0,
+          padding: "1rem",
         },
       }}
       isOpen={isOpen}
@@ -35,10 +37,10 @@ function CustomModal({ isOpen, close, width = 24, height, children }: Props) {
             maxHeight: height,
           }}
           className={
-            "space-y-[1.5rem] overflow-y-auto rounded-info bg-app-dark p-[1.5rem]"
+            "overflow-y-auto rounded-info bg-app-dark p-[1rem] md:space-y-[1.5rem] md:p-[1.5rem]"
           }
         >
-          <div className={"flex items-center justify-between"}>
+          <div className={"hidden items-center justify-between md:flex"}>
             <Logo />
             <button className={"h-[2rem] w-[2rem]"} onClick={close}>
               <X className={"text-[#FFFFFF80]"} />

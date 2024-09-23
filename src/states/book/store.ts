@@ -6,13 +6,19 @@ import {
   $bookAccepted,
   $bookingReset,
   $bookingTypeChanged,
+  $isBookingCanceledPopUpChanged,
+  $bookingIdCancelChanged,
   $sameBookingCountChanged,
 } from "./events.ts";
 import { sample, Store, StoreWritable } from "effector";
 import { $bookForm } from "./form.ts";
 import { BookingTypeDto } from "../../dtos/book/bookingTypeDto.ts";
 import { BookingCountDto } from "../../dtos/book/bookingCountDto.ts";
-import { $createBookingFx, $getBookingTypesByCategoryFx } from "./effects.ts";
+import {
+  $cancelBookingFx,
+  $createBookingFx,
+  $getBookingTypesByCategoryFx,
+} from "./effects.ts";
 import { $eventDetailChanged, $eventDetailOpened } from "../event/events.ts";
 import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
 import { $eventDetail } from "../event/store.ts";
@@ -22,6 +28,14 @@ import { Pages } from "../../constants/pages.ts";
 export const $bookingType = bookDomain
   .createStore<BookingTypeDto[]>([])
   .on($bookingTypeChanged, (_, bookingType) => bookingType);
+
+export const $bookingIdCancel = bookDomain
+  .createStore<string>("")
+  .on($bookingIdCancelChanged, (_, result) => result);
+
+export const $isBookingCanceledPopUp = bookDomain
+  .createStore<boolean>(false)
+  .on($isBookingCanceledPopUpChanged, (_, result) => result);
 
 export const $bookAccept: StoreWritable<BookDto> = bookDomain
   .createStore<BookDto>(null)
@@ -55,6 +69,12 @@ sample({
   source: $eventDetailChanged,
   fn: (eventDetail: EventDetailDto) => eventDetail.categoryId,
   target: $getBookingTypesByCategoryFx,
+});
+
+sample({
+  source: $cancelBookingFx,
+  fn: () => "",
+  target: $bookingIdCancel,
 });
 
 sample({

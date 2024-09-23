@@ -1,8 +1,6 @@
 import { useUnit } from "effector-react";
-import { $isLoginPopUp } from "../../states/profile/store.ts";
 import { useForm } from "effector-forms";
 import { $loginForm } from "../../states/users/form.ts";
-import CustomModal from "../modal/CustomModal.tsx";
 import { UserPopUp } from "../../dtos/users/userPopUp.ts";
 import { $userPopUpChanged } from "../../states/profile/events.ts";
 import InputPassword from "../input/InputPassword.tsx";
@@ -10,57 +8,47 @@ import InputPhone from "../input/InputPhone.tsx";
 import Button from "../button/Button.tsx";
 
 function Login() {
-  const [isLogin, userPopUpChanged] = useUnit([
-    $isLoginPopUp,
-    $userPopUpChanged,
-  ]);
+  const [userPopUpChanged] = useUnit([$userPopUpChanged]);
   const { fields, submit } = useForm($loginForm);
   return (
     <div>
-      <CustomModal
-        isOpen={isLogin}
-        close={() => {
-          userPopUpChanged(UserPopUp.NONE);
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          submit();
         }}
+        className={"flex flex-col space-y-[1.5rem]"}
       >
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            submit();
+        <InputPhone
+          required
+          options={{
+            field: fields.phone,
           }}
-          className={"flex flex-col space-y-[1.5rem]"}
-        >
-          <InputPhone
-            required
-            options={{
-              field: fields.phone,
-            }}
+        />
+        <InputPassword
+          required
+          options={{
+            field: fields.password,
+          }}
+        />
+        <div className={"space-y-[0.5rem]"}>
+          <Button
+            type={"submit"}
+            backgroundColor={"#ACEF03"}
+            name={"Войти"}
+            className={"!h-[2.5rem] w-full text-[#15171C] hover:bg-[#ACEF03CC]"}
           />
-          <InputPassword
-            required
-            options={{
-              field: fields.password,
+          <Button
+            type={"button"}
+            onClick={() => {
+              userPopUpChanged(UserPopUp.REGISTER);
             }}
+            backgroundColor={"#1C1F24"}
+            name={"Зарегестрироваться"}
+            className={"!h-[2.5rem] w-full text-[#FFFFFFCC]"}
           />
-          <div className={"space-y-[0.5rem]"}>
-            <Button
-              type={"submit"}
-              backgroundColor={"#ACEF03"}
-              name={"Войти"}
-              className={"w-full text-[#15171C] hover:bg-[#ACEF03CC]"}
-            />
-            <Button
-              type={"button"}
-              onClick={() => {
-                userPopUpChanged(UserPopUp.REGISTER);
-              }}
-              backgroundColor={"#1C1F24"}
-              name={"Зарегестрироваться"}
-              className={"w-full text-[#FFFFFFCC]"}
-            />
-          </div>
-        </form>
-      </CustomModal>
+        </div>
+      </form>
     </div>
   );
 }

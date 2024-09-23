@@ -1,6 +1,4 @@
 import { ReactNode } from "react";
-import Login from "../auth/Login.tsx";
-import Register from "../auth/Register.tsx";
 
 interface Props {
   children: ReactNode;
