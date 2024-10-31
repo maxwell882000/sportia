@@ -5,6 +5,7 @@ import { $bookingIdCancelChanged } from "../../states/book/events.ts";
 import { BookingStatus } from "../../dtos/profile/bookingStatus.ts";
 import { BookingGroupStatus } from "../../dtos/profile/bookingGroupStatus.ts";
 import BookedStatus from "./BookedStatus.tsx";
+import { bookDomain } from "../../states/book/domain.ts";
 
 interface Props {
   bookedEventDto: BookedEventDto;
@@ -85,14 +86,20 @@ function BookedEvent({ bookedEventDto }: Props) {
           {bookedEventDto.cost} сум
         </p>
       </div>
-      <Button
-        onClick={() => {
-          bookingIdCancelChanged(bookedEventDto.id);
-        }}
-        backgroundColor={"#1C1F24"}
-        name={"Отменить бронирование"}
-        className={"!h-[2.5rem] w-full text-[#FFFFFFCC]"}
-      />
+      {bookedEventDto.status !== BookingStatus.Canceled &&
+      (bookedEventDto.groupStatus === BookingGroupStatus.Filling ||
+        bookedEventDto.groupStatus === BookingGroupStatus.NoStatus) ? (
+        <Button
+          onClick={() => {
+            bookingIdCancelChanged(bookedEventDto.id);
+          }}
+          backgroundColor={"#1C1F24"}
+          name={"Отменить бронирование"}
+          className={"!h-[2.5rem] w-full text-[#FFFFFFCC]"}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

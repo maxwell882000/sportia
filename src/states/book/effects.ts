@@ -17,6 +17,7 @@ import { successNotification } from "../../utils/notifications/successNotificati
 import { $pageChanged } from "../events.ts";
 import { Pages } from "../../constants/pages.ts";
 import { $isBookingCanceledPopUp } from "./store.ts";
+import { $bookedEventCanceled } from "../profile/events.ts";
 
 export const $createBookingFx = bookDomain.createEffect(
   async ({ bookDto, eventId }: { bookDto: BookDto; eventId: string }) => {
@@ -42,6 +43,7 @@ export const $cancelBookingFx = bookDomain.createEffect(
   async (bookingId: string) => {
     await BookingService.cancelBooking({ bookingId });
     $isBookingCanceledPopUpChanged(true);
+    $bookedEventCanceled(bookingId);
   },
 );
 

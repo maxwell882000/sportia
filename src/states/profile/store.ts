@@ -3,13 +3,14 @@ import {
   defaultProfileOptions,
   ProfileOptions,
 } from "../../dtos/profile/profile.ts";
-import { combine, createStore, sample, Store, StoreWritable } from "effector";
+import { combine, sample, Store, StoreWritable } from "effector";
 import {
+  $bookedEventCanceled,
   $bookedEventsChanged,
   $likedEventsChanged,
   $profileOpened,
   $userChanged,
-  $userPopUpChanged,
+  $userPopUpChanged
 } from "./events.ts";
 import { isAuth } from "../middlewares.ts";
 import { Pages } from "../../constants/pages.ts";
@@ -31,6 +32,8 @@ import {
 import { profileDomain } from "./domain.ts";
 import { EventDto } from "../../dtos/events/eventDto.ts";
 import { BookedEventDto } from "../../dtos/profile/bookedEventDto.ts";
+import { $bookingIdCancelChanged } from "../book/events.ts";
+import { BookingStatus } from "../../dtos/profile/bookingStatus.ts";
 
 export const {
   $slides: $profilesOption,
@@ -64,6 +67,11 @@ export const $likedEvents = combine(
 );
 const _bookedEvents: StoreWritable<BookedEventDto[]> = profileDomain
   .createStore<BookedEventDto[]>([])
+  .on($bookedEventCanceled, (_, result) => {
+    const cancelEntity = _.find((e) => e.id == result);
+    cancelEntity.status = BookingStatus.Canceled;
+    return [..._];
+  })
   .on($bookedEventsChanged, (_, result) => {
     return result;
   });
