@@ -19,20 +19,20 @@ function BookForm() {
 
   const [paymentRequired, sameBookingCount] = useUnit([
     $paymentRequired,
-    $sameBookingCount,
+    $sameBookingCount
   ]);
 
   function changeOptions(optionId: string, value: string) {
     let result = fields.bookingOptions.value.map((f) =>
-      f.optionId === optionId ? { ...f, bookingOptionValue: value } : f,
+      f.optionId === optionId ? { ...f, bookingOptionValue: value } : f
     );
     var isPropertyExist = fields.bookingOptions.value.find(
-      (e) => e.optionId === optionId,
+      (e) => e.optionId === optionId
     );
     if (!isPropertyExist) {
       result.push({
         optionId,
-        bookingOptionValue: value,
+        bookingOptionValue: value
       } as BookingUserOptionDto);
     }
     fields.bookingOptions.onChange(result);
@@ -46,7 +46,7 @@ function BookForm() {
             key={`select-${e.type}-${e.id}`}
             options={e.bookingOptionValues.map((e) => ({
               label: e.value,
-              value: e.value,
+              value: e.value
             }))}
             onClick={(value) => {
               if (value) changeOptions(e.id, value?.value);
@@ -60,7 +60,7 @@ function BookForm() {
             options={{
               onChange: (value) => {
                 changeOptions(e.id, value);
-              },
+              }
             }}
             required
             placeholder={e.label}
@@ -71,13 +71,13 @@ function BookForm() {
             options={{
               onChange: (value) => {
                 changeOptions(e.id, value);
-              },
+              }
             }}
             type={"date"}
             required
             placeholder={"Выберите день"}
           />
-        ),
+        )
       )}
       {fields.bookingType?.value?.isShowLimit &&
       sameBookingCount?.totalCount ? (
@@ -91,7 +91,7 @@ function BookForm() {
                   key={`rounded-man-${index}`}
                   className={`h-[2rem] w-[2rem] ${index + 1 > sameBookingCount.count ? "text-[#FFFFFF1F]" : "text-[#ACEF03]"} `}
                 />
-              ),
+              )
             )}
           </div>
         </BookLabel>

@@ -67,7 +67,10 @@ sample({
 
 sample({
   source: $eventDetailChanged,
-  fn: (eventDetail: EventDetailDto) => eventDetail.categoryId,
+  fn: (eventDetail: EventDetailDto) => ({
+    categoryId: eventDetail.categoryId,
+    eventId: eventDetail.id,
+  }),
   target: $getBookingTypesByCategoryFx,
 });
 
