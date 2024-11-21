@@ -44,7 +44,7 @@ function BookedEvent({ bookedEventDto }: Props) {
   return (
     <div className={"space-y-[1rem]"}>
       <div>
-        <div className={"flex space-x-[0.5rem] flex-wrap pb-[1rem]"}>
+        <div className={"flex flex-wrap space-x-[0.5rem] pb-[1rem]"}>
           <BookedStatus
             color={color[bookedEventDto.status]}
             text={text[bookedEventDto.status]}
@@ -87,16 +87,17 @@ function BookedEvent({ bookedEventDto }: Props) {
         </p>
       </div>
       <div className={"flex space-x-[0.5rem]"}>
-        {bookedEventDto.paymentUrl && (
-          <Button
-            onClick={() => {
-              window.open(bookedEventDto.paymentUrl, "_blank");
-            }}
-            backgroundColor={"#ACEF03"}
-            name={"Оплатить"}
-            className={"!h-[2.5rem] w-full"}
-          />
-        )}
+        {bookedEventDto.paymentUrl &&
+          bookedEventDto.status !== BookingStatus.Canceled && (
+            <Button
+              onClick={() => {
+                window.open(bookedEventDto.paymentUrl, "_blank");
+              }}
+              backgroundColor={"#ACEF03"}
+              name={"Оплатить"}
+              className={"!h-[2.5rem] w-full"}
+            />
+          )}
         {bookedEventDto.status !== BookingStatus.Canceled &&
         bookedEventDto.groupStatus !== BookingGroupStatus.Started &&
         bookedEventDto.groupStatus !== BookingGroupStatus.Finished ? (
