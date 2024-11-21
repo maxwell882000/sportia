@@ -10,6 +10,7 @@ import BookCancelPopUp from "./ProfilePopUp/BookCancelPopUp.tsx";
 import BookCancelAcceptPopUp from "./ProfilePopUp/BookCancelAcceptPopUp.tsx";
 import { ProfileTab } from "../../dtos/profile/profile.ts";
 import Setting from "./Setting.tsx";
+import LogoutPopUp from "./ProfilePopUp/LogoutPopUp.tsx";
 
 function Profile() {
   const [activeProfile, bookedEvents, likedEvents] = useUnit([
@@ -21,6 +22,7 @@ function Profile() {
     <>
       <BookCancelPopUp />
       <BookCancelAcceptPopUp />
+      <LogoutPopUp />
       {activeProfile.id === ProfileTab.Book &&
         bookedEvents.map((e) => (
           <div key={`booked-event-${e.id}`} className={"px-[1.5rem] py-[1rem]"}>

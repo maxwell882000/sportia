@@ -1,6 +1,10 @@
 import { AuthToken } from "./dtos/auth/authToken.ts";
 
 export class AuthStorage {
+  static deleteToken() {
+    localStorage.removeItem("token");
+  }
+
   static setToken(token: AuthToken) {
     localStorage.setItem("token", JSON.stringify(token));
   }

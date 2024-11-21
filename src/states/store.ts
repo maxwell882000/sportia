@@ -35,8 +35,6 @@ const $previousPage = app
 export const $currentPage = app
   .createStore<Pages>(Pages.MAIN)
   .on($pageChanged, (_, result) => {
-    if (_ !== result) $previousPageSaved(_);
-    if (result in middlewares) return middlewares[result]() ? result : _;
     return result;
   });
 
@@ -120,6 +118,31 @@ sample({
   source: $profileActivated,
   fn: () => true,
   target: $isMobileSideBarChanged,
+});
+sample({
+  clock: $pageChanged,
+  source: $currentPage,
+  filter: (result, clock) => result !== clock,
+  target: $previousPageSaved,
+});
+
+sample({
+  source: $pageChanged,
+  filter: (result) => {
+    if (result in middlewares) return middlewares[result]();
+    return true;
+  },
+  target: $currentPage,
+});
+
+sample({
+  source: $pageChanged,
+  filter: (result) => {
+    if (result in middlewares) return !middlewares[result]();
+    return false;
+  },
+  fn: () => UserPopUp.LOGIN,
+  target: $userPopUpChanged,
 });
 
 sample({

@@ -11,14 +11,16 @@ import { useUnit } from "effector-react";
 import { $initials, $user } from "../../states/profile/store.ts";
 import { $changeAvatarFx } from "../../states/profile/effects.ts";
 import InputPhone from "../input/InputPhone.tsx";
+import { $userPopUpChanged } from "../../states/profile/events.ts";
 
 function Setting() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const [user, initials, changeAvatar] = useUnit([
+  const [user, initials, changeAvatar, userPopUpChanged] = useUnit([
     $user,
     $initials,
     $changeAvatarFx,
+    $userPopUpChanged,
   ]);
   const { fields, submit } = useForm($profileForm);
   const handleIconClick = () => {
@@ -44,7 +46,7 @@ function Setting() {
       <CircleAvatar
         onClick={handleIconClick}
         initials={initials}
-        imageUrl={user.avatar}
+        imageUrl={user?.avatar}
         size={120}
         icon={<Edit />}
       />
@@ -94,6 +96,14 @@ function Setting() {
           />
         </div>
       </form>
+      <Button
+        backgroundColor={"#F63D68"}
+        name={"Выйти"}
+        onClick={() => {
+          userPopUpChanged(UserPopUp.LOGOUT);
+        }}
+        className={"mt-[1rem] !h-[2.5rem] w-full text-[#FFFFFFCC]"}
+      />
     </div>
   );
 }

@@ -23,7 +23,7 @@ const CircleAvatar: React.FC<AvatarProps> = ({
       {/* Avatar Image or Initials */}
 
       <div
-        className={"overflow-hidden rounded-full"}
+        className={"overflow-hidden rounded-full flex items-center justify-center"}
         style={{ width: size, height: size }}
       >
         {imageUrl ? (

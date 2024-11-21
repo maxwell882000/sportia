@@ -30,6 +30,7 @@ export const $profileForm = createForm<UserChangeDto>({
 
 sample({
   source: $user,
+  filter: (user) => !!user,
   target: $profileForm.setForm,
 });
 

@@ -37,6 +37,7 @@ import { profileDomain } from "./domain.ts";
 import { EventDto } from "../../dtos/events/eventDto.ts";
 import { BookedEventDto } from "../../dtos/profile/bookedEventDto.ts";
 import { BookingStatus } from "../../dtos/profile/bookingStatus.ts";
+import { AuthStorage } from "../../infrastructure/localStorage/authStorage.ts";
 
 export const {
   $slides: $profilesOption,
@@ -93,19 +94,24 @@ export const $bookedEvents = combine(
 );
 
 export const $initials: Store<string | null> = $user.map((e) =>
-  e?.name
-    ?.split(" ")
-    .slice(0, 2)
-    .reduce((letter, e) => letter + (e[0]?.toUpperCase() ?? ""), ""),
+  !e?.name
+    ? ""
+    : e?.name
+        ?.split(" ")
+        .slice(0, 2)
+        .reduce((letter, e) => letter + (e[0]?.toUpperCase() ?? ""), ""),
 );
 
-export const $isLoggedIn: Store<boolean> = $user.map((u) => !!u);
+export const $isLoggedIn: Store<boolean> = $user.map(
+  (u) => !!u && AuthStorage.isToken(),
+);
 
 export const $userPopUp: StoreWritable<UserPopUp> = profileDomain
   .createStore<UserPopUp>(UserPopUp.NONE)
   .on($userPopUpChanged, (_, result) => result);
 
 export const $isLoginPopUp = $userPopUp.map((e) => e === UserPopUp.LOGIN);
+export const $isLogoutPopUp = $userPopUp.map((e) => e === UserPopUp.LOGOUT);
 export const $isRegisterPopUp = $userPopUp.map((e) => e === UserPopUp.REGISTER);
 
 sample({

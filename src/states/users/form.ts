@@ -54,11 +54,3 @@ sample({
   ],
 });
 
-sample({
-  source: $loginForm.formValidated,
-  target: $loginFx,
-});
-sample({
-  source: $registerForm.formValidated,
-  target: $registerFx,
-});

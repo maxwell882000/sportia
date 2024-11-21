@@ -3,4 +3,5 @@ export enum UserPopUp {
   REGISTER,
   LOGIN,
   SUCCESS,
+  LOGOUT
 }
