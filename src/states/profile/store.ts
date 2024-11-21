@@ -5,16 +5,18 @@ import {
 } from "../../dtos/profile/profile.ts";
 import { combine, sample, Store, StoreWritable } from "effector";
 import {
+  $avatarChanged,
   $bookedEventCanceled,
   $bookedEventsChanged,
   $likedEventsChanged,
   $profileOpened,
   $userChanged,
-  $userPopUpChanged
+  $userPopUpChanged,
 } from "./events.ts";
 import { isAuth } from "../middlewares.ts";
 import { Pages } from "../../constants/pages.ts";
 import {
+  $isLoadingChanged,
   $isSideBarChanged,
   $pageChanged,
   $searchPlaceholderRestore,
@@ -25,6 +27,8 @@ import { UserDto } from "../../dtos/users/userDto.ts";
 import { UserPopUp } from "../../dtos/users/userPopUp.ts";
 import { AppStartGate } from "../gate.ts";
 import {
+  $changeAvatarFx,
+  $changeProfileFx,
   $getUserBookedEventsFx,
   $getUserLikedEventsFx,
   $getUserProfileFx,
@@ -32,7 +36,6 @@ import {
 import { profileDomain } from "./domain.ts";
 import { EventDto } from "../../dtos/events/eventDto.ts";
 import { BookedEventDto } from "../../dtos/profile/bookedEventDto.ts";
-import { $bookingIdCancelChanged } from "../book/events.ts";
 import { BookingStatus } from "../../dtos/profile/bookingStatus.ts";
 
 export const {
@@ -43,6 +46,9 @@ export const {
 
 export const $user: StoreWritable<UserDto> = profileDomain
   .createStore<UserDto>(null)
+  .on($avatarChanged, (_, result) => {
+    return { ..._, avatar: result };
+  })
   .on($userChanged, (_, result) => {
     return result;
   });
@@ -131,4 +137,10 @@ sample({
   filter: () => isAuth(),
   fn: () => true,
   target: [$isSideBarChanged],
+});
+
+sample({
+  source: [$changeAvatarFx.pending, $changeProfileFx.pending],
+  fn: (result) => result.filter((e) => e).length > 0,
+  target: $isLoadingChanged,
 });

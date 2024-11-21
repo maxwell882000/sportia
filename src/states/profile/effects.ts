@@ -4,6 +4,7 @@ import { requestHandler } from "../handler.ts";
 import { GetUserProfileResponse } from "../../infrastructure/axios/services/profile/dtos/responses/getUserProfileResponse.ts";
 import { ProfileService } from "../../infrastructure/axios/services/profile/profileService.ts";
 import {
+  $avatarChanged,
   $bookedEventsChanged,
   $likedEventsChanged,
   $userChanged,
@@ -14,7 +15,21 @@ import { BookedEventDto } from "../../dtos/profile/bookedEventDto.ts";
 import { GetUserLikedEventsResponse } from "../../infrastructure/axios/services/profile/dtos/responses/getUserLikedEventsResponse.ts";
 import { EventDto } from "../../dtos/events/eventDto.ts";
 import { $likedEvents } from "./store.ts";
+import { ChangeProfileRequest } from "../../infrastructure/axios/services/profile/dtos/requests/changeProfileRequest.ts";
+import { successNotification } from "../../utils/notifications/successNotification.ts";
 
+export const $changeAvatarFx = userDomain.createEffect(async (avatar: File) => {
+  const response = await ProfileService.changeAvatar({ avatar });
+  $avatarChanged(response.avatar.path);
+  successNotification("Вы успешно обновили аватар !");
+});
+
+export const $changeProfileFx = userDomain.createEffect(
+  async (request: ChangeProfileRequest) => {
+    await ProfileService.changeProfile(request);
+    successNotification("Ваш профиль был обновлен !");
+  },
+);
 export const $getUserProfileFx = userDomain.createEffect(async () => {
   if (AuthStorage.isToken()) {
     const userResponse = await requestHandler<GetUserProfileResponse>(
@@ -51,5 +66,4 @@ export const $getUserLikedEventsFx = userDomain.createEffect(async () => {
         }) as EventDto,
     ),
   ]);
-
 });

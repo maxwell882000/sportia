@@ -14,5 +14,6 @@ export const $bookedEventsChanged =
 export const $userPopUpChanged = profileDomain.createEvent<UserPopUp>();
 
 export const $userChanged = profileDomain.createEvent<UserDto>();
+export const $avatarChanged = profileDomain.createEvent<string>();
 
 export const $bookedEventCanceled = profileDomain.createEvent<string>();
