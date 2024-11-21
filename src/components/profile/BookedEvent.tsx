@@ -44,7 +44,7 @@ function BookedEvent({ bookedEventDto }: Props) {
   return (
     <div className={"space-y-[1rem]"}>
       <div>
-        <div className={"flex space-x-[0.5rem]"}>
+        <div className={"flex space-x-[0.5rem] flex-wrap pb-[1rem]"}>
           <BookedStatus
             color={color[bookedEventDto.status]}
             text={text[bookedEventDto.status]}
