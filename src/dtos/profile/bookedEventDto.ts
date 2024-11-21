@@ -9,4 +9,5 @@ export interface BookedEventDto {
   cost: number;
   status: BookingStatus;
   groupStatus: BookingGroupStatus;
+  paymentUrl?: string;
 }

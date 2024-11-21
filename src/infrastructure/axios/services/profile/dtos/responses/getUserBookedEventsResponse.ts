@@ -9,4 +9,5 @@ export interface GetUserBookedEventsResponse {
   cost: number;
   status: BookingStatus;
   groupStatus: BookingGroupStatus;
+  paymentUrl?: string;
 }

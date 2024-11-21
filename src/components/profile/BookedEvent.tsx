@@ -86,20 +86,34 @@ function BookedEvent({ bookedEventDto }: Props) {
           {bookedEventDto.cost} сум
         </p>
       </div>
-      {bookedEventDto.status !== BookingStatus.Canceled &&
-      (bookedEventDto.groupStatus === BookingGroupStatus.Filling ||
-        bookedEventDto.groupStatus === BookingGroupStatus.NoStatus) ? (
-        <Button
-          onClick={() => {
-            bookingIdCancelChanged(bookedEventDto.id);
-          }}
-          backgroundColor={"#1C1F24"}
-          name={"Отменить бронирование"}
-          className={"!h-[2.5rem] w-full text-[#FFFFFFCC]"}
-        />
-      ) : (
-        ""
-      )}
+      <div className={"flex space-x-[0.5rem]"}>
+        {bookedEventDto.paymentUrl && (
+          <Button
+            onClick={() => {
+              window.open(bookedEventDto.paymentUrl, "_blank");
+            }}
+            backgroundColor={"#ACEF03"}
+            name={"Оплатить"}
+            className={"!h-[2.5rem] w-full"}
+          />
+        )}
+        {bookedEventDto.status !== BookingStatus.Canceled &&
+        bookedEventDto.groupStatus !== BookingGroupStatus.Started &&
+        bookedEventDto.groupStatus !== BookingGroupStatus.Finished ? (
+          <Button
+            onClick={() => {
+              bookingIdCancelChanged(bookedEventDto.id);
+            }}
+            backgroundColor={"#1C1F24"}
+            name={
+              bookedEventDto.paymentUrl ? "Отменить" : "Отменить бронирование"
+            }
+            className={"!h-[2.5rem] w-full text-[#FFFFFFCC]"}
+          />
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 }

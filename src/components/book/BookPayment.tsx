@@ -21,14 +21,14 @@ function BookPayment({ cost, isPayme, isClick }: Props) {
               isClick.resetErrors();
             }}
           />
-          <Checkbox
-            field={isClick}
-            placeholder={"Click"}
-            onClick={(check) => {
-              if (isPayme.value == true && check) isPayme.onChange(!check);
-              isPayme.resetErrors();
-            }}
-          />
+          {/*<Checkbox*/}
+          {/*  field={isClick}*/}
+          {/*  placeholder={"Click"}*/}
+          {/*  onClick={(check) => {*/}
+          {/*    if (isPayme.value == true && check) isPayme.onChange(!check);*/}
+          {/*    isPayme.resetErrors();*/}
+          {/*  }}*/}
+          {/*/>*/}
         </div>
       </BookLabel>
       <BookLabel label={"Стоимость"}>
