@@ -13,7 +13,6 @@ export const $pageChangeFx = app.createEffect((page: Pages) => {
   }
   if ($currentPage.getState() != page)
     $previousPageSaved($currentPage.getState());
-  console.log("IS CHANGES", page as string);
   $savePageChanged(page);
 });
 
