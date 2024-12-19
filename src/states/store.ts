@@ -104,7 +104,8 @@ sample({
 
 sample({
   source: $userPopUpChanged,
-  filter: (result) => result === UserPopUp.SUCCESS,
+  filter: (result) =>
+    result === UserPopUp.SUCCESS && $previousPage.getState() in middlewares,
   target: $pageRestored,
 });
 
