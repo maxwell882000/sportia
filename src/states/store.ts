@@ -32,11 +32,7 @@ const $previousPage = app
   .createStore<Pages>(Pages.MAIN)
   .on($previousPageSaved, (_, result) => result);
 
-export const $currentPage = app
-  .createStore<Pages>(Pages.MAIN)
-  .on($pageChanged, (_, result) => {
-    return result;
-  });
+export const $currentPage = app.createStore<Pages>(Pages.MAIN);
 
 export const $isLoading = app
   .createStore<boolean>(false)
