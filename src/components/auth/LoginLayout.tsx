@@ -27,24 +27,26 @@ function LoginLayout() {
           <Login />
         </CustomModal>
       ) : (
-        <BaseDrawer open={isLogin} activeSnapPoint={1} snapPoints={[0.3, 1]}>
-          <div className={"p-[1rem]"}>
-            <div className={"pb-[1.5rem]"}>
-              <div className={"flex items-center justify-between"}>
-                <Logo />
-                <button
-                  className={"h-[2rem] w-[2rem]"}
-                  onClick={() => {
-                    userPopUpChanged(UserPopUp.NONE);
-                  }}
-                >
-                  <X className={"text-[#FFFFFF80]"} />
-                </button>
+        isLogin && (
+          <BaseDrawer activeSnapPoint={1} snapPoints={[0.3, 1]}>
+            <div className={"p-[1rem]"}>
+              <div className={"pb-[1.5rem]"}>
+                <div className={"flex items-center justify-between"}>
+                  <Logo />
+                  <button
+                    className={"h-[2rem] w-[2rem]"}
+                    onClick={() => {
+                      userPopUpChanged(UserPopUp.NONE);
+                    }}
+                  >
+                    <X className={"text-[#FFFFFF80]"} />
+                  </button>
+                </div>
               </div>
+              <Login />
             </div>
-            <Login />
-          </div>
-        </BaseDrawer>
+          </BaseDrawer>
+        )
       )}
     </>
   );
