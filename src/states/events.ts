@@ -13,6 +13,8 @@ export const $searchPlaceholderChanged = app.createEvent<string>();
 
 export const $pageChanged = app.createEvent<Pages>();
 
+export const $savePageChanged = app.createEvent<Pages>();
+
 export const $previousPageSaved = app.createEvent<Pages>();
 
 export const $pageRestored = app.createEvent();

@@ -116,6 +116,7 @@ export const $isRegisterPopUp = $userPopUp.map((e) => e === UserPopUp.REGISTER);
 
 sample({
   source: $userChanged,
+  filter: (u: UserDto) => !!u.phone,
   fn: () => UserPopUp.SUCCESS,
   target: $userPopUpChanged,
 });

@@ -36,8 +36,6 @@ function LogoutPopUp() {
           <Button
             onClick={async () => {
               await logout();
-
-              // userChanged(null);
             }}
             className={"w-full text-[#FFFFFFCC]"}
             name={"Да"}

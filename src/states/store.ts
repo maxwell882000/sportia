@@ -6,6 +6,7 @@ import {
   $pageChanged,
   $pageRestored,
   $previousPageSaved,
+  $savePageChanged,
   $searchChanged,
   $searchPlaceholderChanged,
   $searchPlaceholderRestore,
@@ -19,6 +20,7 @@ import { UserPopUp } from "../dtos/users/userPopUp.ts";
 import { middlewares } from "./middlewares.ts";
 import { $profileActivated, _search } from "./profile/store.ts";
 import { $categoryActivated } from "./category/store.ts";
+import { $pageChangeFx } from "./effects.ts";
 
 export const $isSideBar = app
   .createStore<boolean>(false)
@@ -32,7 +34,9 @@ const $previousPage = app
   .createStore<Pages>(Pages.MAIN)
   .on($previousPageSaved, (_, result) => result);
 
-export const $currentPage = app.createStore<Pages>(Pages.MAIN);
+export const $currentPage = app
+  .createStore<Pages>(Pages.MAIN)
+  .on($savePageChanged, (_, result) => result);
 
 export const $isLoading = app
   .createStore<boolean>(false)
@@ -115,30 +119,10 @@ sample({
   fn: () => true,
   target: $isMobileSideBarChanged,
 });
-sample({
-  clock: $pageChanged,
-  source: $currentPage,
-  filter: (result, clock) => result !== clock,
-  target: $previousPageSaved,
-});
 
 sample({
   source: $pageChanged,
-  filter: (result) => {
-    if (result in middlewares) return middlewares[result]();
-    return true;
-  },
-  target: $currentPage,
-});
-
-sample({
-  source: $pageChanged,
-  filter: (result) => {
-    if (result in middlewares) return !middlewares[result]();
-    return false;
-  },
-  fn: () => UserPopUp.LOGIN,
-  target: $userPopUpChanged,
+  target: $pageChangeFx,
 });
 
 sample({
