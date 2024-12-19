@@ -21,6 +21,7 @@ import { $getReviewsFx, $saveReviewFx } from "./effects.ts";
 import { AggregateReviewDto } from "../../dtos/review/aggregateReviewDto.ts";
 import { $eventDetail } from "../event/store.ts";
 import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
+import { $checkAuth } from "../effects.ts";
 
 export const $review: StoreWritable<ReviewDto> = reviewDomain
   .createStore<ReviewDto>(null)
@@ -54,6 +55,11 @@ sample({
   source: $eventDetailChanged,
   fn: (r) => r.id,
   target: $getReviewsFx,
+});
+
+sample({
+  source: $commentMade,
+  target: $checkAuth,
 });
 
 sample({

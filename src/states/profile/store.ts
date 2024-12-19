@@ -38,6 +38,7 @@ import { EventDto } from "../../dtos/events/eventDto.ts";
 import { BookedEventDto } from "../../dtos/profile/bookedEventDto.ts";
 import { BookingStatus } from "../../dtos/profile/bookingStatus.ts";
 import { AuthStorage } from "../../infrastructure/localStorage/authStorage.ts";
+import { $checkAuth } from "../effects.ts";
 
 export const {
   $slides: $profilesOption,
@@ -144,6 +145,10 @@ sample({
   filter: () => isAuth(),
   fn: () => true,
   target: [$isSideBarChanged],
+});
+sample({
+  source: $profileOpened,
+  target: $checkAuth,
 });
 
 sample({

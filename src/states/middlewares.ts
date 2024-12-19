@@ -4,11 +4,7 @@ import { $userPopUpChanged } from "./profile/events.ts";
 import { UserPopUp } from "../dtos/users/userPopUp.ts";
 
 export const isAuth = () => {
-  if ($isLoggedIn.getState()) {
-    return true;
-  }
-  $userPopUpChanged(UserPopUp.LOGIN);
-  return false;
+  return $isLoggedIn.getState();
 };
 
 export const middlewares = {
