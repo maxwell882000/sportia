@@ -1,7 +1,7 @@
 import { UserPopUp } from "../../dtos/users/userPopUp.ts";
 import CustomModal from "../modal/CustomModal.tsx";
 import { useUnit } from "effector-react";
-import { $isLoginPopUp, $userPopUp } from "../../states/profile/store.ts";
+import { $isLoginPopUp } from "../../states/profile/store.ts";
 import { $userPopUpChanged } from "../../states/profile/events.ts";
 import Login from "./Login.tsx";
 import { useWindowSize } from "../../hooks/useWindowSize.ts";
@@ -10,7 +10,10 @@ import Logo from "../Icons/Logo.tsx";
 import { X } from "@untitled-ui/icons-react";
 
 function LoginLayout() {
-  const [isLogin, userPopUpChanged] = useUnit([$userPopUp, $userPopUpChanged]);
+  const [isLogin, userPopUpChanged] = useUnit([
+    $isLoginPopUp,
+    $userPopUpChanged,
+  ]);
   const windowSize = useWindowSize();
   return (
     <>
