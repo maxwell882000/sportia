@@ -106,6 +106,8 @@ sample({
   source: $userPopUpChanged,
   filter: (result) =>
     result === UserPopUp.SUCCESS && $previousPage.getState() in middlewares,
+  // actually second case is impossible for now,
+  // TO DO: must create store that saves page that user wanted to see , but could not
   target: $pageRestored,
 });
 
