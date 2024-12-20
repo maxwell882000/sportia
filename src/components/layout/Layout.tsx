@@ -6,7 +6,7 @@ interface Props {
 
 function Layout({ children }: Props) {
   return (
-    <div className="relative h-screen w-screen">
+    <div className="relative h-dvh w-screen overflow-hidden">
       {children}
     </div>
   );
