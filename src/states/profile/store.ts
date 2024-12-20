@@ -17,6 +17,7 @@ import { isAuth } from "../middlewares.ts";
 import { Pages } from "../../constants/pages.ts";
 import {
   $isLoadingChanged,
+  $isMobileSideBarChanged,
   $isSideBarChanged,
   $pageChanged,
   $searchPlaceholderRestore,
@@ -144,7 +145,7 @@ sample({
   source: delay({ source: $profileOpened, timeout: 200 }),
   filter: () => isAuth(),
   fn: () => true,
-  target: [$isSideBarChanged],
+  target: [$isSideBarChanged, $isMobileSideBarChanged],
 });
 sample({
   source: $profileOpened,

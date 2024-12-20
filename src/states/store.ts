@@ -27,7 +27,7 @@ export const $isSideBar = app
   .on($isSideBarChanged, (_, result) => result);
 
 export const $isMobileSideBar = app
-  .createStore<boolean>(false)
+  .createStore<boolean>(true)
   .on($isMobileSideBarChanged, (_, result) => result);
 
 const $previousPage = app
