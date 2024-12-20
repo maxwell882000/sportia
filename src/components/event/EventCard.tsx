@@ -11,7 +11,7 @@ function EventCard({ event }: Props) {
     <>
       <div
         className={
-          "my-0.5 flex items-center space-x-[0.5rem] text-center text-[0.75rem] leading-[0.875rem] md:text-[0.875rem] md:leading-[1rem]"
+          "my-0.5 flex items-center space-x-[0.5rem] text-center text-[1rem] leading-[1.125rem] md:text-[0.875rem] md:leading-[1rem]"
         }
       >
         <ReviewStar
@@ -20,7 +20,7 @@ function EventCard({ event }: Props) {
         />
         <span
           className={
-            "text-[0.75rem] leading-[0.875rem] text-[#FFFFFFCC] md:text-[0.875rem] md:leading-[1rem]"
+            "text-[0.875rem] leading-[1.125rem] text-[#FFFFFFCC] md:text-[0.875rem] md:leading-[1rem]"
           }
         >
           {event.mark}
@@ -29,17 +29,17 @@ function EventCard({ event }: Props) {
       </div>
       <div
         className={
-          "mt-0.5 space-y-0.5 text-[0.75rem] leading-[0.875rem] md:text-[0.875rem] md:leading-[1rem]"
+          "mt-0.5 space-y-1.5 text-[1rem] leading-[1.125rem] md:text-[0.875rem] md:leading-[1rem]"
         }
       >
         <p
-          className={`text-[0.75rem] md:text-[0.875rem] md:leading-[1rem] ${event.isOpen ? "text-[#ACEF03]" : "text-[#F63D68]"}`}
+          className={` text-[1rem] md:text-[0.875rem] md:leading-[1rem] ${event.isOpen ? "text-[#ACEF03]" : "text-[#F63D68]"}`}
         >
           {event.nextTime}
         </p>
         <p
           className={
-            "one-lines text-[0.75rem] text-[#D2D2D3] text-opacity-70 md:text-[0.875rem] md:leading-[1rem]"
+            "one-lines text-[1rem] text-[#D2D2D3] text-opacity-70 md:text-[0.875rem] md:leading-[1rem]"
           }
         >
           {event.address}
