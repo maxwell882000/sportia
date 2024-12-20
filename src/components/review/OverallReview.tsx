@@ -27,7 +27,7 @@ function OverallReview() {
                   "text-[3rem] leading-[2.869rem] tracking-[0.009rem] text-white text-opacity-80"
                 }
               >
-                {review?.mark ?? 0.0}
+                {review?.mark?.toFixed(1) ?? 0.0}
               </span>
             </div>
             <div>
