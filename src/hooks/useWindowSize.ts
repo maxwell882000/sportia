@@ -18,9 +18,9 @@ export const useWindowSize = () => {
       });
     }
 
-    window.addEventListener("resize", onResize);
+    window.visualViewport.addEventListener("resize", onResize);
 
-    return () => window.removeEventListener("resize", onResize);
+    return () => window.visualViewport.removeEventListener("resize", onResize);
   }, []);
   return windowSize;
 };

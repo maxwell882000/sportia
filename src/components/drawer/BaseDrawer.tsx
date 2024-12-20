@@ -47,7 +47,7 @@ function BaseDrawer({
 
         return height;
       }) ?? [],
-    [snapPoints, windowSize],
+    [snapPoints],
   );
 
   return (
@@ -69,7 +69,7 @@ function BaseDrawer({
           style={{
             transform: `translate3d(0px, ${snapPointsOffset[0]}px, 0px)`,
           }}
-          className="fixed bottom-0 left-0 right-0 z-10 mt-24 flex h-[96%] flex-col rounded-t-[1.5rem] bg-app-dark"
+          className="fixed !bottom-0 left-0 right-0 z-10 mt-24 flex !h-[96%] flex-col rounded-t-[1.5rem] bg-app-dark"
         >
           <Drawer.Title />
           <div
