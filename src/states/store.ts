@@ -21,6 +21,8 @@ import { middlewares } from "./middlewares.ts";
 import { $profileActivated, _search } from "./profile/store.ts";
 import { $categoryActivated } from "./category/store.ts";
 import { $pageChangeFx } from "./effects.ts";
+import { $likeEventFx } from "./event/effects.ts";
+import { $getUserLikedEventsFx } from "./profile/effects.ts";
 
 export const $isSideBar = app
   .createStore<boolean>(false)
@@ -30,7 +32,7 @@ export const $isMobileSideBar = app
   .createStore<boolean>(true)
   .on($isMobileSideBarChanged, (_, result) => result);
 
-const $previousPage = app
+export const $previousPage = app
   .createStore<Pages>(Pages.MAIN)
   .on($previousPageSaved, (_, result) => result);
 
@@ -89,10 +91,11 @@ sample({
   clock: $eventDetailClose,
   source: $currentPage,
   filter: (source) => source === Pages.DETAIL,
-  fn: () =>
-    $previousPage.getState() === Pages.BOOK
+  fn: () => {
+    return $previousPage.getState() === Pages.BOOK
       ? Pages.MAIN
-      : $previousPage.getState(),
+      : $previousPage.getState();
+  },
   target: $pageChanged,
 });
 
@@ -131,4 +134,12 @@ sample({
 sample({
   source: $search,
   target: _search,
+});
+
+
+sample({
+  clock: $likeEventFx.doneData,
+  source: $previousPage,
+  filter: (page) => page == Pages.PROFILE,
+  target: [$getUserLikedEventsFx],
 });

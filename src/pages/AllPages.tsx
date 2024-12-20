@@ -4,6 +4,7 @@ import {
   $currentPage,
   $isAnimateSideBar,
   $isSliderDisappeared,
+  $previousPage,
 } from "../states/store.ts";
 import SliderPage from "./SliderPage.tsx";
 import { Pages } from "../constants/pages.ts";
@@ -15,11 +16,13 @@ import ProfileOptions from "../components/profile/ProfileOptions.tsx";
 import Profile from "../components/profile/Profile.tsx";
 
 function AllPages() {
-  const [isCategoriesDisappeared, isAnimateSideBar, currentPage] = useUnit([
-    $isSliderDisappeared,
-    $isAnimateSideBar,
-    $currentPage,
-  ]);
+  const [isCategoriesDisappeared, isAnimateSideBar, currentPage, previousPage] =
+    useUnit([
+      $isSliderDisappeared,
+      $isAnimateSideBar,
+      $currentPage,
+      $previousPage,
+    ]);
   const animateCloseOpenSideBar = isAnimateSideBar("left-0", "left-[-24.5rem]");
   return (
     <>
@@ -28,7 +31,8 @@ function AllPages() {
       >
         <Search />
       </div>
-      {(currentPage === Pages.MAIN || currentPage === Pages.DETAIL) && (
+      {(currentPage === Pages.MAIN ||
+        (currentPage === Pages.DETAIL && previousPage === Pages.MAIN)) && (
         <SliderPage
           choice={<Categories />}
           content={<Events />}
@@ -40,7 +44,8 @@ function AllPages() {
           <Book />
         </Page>
       )}
-      {currentPage === Pages.PROFILE && (
+      {(currentPage === Pages.PROFILE ||
+        (currentPage === Pages.DETAIL && previousPage === Pages.PROFILE)) && (
         <SliderPage
           choice={<ProfileOptions />}
           content={<Profile />}

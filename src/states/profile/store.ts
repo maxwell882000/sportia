@@ -40,6 +40,8 @@ import { BookedEventDto } from "../../dtos/profile/bookedEventDto.ts";
 import { BookingStatus } from "../../dtos/profile/bookingStatus.ts";
 import { AuthStorage } from "../../infrastructure/localStorage/authStorage.ts";
 import { $checkAuth } from "../effects.ts";
+import { $likeEventFx } from "../event/effects.ts";
+import { $currentPage } from "../store.ts";
 
 export const {
   $slides: $profilesOption,
@@ -158,3 +160,5 @@ sample({
   fn: (result) => result.filter((e) => e).length > 0,
   target: $isLoadingChanged,
 });
+
+

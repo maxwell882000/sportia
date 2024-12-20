@@ -6,13 +6,14 @@ import {
   $eventDetailOpened,
   $eventLike,
   $eventLiked,
+  $eventReset,
   $eventsChanged,
 } from "./events.ts";
 import { defaultEventsDto, EventDto } from "../../dtos/events/eventDto.ts";
 import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
 import { $activeCategory } from "../category/store.ts";
 import { combine, sample } from "effector";
-import { $pageChanged } from "../events.ts";
+import { $pageChanged, $previousPageSaved } from "../events.ts";
 import { Pages } from "../../constants/pages.ts";
 import { AppStartGate } from "../gate.ts";
 import { $getAllEventsFx, $getEventDetailFx, $likeEventFx } from "./effects.ts";
@@ -34,7 +35,8 @@ export const $eventDetail = eventDomain
   .on($aggregateReviewChanged, (_, result) => ({ ..._, ...result }))
   .on($eventLiked, (_) => {
     return { ..._, isLiked: !_.isLiked };
-  });
+  })
+  .reset($eventReset);
 
 export const $activeEvents = combine(
   $activeCategory,
@@ -53,9 +55,9 @@ export const $activeEvents = combine(
 );
 
 sample({
-  source: $pageChanged,
-  filter: (page) => page === Pages.PROFILE,
-  target: $eventDetailClose,
+  clock: $previousPageSaved,
+  filter: (page) => page == Pages.DETAIL,
+  target: $eventReset,
 });
 
 sample({
