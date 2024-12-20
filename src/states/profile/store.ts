@@ -133,6 +133,7 @@ sample({
   filter: () => isAuth(),
   fn: () => Pages.PROFILE,
   target: [
+    $isMobileSideBarChanged,
     $pageChanged,
     $searchPlaceholderRestore,
     $searchRestore,
@@ -145,7 +146,7 @@ sample({
   source: delay({ source: $profileOpened, timeout: 200 }),
   filter: () => isAuth(),
   fn: () => true,
-  target: [$isSideBarChanged, $isMobileSideBarChanged],
+  target: [$isSideBarChanged],
 });
 sample({
   source: $profileOpened,
