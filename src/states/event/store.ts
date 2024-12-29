@@ -20,6 +20,7 @@ import { $getAllEventsFx, $getEventDetailFx, $likeEventFx } from "./effects.ts";
 import { $aggregateReviewChanged } from "../review/events.ts";
 import { $currentPage, $search } from "../store.ts";
 import { $loginFx } from "../users/effects.ts";
+import Page from "../../pages/Page.tsx";
 
 export const $events = eventDomain
   .createStore<EventDto[]>(defaultEventsDto)
@@ -53,12 +54,6 @@ export const $activeEvents = combine(
       .map((e) => ({ ...e }));
   },
 );
-
-sample({
-  clock: $previousPageSaved,
-  filter: (page) => page == Pages.DETAIL,
-  target: $eventReset,
-});
 
 sample({
   source: AppStartGate.open,

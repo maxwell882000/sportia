@@ -1,6 +1,11 @@
 import { eventDomain } from "./domain.ts";
 import { EventService } from "../../infrastructure/axios/services/event/eventService.ts";
-import { $eventDetailChanged, $eventLiked, $eventsChanged } from "./events.ts";
+import {
+  $eventDetailChanged,
+  $eventLiked,
+  $eventReset,
+  $eventsChanged,
+} from "./events.ts";
 import { EventDto } from "../../dtos/events/eventDto.ts";
 import { FileDto } from "../../infrastructure/axios/services/common/dtos/fileDto.ts";
 import { EventDetailDto } from "../../dtos/events/eventDetailDto.ts";
@@ -40,6 +45,7 @@ export const $likeEventFx = eventDomain.createEffect(
 
 export const $getEventDetailFx = eventDomain.createEffect(
   async (event: EventDto) => {
+    $eventReset();
     const eventDetail = await requestHandler<GetEventDetailResponse>(
       EventService.getEventDetail({
         id: event.id,
