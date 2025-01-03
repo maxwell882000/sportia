@@ -9,7 +9,7 @@ interface Props {
 function PayInfo({ icon, paymentType, payment }: Props) {
   return (
     <div className={"mt-[0.5rem] flex items-center justify-start"}>
-      <div className={"pr-[0.5rem] text-[#ACEF03]"}>{icon}</div>
+      <div className={"pr-[0.5rem] w-[1.5rem] text-[#ACEF03]"}>{icon}</div>
       <div>
         <p
           className={

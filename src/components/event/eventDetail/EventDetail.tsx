@@ -38,7 +38,7 @@ function EventDetail() {
             <div className={"space-y-6"}>
               <EventTitle event={event} />
               <div>
-                {event.bookingDetails.map((bookingDetail) => (
+                {event?.bookingDetails?.map((bookingDetail) => (
                   <PayInfo
                     key={`pay-info-${bookingDetail.label}`}
                     icon={<ReactSVG src={bookingDetail.icon} />}

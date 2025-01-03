@@ -41,7 +41,8 @@ function InputSearch(props: InputHTMLAttributes<HTMLInputElement>) {
         ) : (
           <button
             onClick={() => {
-              if (currentPage === Pages.PROFILE) pageChanged(Pages.MAIN);
+              if (currentPage === Pages.PROFILE || currentPage === Pages.BOOK)
+                pageChanged(Pages.MAIN);
               else pageRestored();
             }}
             className={"text-white text-opacity-50"}
