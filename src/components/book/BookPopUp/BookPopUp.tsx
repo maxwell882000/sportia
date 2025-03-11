@@ -23,7 +23,7 @@ function BookPopUp() {
         {bookAccept.bookingOptions.map((e) => (
           <BookInfo
             key={`book-info-${e.optionId}-${e.bookingOptionValue}`}
-            label={"Дата игры"}
+            label={e.label}
             value={e.bookingOptionValue}
           />
         ))}

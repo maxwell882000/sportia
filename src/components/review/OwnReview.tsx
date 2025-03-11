@@ -31,7 +31,7 @@ function OwnReview() {
         <div className={"flex space-x-[0.5rem]"}>
           <Button
             backgroundColor={"#ACEF03"}
-            name={"Редакитировать"}
+            name={"Редактировать"}
             className={"w-full text-[#15171C]"}
             onClick={() => {
               commentMade({ ...ownReview });

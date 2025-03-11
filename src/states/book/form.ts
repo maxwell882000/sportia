@@ -1,5 +1,4 @@
 import { createForm } from "effector-forms";
-import { BookTypeDto } from "../../dtos/book/bookTypeDto.ts";
 import { BookDto } from "../../dtos/book/bookDto.ts";
 import { forward, sample } from "effector";
 import {

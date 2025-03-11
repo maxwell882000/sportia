@@ -5,10 +5,7 @@ import {
   $bookAcceptClose,
   $bookAccepted,
 } from "../../../states/book/events.ts";
-import Button from "../../button/Button.tsx";
 import { $user } from "../../../states/profile/store.ts";
-import { BookTypeDto } from "../../../dtos/book/bookTypeDto.ts";
-import BookInfo from "./BookInfo.tsx";
 import BookPopUp from "./BookPopUp.tsx";
 
 function BookPopUpDesktop() {

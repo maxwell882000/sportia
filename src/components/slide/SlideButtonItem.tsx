@@ -17,7 +17,7 @@ function SlideButton<T extends SlideButtonDto>({ item, onClick }: Props<T>) {
       className={"text-white"}
       onClick={() => onClick && onClick(item)}
       icon={
-        <div className={"w-[1.25rem] h-[1.25rem]"}>
+        <div className={"h-[1.25rem] w-[1.25rem]"}>
           {typeof item.icon == "string" ? (
             <ReactSVG src={item.icon} className={"slide-button"} />
           ) : (

@@ -19,20 +19,21 @@ function BookForm() {
 
   const [paymentRequired, sameBookingCount] = useUnit([
     $paymentRequired,
-    $sameBookingCount
+    $sameBookingCount,
   ]);
 
-  function changeOptions(optionId: string, value: string) {
+  function changeOptions(optionId: string, value: string, label: string) {
     let result = fields.bookingOptions.value.map((f) =>
-      f.optionId === optionId ? { ...f, bookingOptionValue: value } : f
+      f.optionId === optionId ? { ...f, bookingOptionValue: value } : f,
     );
     var isPropertyExist = fields.bookingOptions.value.find(
-      (e) => e.optionId === optionId
+      (e) => e.optionId === optionId,
     );
     if (!isPropertyExist) {
       result.push({
         optionId,
-        bookingOptionValue: value
+        label: label,
+        bookingOptionValue: value,
       } as BookingUserOptionDto);
     }
     fields.bookingOptions.onChange(result);
@@ -46,10 +47,10 @@ function BookForm() {
             key={`select-${e.type}-${e.id}`}
             options={e.bookingOptionValues.map((e) => ({
               label: e.value,
-              value: e.value
+              value: e.value,
             }))}
             onClick={(value) => {
-              if (value) changeOptions(e.id, value?.value);
+              if (value) changeOptions(e.id, value?.value, e.label);
             }}
             required={true}
             placeholder={e.label}
@@ -59,8 +60,8 @@ function BookForm() {
             key={`select-${e.type}-${e.id}`}
             options={{
               onChange: (value) => {
-                changeOptions(e.id, value);
-              }
+                changeOptions(e.id, value, e.label);
+              },
             }}
             required
             placeholder={e.label}
@@ -70,14 +71,14 @@ function BookForm() {
             key={`select-${e.type}-${e.id}`}
             options={{
               onChange: (value) => {
-                changeOptions(e.id, value);
-              }
+                changeOptions(e.id, value, e.label);
+              },
             }}
             type={"date"}
             required
-            placeholder={"Выберите день"}
+            placeholder={e.label}
           />
-        )
+        ),
       )}
       {fields.bookingType?.value?.isShowLimit &&
       sameBookingCount?.totalCount ? (
@@ -91,7 +92,7 @@ function BookForm() {
                   key={`rounded-man-${index}`}
                   className={`h-[2rem] w-[2rem] ${index + 1 > sameBookingCount.count ? "text-[#FFFFFF1F]" : "text-[#ACEF03]"} `}
                 />
-              )
+              ),
             )}
           </div>
         </BookLabel>

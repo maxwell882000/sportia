@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Check from "../Icons/Check.tsx";
 import { ConnectedField } from "effector-forms";
 
