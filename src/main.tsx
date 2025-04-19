@@ -16,7 +16,7 @@ fork();
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <YMapComponentsProvider
-      apiKey={"d6e198c0-c3c3-422a-86c9-e0ff581ecc64"}
+      apiKey={"d19c6c61-99a0-4d7c-9a58-0b70ea211493"}
       lang="en_EN"
     >
       <App />

@@ -16,11 +16,11 @@ interface Props {
 function EventBooking({ event }: Props) {
   const [eventLike, pageChanged] = useUnit([$eventLike, $pageChanged]);
   return (
-    <div className={"flex justify-between"}>
+    <div className={"flex justify-between space-x-4"}>
       <Button
         backgroundColor={"#ACEF03"}
         name={"Забронировать"}
-        className={"!h-[2.5rem] w-[12rem] text-[#15171C] md:w-[13.5rem]"}
+        className={"!h-[2.5rem] w-full text-[#15171C] md:w-[13.5rem]"}
         onClick={() => {
           pageChanged(Pages.BOOK);
         }}
